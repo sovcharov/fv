@@ -1,0 +1,191 @@
+@charset "utf-8";
+body {
+	margin:0;
+	font-size:12px;
+
+}
+
+
+#divContainer
+{
+	width:990px;
+	margin: 0 auto; /*this is what makes our page to sit in a centre of browser window*/
+	
+
+}
+#divTopBlock
+{	
+	position:fixed;
+	top:0px;
+	width:990px;
+	height:50px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	box-shadow: 0px 0px 15px black; 
+}
+#divHeader
+{
+	position:fixed;
+	top:0px;
+	width:990px;
+	height:40px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	background-color:#007AA3;/*red;*/
+}
+
+#divHeaderPicUsa
+{
+	float:right;
+	margin:4px;
+	height:32px;
+	width:60px;
+	
+}
+
+#divList
+{
+	height:40px;
+	width:260px;
+	float:right;
+	text-decoration:none;
+}
+
+#divList ul
+{
+	margin:0px;
+	list-style-type:none;
+}
+
+#divList ul li
+{	
+	
+	float:right;
+	font-family:tahoma;
+	font-weight:bold;
+}
+
+#divList ul li a
+{
+    display:block;
+	height:40px;
+	line-height:40px;
+	width: 60px;
+	margin:0px;
+	color:#FFFFFF;
+	text-align:center;
+	text-decoration:none;
+}
+
+#divList ul li a:hover
+{
+    background-color:#006282;
+}
+
+#divPicHeaderLogo
+{
+	position:relative;
+	left:15px;
+}
+
+
+#divSearch
+{
+	margin:0px;
+	padding:0px;
+	line-height:40px;
+	left:155px;
+	height:40px;
+	width:450px;
+	position:relative;
+}
+
+#divSearch input
+{
+	margin:0px;
+}
+
+#divSearch a
+{
+	font-family:tahoma;
+	font-weight:bold;
+	
+	height:40px;
+	line-height:30px;
+	margin:20px;
+	color:#FFFFFF;
+	text-align:center;
+	text-decoration:none;
+}
+#divSearch a:hover
+{
+    color:#E60000;*/
+
+}
+
+#inputSearchField
+{
+	font-family:verdana;
+	color:#CFCFCF;
+	font-weight:bold;
+	width:180px;
+	padding:2px;
+}
+
+#submitButton1
+{
+	border-style:none;
+	background-color:#006282;
+	color:white;
+	font-weight:bold;
+	font-family:tahoma;
+	margin-left:3px;
+	height:26px;
+	width:55px;
+	visibility:hidden;
+}
+
+#divPageContent
+{
+	border:2px solid #007AA3;
+	margin:150px;
+	box-shadow: 0px 0px 15px black; 
+	border-radius:5px;
+}
+
+#submitButton2
+{
+	border-style:none;
+	background-color:#006282;
+	color:white;
+	font-weight:bold;
+	font-family:tahoma;
+	margin:10px; 
+	margin-left:10px;
+	height:26px;
+	width:90px;
+	border-radius:5px;
+	//visibility:hidden;
+}
+
+#submitButton2:hover, #submitButton1:hover
+{
+	color:yellow;
+}
+
+#formLogin p
+{
+	float:left; 
+	padding:3px; 
+	width:110px; 
+	margin:0px; 
+	margin-left:10px;
+	font-size:14px; 
+	font-family: verdana, helvetica, arial, sans-serif;
+}
+
+#divSubmitButton2
+{
+	clear:both;
+	height:46px;
+}

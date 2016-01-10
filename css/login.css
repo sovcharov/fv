@@ -1,0 +1,62 @@
+@charset "utf-8";
+body {
+	margin:0;
+	font-size:12px;
+	font-family: Arial;
+}
+
+#submitButton1
+{
+	border-style:none;
+	background-color:#006282;
+	color:white;
+	font-weight:bold;
+	margin-left:3px;
+	height:26px;
+	width:55px;
+	visibility:hidden;
+}
+
+#divPageContent
+{
+	border:2px solid #007AA3;
+	margin:0 auto;
+	border-radius:5px;
+	width:80%;
+	margin-top:5px;
+}
+
+#submitButton2
+{
+	border-style:none;
+	background-color:#006282;
+	color:white;
+	font-weight:bold;
+	font-family:tahoma;
+	margin:10px; 
+	margin-left:10px;
+	height:26px;
+	width:90px;
+	border-radius:5px;
+}
+
+#submitButton2:hover, #submitButton1:hover
+{
+	color:yellow;
+}
+
+#formLogin p
+{
+	float:left; 
+	padding:3px; 
+	width:80px; 
+	margin:0px; 
+	margin-left:10px;
+	font-size:14px; 
+}
+
+#divSubmitButton2
+{
+	clear:both;
+	height:46px;
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html ng-app="FVCakes">
+<head>
+	<title>FVolchek.net</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>	
+	<script src="controllers/FVController.js"></script>
+	<script src="controllers/InfoEventController.js"></script>
+	<script src="controllers/Run.js"></script>
+	<script src="controllers/datepicker.js"></script>
+	<script src="controllers/TabController.js"></script>
+	<script src="directives/tabs.js"></script>
+	<script src="controllers/OrdersPageController.js"></script>		
+	<script src="controllers/OrderOpenController.js"></script>
+</head>
+<body  ng-controller="FVController"  class="col-sm-12">
+    <nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><img alt="Brand" height="30" width="30" src="../images/fvlogo.png"></a>
+				<a class="navbar-brand" href="#">Пекарня Ф. Вольчека</a>
+				<p class="navbar-text">
+					<a href="#" style="color:red; font-size:10px;">{{user.firstName}} {{user.lastName}}</a>
+					<a href="/main/" ng-show="user && chekUserTypeIsAdmin()">main</a>
+					<a href="../passwordchange/">Сменить Пароль</a>
+					<a href="../main/exitapp.php">Выход</a>
+				</p>
+			</div> 
+		</div>		
+    </nav> 
+	<section ng-controller="TabController as tab">
+		<my-tabs></my-tabs>
+        <div  ng-controller="OrderOpenController">
+			<div ng-show="tab.isSet(-1)">				
+				<div ng-controller="OrdersPageController as OPCtrl">
+					<div class="form-horizontal" style="" ng-controller="DateController2">						
+						<div class="form-group col-sm-12" ng-show="user && !chekUserTypeIsBaker() || user && chekUserTypeIsAdmin()">							
+							<button class="btn btn-danger btn-lg btn-block" ng-click="tab.setTab(dataInit())">Новый заказ</button>							
+						</div>
+						<div class="col-sm-12 form-group" ng-show="user && chekUserTypeIsBaker() || user && chekUserTypeIsAdmin()">
+								<a href="print/printOrders.php" target="_blank"><button class="btn btn-success btn-lg btn-block" ng-click="">Печать принятых заказов на завтра</button></a>
+						</div>	
+						<div class="form-group form-group-lg col-sm-8">
+							<label for="inputEmail3" class="control-label col-sm-2">Интервал:</label>		
+								<div class="col-sm-5">
+									<span class="input-group">
+										<input ng-model="dateFrom" ng-change="changeDateTo();getOrders(dateFrom, dateTo);" readonly="true" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="" is-open="opened" min-date="" max-date="" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Закрыть" current-text="Сегодня" show-button-bar="" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-lg" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										</span>
+									</span>
+								</div>
+								<div class="col-sm-5">
+									<span class="input-group">
+										<input ng-model="dateTo" ng-change="getOrders(dateFrom, dateTo);" readonly="true" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="" is-open="opened2" min-date="dateFrom" max-date="" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Закрыть" current-text="Сегодня" show-button-bar="false" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-lg" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										</span>
+									</span>
+								</div>								
+						</div>
+						<div class="form-group form-group-lg col-sm-4">
+							<div class="col-sm-12">
+								<button class="btn btn-primary  btn-lg" ng-click="getOrders(dateFrom, dateTo);">Обновить</button>														
+							</div>
+						</div>											
+					</div>	
+					<table class="table table-striped table-hover" style="width:100%;clear:both;">
+						<tr class="">	
+							<th class="">ID</th>
+							<th class="">Создан</th>						
+							<th class="">Выдача</th>
+							<th class="">В булочной</th>
+							<th class="">Автор</th>
+							<th class="">Принял</th>							
+							<th class="">Статус</th>
+						</tr>		
+						<tr  class="" ng-repeat="orderMain in ordersMain" ng-dblclick="getOrderedCakes(orderMain.id, $index);" ng-show="orderMain && users"  >
+							<td class="">{{orderMain.id}}</td>
+							<td class="">{{orderMain.dateCreated}}</td>
+							<td class="">{{getOrderGiveAwayDate(orderMain.date,orderMain.time)}}</td>
+							<td class="">{{getStoreName(orderMain.address)}}</td>
+							<td class="">{{getOrderAuthor(orderMain.author)}}</td>
+							<td class="">{{getOrderAuthor(orderMain.acceptedBy)}}</td>
+							<td class="" ng-show="!orderMain.confirmedByBakery && !orderMain.acceptedByPlant"><span class="btn btn-default btn-lg btn-block" ng-click="getOrderedCakes(orderMain.id, $index)">Сохранен</span></td>
+							<td class="" ng-show="orderMain.confirmedByBakery && !orderMain.acceptedByPlant"><span class="btn btn-danger btn-lg btn-block" ng-click="getOrderedCakes(orderMain.id, $index)">Проведен</span></td>
+							<td class="" ng-show="orderMain.confirmedByBakery && orderMain.acceptedByPlant"><span class="btn btn-success btn-lg btn-block" ng-click="getOrderedCakes(orderMain.id, $index)">В работе</span></td>
+							<!--<td class="" style=''><button class="btn btn-primary btn-small" ng-click="getOrderedCakes(orderMain.id, $index)">Открыть</button></td>-->
+						</tr>
+					</table>
+					<!--
+					<span>ordersMain:===========================================================<br>{{ordersMain}}<br/>
+					ordes:======================================================<br>{{orders}}<br>
+					stores:=======================================================<br>{{stores}}<br/>
+					user: ==========================================================<br>{{user}}<br>
+					users:==================================================================== <br>{{users}}<br>
+					=======================
+					{{tab.getTab();}}========================
+					</span>
+					-->
+				</div>
+			</div>	
+			<div class="" ng-repeat="order in orders" ng-show="tab.isSet($index)" ng-class="{otherUser: (checkIfCantChange(order.author) || order.acceptedByPlant) && !chekUserTypeIsAdmin()}">	
+				<form class="form-horizontal">	
+					<div>
+						<div style="border-width: 1px; border-style: solid; padding: 10px; border-radius: 5px; border-color: gray; background-color: #E0E0EB; ">
+							<div class="form-group form-group-lg">
+								<label class="col-sm-2 control-label">Автор заказа</label>
+								<div class="col-sm-3">
+									<div class="form-control">{{getUserName(order.author)}}</div>
+								</div>
+								<label for="inputEmail3" class="col-sm-1 control-label">Заказчик</label>
+								<div class="col-sm-2" ng-show="!chekUserTypeIsBaker()">
+									<input ng-model="order.customer" type="text" class="form-control" placeholder="Имя" ng-change="orderChanged($index); chekEnteredName($index);">
+								</div>
+								<div class="col-sm-2" ng-show="!chekUserTypeIsBaker()">
+									<input ng-model="order.customerNumber" type="text" class="form-control" placeholder="Телефон" ng-change="orderChanged($index); chekEnteredNumber($index);">
+								</div>
+							</div>
+							<div class="form-group  form-group-lg">
+								<label class="col-sm-2 control-label">Адрес выдачи</label>
+								<div class="col-sm-2">
+									<select class="form-control" ng-model="order.address" ng-options="store.id as store.name for store in stores" ng-change="orderChanged($index);"></select>
+								</div>
+								<label for="inputEmail3" class="col-sm-1 control-label">Дата выдачи</label>
+								<div class="col-sm-2" ng-controller="DateController">
+									<span class="input-group">
+										<input ng-model="order.date" readonly="true" type="text" class="form-control" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2055-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Закрыть" current-text="Сегодня" show-button-bar="false"  ng-change="orderChanged($index);"/>
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-lg" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										</span>
+									</span>
+								</div>
+								<!--
+								<label for="inputPassword3" class="col-sm-1 control-label">Время</label>
+								<div class="col-sm-2">
+									<select class="form-control" ng-model="order.time" ng-options="time as time for time in times" ng-change="orderChanged($index);">model.time</select>
+								</div>
+								-->
+							</div>
+						</div>					
+						<table class="table table-striped ">
+							<tr ng-repeat="CAKE in order.cakes">
+								<td class="col-sm-12">		
+									<div class="form-group form-group-lg">
+										<label style="font-size:12px" for="inputPassword3" class="col-sm-1 control-label"><span class="label label-success" style="font-size:18px">{{$index+1}}</span> Товар</label>
+										<div class="col-sm-3">
+											<select  class="form-control" ng-model="CAKE.cake" ng-options="cake.id as cake.name for cake in cakes" ng-change="orderChanged($parent.$index);"></select>
+										</div>										
+										<label class="col-sm-1 control-label">Кол-во</label>
+										<div class="col-sm-2">
+											<div class="btn-group">
+													<button type="button" class="btn btn-default btn-lg"  ng-click="addOrReduceQty(0,$index, $parent.$index);orderChanged($parent.$index);">-</button>
+													<button type="button" class="btn btn-default btn-lg"  ng-click="addOrReduceQty(1,$index, $parent.$index);orderChanged($parent.$index);">+</button>
+											</div>
+											<span class="label label-info" style="font-size:24px">{{CAKE.qty}}</span>
+										</div>		
+																				
+										<label class="col-sm-1 control-label">Вес, kg</label>
+										<div class="col-sm-2">
+											<select  class="form-control" ng-model="CAKE.weight" ng-options="wght.weight as wght.weight for wght in weights" ng-change="orderChanged($parent.$index);"></select>
+										</div>										
+									</div>
+									<div class="form-group  form-group-lg">
+										<label class="col-sm-1 control-label">Нарезка</label>
+										<div class="col-sm-2">											
+												<!--<input ng-model="CAKE.cut" class="" style="font-size:20px;" type="checkbox" ng-change="orderChanged($parent.$index);"/>Нарезка-->												
+												<div>
+													<button type="button" class="btn btn-default btn-sm" ng-show = "!CAKE.cut" style="width:45%;" ng-click="CAKE.cut=true">Да</button>
+													<button type="button" class="btn btn-success btn-lg" ng-show = "CAKE.cut" style="width:45%;" ng-click="CAKE.cut=true">Да</button>													
+													<button type="button" class="btn btn-danger btn-lg" ng-show = "!CAKE.cut" style="width:45%;" ng-click="CAKE.cut=false">Нет</button>
+													<button type="button" class="btn btn-default btn-sm" ng-show = "CAKE.cut" style="width:45%;" ng-click="CAKE.cut=false">Нет</button>
+												</div>											
+										</div>	
+										<!--<label for="inputEmail3" class="col-sm-1 control-label">Надпись</label>-->
+										<div class="col-sm-4">
+											<input ng-model="CAKE.text" type="text"class="form-control" placeholder="Надпись на торте" ng-change="orderChanged($parent.$index); chekEnteredCakeText($index,$parent.$index);">
+										</div>
+										<!--<label for="inputEmail3" class="col-sm-1 control-label">Комментарий</label>-->
+										<div class="col-sm-4">
+											<input ng-model="CAKE.comment" type="text" class="form-control" placeholder="Комментарии для производства" ng-change="orderChanged($parent.$index); chekEnteredComment($index,$parent.$index);">
+										</div>
+										<div class="col-sm-1">
+											<button class="btn btn-danger btn-xs pull-right" ng-click="deleteCake($index, $parent.$index);orderChanged($parent.$index);">Удалить</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+						<button class="btn btn-success btn-lg col-sm-2" ng-click="addNewCake($index);orderChanged($index);" style="weigth:120%;font-size:30px;font-weight:bold;">+</button>
+						<br><br><br><br><br><br><br><br><br><br>
+					</div>
+					<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" style="z-index:0;">
+						<div class=" col-sm-12" style="background-color:#dff0d8;padding:5px">								
+							<div class="col-sm-12" style="border-width:1px;border-style:solid;border-radius:5px; padding:5px;">
+								<label for="inputEmail3" class="control-label">Итого наименований: <span style="font-size:18px;" class="label label-warning">{{order.cakes.length}}</span></label>
+								<!--<button class="pull-right btn btn-success" ng-click="addNewCake($index);orderChanged($index);">Добавить</button>-->
+							</div>								
+							<div class="col-sm-12" style="margin-top:5px">
+								<span>
+									<button class="btn btn-primary col-sm-2 btn-lg" style="margin-right:5px;" ng-click="saveAndPlace(order,$index);orderChangedClear($index);" ng-show="!order.closeClicked && !chekUserTypeIsBaker()">Сохранить</button>									
+									<button class="btn btn-warning col-sm-2 btn-lg" style="margin-right:5px;" ng-click="orderPlace($index);getOrders(dateCurrent,dateCurrent2);" ng-show="order.confirmedByBakery && order.id &&!order.acceptedByPlant && !order.closeClicked && !chekUserTypeIsBaker()">Отозвать</button>	
+									<button class="btn btn-primary col-sm-2 btn-lg" style="margin-right:5px;" ng-click="orderPlace($index);getOrders(dateCurrent,dateCurrent2);" ng-show="!order.confirmedByBakery && order.id && !order.closeClicked && !chekUserTypeIsBaker()">Провести</button>	
+									<button class="btn btn-default col-sm-2 btn-lg" style="margin-right:5px;" ng-click="" ng-show="!order.confirmedByBakery && !order.id && !order.closeClicked && !chekUserTypeIsBaker()" disabled="disabled">Провести</button>	
+									<button class="btn btn-primary col-sm-2 btn-lg" style="margin-right:5px;" ng-click="closeClicked($index,1);" ng-show="!order.closeClicked"  ng-class="{clickable:1}">Закрыть</button>
+									<button class="btn btn-success col-sm-2 btn-lg" style="margin-right:5px;" ng-click="saveAndPlace(order,$index);closeClicked($index,2);getOrders(dateCurrent,dateCurrent2);" ng-show="order.closeClicked  && !chekUserTypeIsBaker()">Сохранить</button>
+									<button class="btn btn-default col-sm-2 btn-lg" style="margin-right:5px;" ng-click="closeClicked($index,2);getOrders(dateCurrent,dateCurrent2);" ng-show="order.closeClicked && !chekUserTypeIsBaker()"  ng-class="{clickable:1}">Не сохранять</button>
+									<button class="btn btn-default col-sm-2 btn-lg" style="margin-right:5px;" ng-click="closeClicked($index,2);getOrders(dateCurrent,dateCurrent2);" ng-show="order.closeClicked && chekUserTypeIsBaker()"  ng-class="{clickable:1}">Закрыть</button>
+									<button class="btn btn-primary col-sm-2 btn-lg" style="margin-right:5px;" ng-click="closeClicked($index,3);" ng-show="order.closeClicked"  ng-class="{clickable:1}">Отмена</button>
+									<button class="btn btn-danger col-sm-2 btn-lg" style="margin-right:5px;" ng-click="deletePressed($index);" ng-show="order.id && !order.deletePressed && !order.closeClicked && !chekUserTypeIsBaker()">Удалить</button>
+									<button class="btn btn-danger col-sm-1 btn-lg" style="margin-right:5px;" ng-click="orderDelete($index); tab.setMainTab();" ng-show="order.id && order.deletePressed  && !order.closeClicked && !chekUserTypeIsBaker()">Удалить</button>
+									<button class="btn btn-success col-sm-1 btn-lg" style="margin-right:5px;" ng-click="deleteNotConfirmed($index);" ng-show="order.id && order.deletePressed && !order.closeClicked && !chekUserTypeIsBaker()">Отмена</button>
+								</span>
+								<span class="" ng-show="chekUserTypeIsBaker()  || chekUserTypeIsAdmin()" ng-class="{clickable: chekUserTypeIsBaker()}">
+									<button class="btn btn-primary col-sm-3 btn-lg" ng-click="orderAcceptByPlant($index);getOrders(dateCurrent,dateCurrent2);" ng-show="!order.acceptedByPlant && order.confirmedByBakery  && !order.closeClicked" >Принять в производство</button>
+									<button class="btn btn-success col-sm-3 btn-lg" ng-click="orderAcceptByPlant($index);getOrders(dateCurrent,dateCurrent2);" ng-show="order.acceptedByPlant && !order.closeClicked" >Отозвать из производства</button>
+								</span>
+							</div>
+						</div>	
+					</nav>
+				</form>					
+			</div>
+		</div>
+	</section>   
+	<div class="infoEventMain" ng-controller="InfoEventController">
+		<div ng-repeat="event in infoEvents"  class="infoEvent" ng-class="{'infoEventWarning': checkInfoEventClass(event),'infoEventSuccess': !checkInfoEventClass(event)}">
+			<div>{{event.text}}</div>
+			<div style="font-size:12px;line-height:10px">{{event.comment}}</div>
+		</div>
+	</div>
+</body>
+</html>

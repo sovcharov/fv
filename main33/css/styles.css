@@ -1,0 +1,44 @@
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css);
+@charset "utf-8";
+
+.row {
+    padding: 10px; 
+    border-style: solid; 
+    border-width: 3px;
+    cursor: pointer;
+}
+
+.row span {
+    padding: 5px;
+}
+
+.bakery :hover {
+    background-color:aliceblue;
+}    
+
+.bakery-name {
+    font-weight: bold;
+}
+
+.receipts-date {
+    font-weight: bold;
+}
+
+.bakery-data {
+    font-weight: bold;
+    color: brown;
+}
+
+.currentDate {
+    color: darkcyan;
+}
+
+.notCurrentDate {
+    color: red;
+}
+
+.plusButton {
+    height: 22px;
+    width: 22px;
+    font-weight: bold;
+}

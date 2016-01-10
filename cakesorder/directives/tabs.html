@@ -1,0 +1,9 @@
+<div class="panel">
+	<ul class="nav nav-pills ">
+		<li ng-class="{active : tab.isSet(-1)}"><a href ng-click="tab.setTab(-1)">Заказы</a></li>
+		<li ng-repeat="order in orders" ng-class="{active : tab.isSet($index)}" class="">
+			<a ng-click="tab.setTab($index)" ng-show="order.id">Заказ {{order.id}}<span ng-click="closeClicked($index,1)" ng-show="tab.isSet($index)" class="myCloseButton" style="margin-left:10px; ">x</span></a>
+			<a ng-click="tab.setTab($index)" ng-show="!order.id">Новый заказ<span ng-click="closeClicked($index,1)" ng-show="tab.isSet($index)" class="myCloseButton" style="margin-left:10px;">x</span></a>
+		</li>								
+	</ul>
+</div>
