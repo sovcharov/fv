@@ -4,8 +4,12 @@
 .row {
     padding: 10px; 
     border-style: solid; 
-    border-width: 3px;
-    cursor: pointer;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: darkgray;
+    margin: 0 auto;
+    margin-bottom: 2px;
+    //color:dimgrey;
 }
 
 .row span {
@@ -17,20 +21,25 @@
 }    
 
 .bakery-name {
-    font-weight: bold;
+    
 }
 
 .receipts-date {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .bakery-data {
-    font-weight: bold;
-    color: brown;
+    font-weight: normal;
+    color: gray;
+}
+
+.bakery-data-cash {
+    font-weight: normal;
+    color: cornflowerblue;
 }
 
 .currentDate {
-    color: darkcyan;
+    color: gray;
 }
 
 .notCurrentDate {
@@ -40,5 +49,5 @@
 .plusButton {
     height: 22px;
     width: 22px;
-    font-weight: bold;
+    font-weight: normal;
 }
