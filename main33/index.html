@@ -14,6 +14,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="controllers/MainController.js"></script>
+	<script src="controllers/DataController.js"></script> 
 </head>
 <body ng-controller="MainController">
     <nav class="navbar navbar-inverse">
@@ -44,19 +45,22 @@
       </div><!-- /.container-fluid -->
     </nav>
     <!--{{bakeries}}-->
-    <div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'number'" ng-click="newWindow()">
-        <div class="row">
-            <div class="col-sm-4">
-                <span class="col-xs-11 bakery-name">
-                    <button class="btn btn-xs btn-active plusButton">+</button>
-                    № {{bakery.number}}. {{bakery.address}}
-                </span>
-                <span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>
-            </div>
-            <div class="col-sm-8">    
-                <span class="col-xs-5">Выручка: <span class="bakery-data-cash">{{bakery.cash | currency: "" : 0}}</span></span>
-                <span class="col-xs-3">Чеков: <span class="bakery-data">{{bakery.checks}}</span></span>
-                <span class="col-xs-4">Средний: <span class="bakery-data">{{bakery.averageCheck | currency: "" : 0}}</span></span>
+    <div ng-controller = "DataController as DataCtrl">
+        {{stores}}
+        <div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'number'" ng-click="newWindow()">
+            <div class="row">
+                <div class="col-sm-4">
+                    <span class="col-xs-11 bakery-name">
+                        <button class="btn btn-xs btn-active plusButton">+</button>
+                        № {{bakery.number}}. {{bakery.address}}
+                    </span>
+                    <span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>
+                </div>
+                <div class="col-sm-8">    
+                    <span class="col-xs-5">Выручка: <span class="bakery-data-cash">{{bakery.cash | currency: "" : 0}}</span></span>
+                    <span class="col-xs-3">Чеков: <span class="bakery-data">{{bakery.checks}}</span></span>
+                    <span class="col-xs-4">Средний: <span class="bakery-data">{{bakery.averageCheck | currency: "" : 0}}</span></span>
+                </div>
             </div>
         </div>
     </div>
