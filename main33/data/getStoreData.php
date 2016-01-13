@@ -1,7 +1,8 @@
 <?php
     $postdata = file_get_contents("php://input");
-    $id = json_decode($postdata);		
-//	$id =  $request->id;
+    $request = json_decode($postdata);
+	$store =  $request->store;
+    $date =  $request->date;
 //    require '../../../pdodbconnect.php';
 //    $stores = array();        
 //    $q=$dbh->query("call getUserStores('.$user.');");
@@ -14,5 +15,5 @@
 //    $q->closeCursor();
 //    $q= null;
 //    $dbh = null;
-    echo (int)$id;
+    echo $store." ".$date;
 ?>

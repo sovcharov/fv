@@ -9,12 +9,14 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="Sergei Ovcharov">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.0.3.min.js"></script>
 	<script src="controllers/MainController.js"></script>
-	<script src="controllers/DataController.js"></script> 
+	<script src="controllers/DataController.js"></script>
+    <script src="controllers/DatePickerController.js"></script>
 </head>
 <body ng-controller="MainController">
     <nav class="navbar navbar-inverse">
@@ -46,7 +48,20 @@
     </nav>
     <!--{{bakeries}}-->
     <div ng-controller = "DataController as DataCtrl">
-        {{stores}}
+        <div ng-controller="DateController">
+            <div class="raw">
+                <div class="col-md-2">
+                    <p class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        {{stores}} {{date}}
         <div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'number'" ng-click="newWindow()">
             <div class="row">
                 <div class="col-sm-4">
