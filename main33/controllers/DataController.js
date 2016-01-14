@@ -1,52 +1,53 @@
 (function () {
     "use strict";
     angular.module("InvestorPanel").controller("DataController", function ($scope, $http) {
-        var getStoresData;
-        $scope.date = new Date();
+        var getStoresData, getData;
         $scope.bakeries = [];
-        
-        getStoresData = function () {
-            var i, getData, update = false;
+        getData = function (store, date, update) {
+            var data = {};
+            data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            console.log(data.date);
+            data.store = store;
+            $http({
+                method: 'POST',
+                url: 'data/getStoreData.php',
+                data: data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+                .success(function (dataReceived) {
+                    if (update) {
+                        update = true;
+                    } else {
+                        var indexLocal = $scope.bakeries.length;
+                        $scope.bakeries[indexLocal] = {};
+                        $scope.bakeries[indexLocal].number = store;
+                        $scope.bakeries[indexLocal].address = "store";
+                        $scope.bakeries[indexLocal].cash = dataReceived.cash;
+                        $scope.bakeries[indexLocal].checks = dataReceived.checks;
+                        $scope.bakeries[indexLocal].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                    }
+                });
+        };
+        getStoresData = function (date, stores) {
+            var i, update = false;
             if ($scope.bakeries.length) {
                 update = true;
             }
-            getData = function (store) {
-                var data = {};
-                data.date = $scope.date.getFullYear() + '-' + ($scope.date.getMonth() + 1) + '-' + $scope.date.getDate();
-                console.log(data.date);
-                data.store = store;
-                $http({
-                    method: 'POST',
-                    url: 'data/getStoreData.php',
-                    data: data,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                })
-                    .success(function (dataReceived) {
-                        if (update) {
-                            update = true;
-                        } else {
-                            var indexLocal = $scope.bakeries.length;
-                            $scope.bakeries[indexLocal] = {};
-                            $scope.bakeries[indexLocal].number = dataReceived;
-                        }
-                    });
-            };
-            
-            for (i = 0; i < $scope.stores.length; i = i + 1) {
-                getData($scope.stores[i]);
+            for (i = 0; i < stores.length; i = i + 1) {
+                getData(stores[i], date, update);
             }
         };
         
         (function () {
             $http.get('data/getUserStores.php').success(function (data) {
                 $scope.stores = data;
-                getStoresData();
+                var date = new Date();
+                getStoresData(date, $scope.stores);
             });
         }());
 
         $scope.dateChanged = function (date) {
-            $scope.date = date;
-            getStoresData();
+            getStoresData(date, $scope.stores);
         };
     });
 }());
