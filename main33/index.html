@@ -49,7 +49,7 @@
     <!--{{bakeries}}-->
     <div ng-controller = "DataController as DataCtrl">
         <div ng-controller="DateController">
-            <div class="raw">
+            <div class="col-xs-12">
                 <div class="col-md-2">
                     <p class="input-group">
                       <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>

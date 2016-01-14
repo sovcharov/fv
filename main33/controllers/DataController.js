@@ -12,7 +12,7 @@
             }
             getData = function (store) {
                 var data = {};
-                data.date = $scope.date.getFullYear() + ':' + ($scope.date.getMonth() + 1) + ':' + $scope.date.getDate();
+                data.date = $scope.date.getFullYear() + '-' + ($scope.date.getMonth() + 1) + '-' + $scope.date.getDate();
                 console.log(data.date);
                 data.store = store;
                 $http({
