@@ -7,7 +7,7 @@
             var data = {};
             data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             console.log(data.date);
-            data.store = store;
+            data.store = store.id;
             $http({
                 method: 'POST',
                 url: 'data/getStoreData.php',
@@ -20,8 +20,8 @@
                     } else {
                         var indexLocal = $scope.bakeries.length;
                         $scope.bakeries[indexLocal] = {};
-                        $scope.bakeries[indexLocal].number = store;
-                        $scope.bakeries[indexLocal].address = "store";
+                        $scope.bakeries[indexLocal].number = store.id;
+                        $scope.bakeries[indexLocal].address = store.address;
                         $scope.bakeries[indexLocal].cash = dataReceived.cash;
                         $scope.bakeries[indexLocal].checks = dataReceived.checks;
                         $scope.bakeries[indexLocal].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);

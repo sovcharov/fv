@@ -8,7 +8,8 @@
         $q->setFetchMode(PDO::FETCH_ASSOC);
         while ($row = $q->fetch())
         {
-            $stores[$index] = (int)$row['store'];
+            $stores[$index]['id'] = (int)$row['store'];
+            $stores[$index]['address'] = $row['address'];
             $index++;
         }
         $q->closeCursor();
@@ -16,6 +17,6 @@
         $dbh = null;
         echo json_encode($stores);
     }else{
-        echo "wrong";
+        echo 0;
     }
 ?>
