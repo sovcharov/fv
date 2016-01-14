@@ -4,9 +4,9 @@
         var getStoresData, getData;
         $scope.bakeries = [];
         getData = function (store, date, update) {
-            var data = {};
+            var data = {},
+                i;
             data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            console.log(data.date);
             data.store = store.id;
             $http({
                 method: 'POST',
@@ -16,7 +16,13 @@
             })
                 .success(function (dataReceived) {
                     if (update) {
-                        update = true;
+                        for (i = 0; i < $scope.bakeries.length; i = i + 1) {
+                            if ($scope.bakeries[i].number === store.id) {
+                                $scope.bakeries[i].cash = dataReceived.cash;
+                                $scope.bakeries[i].checks = dataReceived.checks;
+                                $scope.bakeries[i].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                            }
+                        }
                     } else {
                         var indexLocal = $scope.bakeries.length;
                         $scope.bakeries[indexLocal] = {};
