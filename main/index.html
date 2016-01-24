@@ -37,9 +37,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Сменить пароль</a></li>
+                <li><a href="/mainOld/">Старая версия</a></li>
+<!--                <li><a href="#">Сменить пароль</a></li>-->
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Выход</a></li>
+                <li><a href="/mainOld/exitapp.php">Выход</a></li>
               </ul>
             </li>
           </ul>
@@ -65,7 +66,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <span class="col-xs-11 bakery-name">
-                        <button class="btn btn-xs btn-active plusButton">+</button>
+<!--                        <button class="btn btn-xs btn-active plusButton">+</button>-->
                         № {{bakery.number}}. {{bakery.address}}
                     </span>
                     <span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>

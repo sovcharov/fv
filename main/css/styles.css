@@ -4,11 +4,12 @@
 .row {
     padding: 10px; 
     border-style: solid; 
-    border-width: 1px;
-    border-radius: 3px;
+    border-width: 3px;
+    border-radius: 10px;
     border-color: darkgray;
     margin: 0 auto;
     margin-bottom: 2px;
+    width: 99.5%;
     //color:dimgrey;
 }
 
