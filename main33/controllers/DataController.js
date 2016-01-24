@@ -20,7 +20,11 @@
                             if ($scope.bakeries[i].number === store.id) {
                                 $scope.bakeries[i].cash = dataReceived.cash;
                                 $scope.bakeries[i].checks = dataReceived.checks;
-                                $scope.bakeries[i].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                                if (dataReceived.checks) {
+                                    $scope.bakeries[i].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                                } else {
+                                    $scope.bakeries[i].averageCheck = 0;
+                                }
                             }
                         }
                     } else {
@@ -30,7 +34,11 @@
                         $scope.bakeries[indexLocal].address = store.address;
                         $scope.bakeries[indexLocal].cash = dataReceived.cash;
                         $scope.bakeries[indexLocal].checks = dataReceived.checks;
-                        $scope.bakeries[indexLocal].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                        if (dataReceived.checks) {
+                            $scope.bakeries[indexLocal].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                        } else {
+                            $scope.bakeries[indexLocal].averageCheck = 0;
+                        }
                     }
                 });
         };

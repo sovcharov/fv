@@ -1,5 +1,4 @@
 <?php
-
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 $store =  $request->store;
@@ -18,11 +17,10 @@ while ($msrow = mssql_fetch_array($msqresult))
     $result['cash'] = $msrow['total'];
     $result['checks'] = $msrow['checks'];
 }
-if(!sizeof($result)){
+if(!$result['cash']){
     $result['cash'] = 0;
-    $result['checks'] = 0; 
+    $result['checks'] = 0;
 }
 require '../../../dbclosems.php';
 echo json_encode($result);
-
 ?>
