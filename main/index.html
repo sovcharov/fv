@@ -51,11 +51,12 @@
 	<div ng-controller = "DataController as DataCtrl">
 		<div ng-controller="DateController">
 			<div class="col-xs-12">
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<p class="input-group">
 						<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+							<button type="button" class="btn btn-default" ng-click="dateChanged(dt);"><i class="glyphicon glyphicon-refresh"></i></button>
 						</span>
 					</p>
 				</div>
@@ -71,7 +72,11 @@
 					</span>
 					<span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>
 				</div>
-				<div class="col-sm-8">
+				<div class="col-sm-8" ng-show = "bakery.cash < 0">
+					<span class = "col-xs-12"><div class="loader"></div></span>
+					<!-- <span class="col-sm-8"><uib-progressbar class="progress-striped active" value="dynamic" type=""></uib-progressbar></span> -->
+				</div>
+				<div class="col-sm-8" ng-show = "bakery.cash > -1">
 					<span class="col-xs-5">Выручка: <span class="bakery-data-cash">{{bakery.cash | currency: "" : 0}}</span></span>
 					<span class="col-xs-3">Чеков: <span class="bakery-data">{{bakery.checks}}</span></span>
 					<span class="col-xs-4">Средний: <span class="bakery-data">{{bakery.averageCheck | currency: "" : 0}}</span></span>

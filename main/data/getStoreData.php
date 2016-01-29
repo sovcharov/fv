@@ -9,10 +9,10 @@ $msquery="
     from ChequeHead as c
     where convert(date,c.DateOperation) = '".$date."'
     and c.Cash_Code = ".$store."
-    ";				
+    ";
 $msqresult = mssql_query($msquery);
 $result = [];
-while ($msrow = mssql_fetch_array($msqresult)) 
+while ($msrow = mssql_fetch_array($msqresult))
 {
     $result['cash'] = $msrow['total'];
     $result['checks'] = $msrow['checks'];
