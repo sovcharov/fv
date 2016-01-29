@@ -42,6 +42,7 @@
                     }
                 });
         };
+
         getStoresData = function (date, stores) {
             var i, update = false;
             if ($scope.bakeries.length) {
@@ -51,7 +52,7 @@
                 getData(stores[i], date, update);
             }
         };
-        
+
         (function () {
             $http.get('data/getUserStores.php').success(function (data) {
                 $scope.stores = data;
