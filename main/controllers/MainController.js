@@ -6,7 +6,7 @@
         //check for user to exist before enter main page
         (function () {
             $http.get('data/checkUser.php').success(function (data) {
-                if (!data) {
+                if (!parseInt(data, 10)) {
                     window.open("http://www.fvolchek.net", "_self", false);
                     // window.location.assign("http://www.fvolchek.net");
                 }
