@@ -52,7 +52,7 @@
 		<div ng-controller="DateController">
 			<div class="col-xs-12">
 				<div class="col-md-3">
-					<p class="input-group">
+					<p class="input-group input-group-lg">
 						<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -61,7 +61,7 @@
 					</p>
 				</div>
 			</div>
-			<br/><br/>
+			<br/><br/><br/>
 		</div>
 		<div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'number'" ng-click="newWindow()">
 			<div class="row">
