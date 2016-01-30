@@ -12,5 +12,17 @@
                 }
             });
         }());
+
+        $scope.addLog = function (action) {
+            var data = {};
+            data.action = action;
+            $http({
+                method: 'POST',
+                url: 'services/addLog.php',
+                data: data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        };
+        $scope.addLog("Main load");
     });
 }());
