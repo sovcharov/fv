@@ -210,8 +210,8 @@
 						SUM(Summa)/SUM(OperGang.ChequeCountSale) as avCheckAmountLastMonth
 						from OperGang
 						where CashNumber = '".$mass[$j][0]."'
-						and YEAR(GangDateStart) = YEAR(getdate())-1
-						and month(GangDateStart) = month(getdate())+11
+						and YEAR(GangDateStart) = YEAR(getdate())
+						and month(GangDateStart) = month(getdate())-1
 						and Summa <> 0
 						group by OperGang.CashNumber
 					";
@@ -434,8 +434,8 @@
 						sum(OperGang.ChequeCountSale)/DATEPART(day, DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE())-1,0))) as avChecks, SUM(Summa) as sumCash,
 						SUM(Summa)/SUM(OperGang.ChequeCountSale) as avCheckAmountYear
 						from OperGang
-						where YEAR(GangDateStart) = YEAR(getdate())
-						and month(GangDateStart) = month(getdate())-2
+						where YEAR(GangDateStart) = YEAR(getdate())-1
+						and month(GangDateStart) = month(getdate())+10
 						and Summa <> 0
 					";
 
@@ -467,7 +467,7 @@
 				echo '</table>';
                 $daysInMonths = array(0,31,28,31,30,31,30,31,31,30,31,30,31);
                 $daysThisMonth = $daysInMonths[(int)date('m')];
-                if (!(int)date('y')%4 && date('m') == 2) $daysThisMonth += 1;
+                if ((int)date('y')%4 == 0 && date('m') == 2) $daysThisMonth += 1;
                 $plannedSumma = $avCashMonth2 * $daysThisMonth;
 				echo '<span style ="">Планируемая выручка: '.number_format($plannedSumma,2);
 				echo '<br>Планируемая выручка производства: '.number_format($plannedSumma*0.37,2);
