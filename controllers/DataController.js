@@ -1,73 +1,65 @@
 (function () {
     "use strict";
     angular.module("InvestorPanel").controller("DataController", function ($scope, $http) {
-        var getStoresData, getData, dataInitOrDrop;
+        var getStoresData, getData, dataInitOrDrop, getAvailableStores;
         $scope.bakeries = [];
-        getData = function (store, date) {
-            var data = {},
-                i;
+        getData = function (bakery, date) {
+            var data = {};
             data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            data.store = store.id;
+            data.store = bakery.id;
             $http({
                 method: 'POST',
                 url: 'data/getStoreData.php',
                 data: data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (dataReceived) {
-                for (i = 0; i < $scope.bakeries.length; i = i + 1) {
-                    if ($scope.bakeries[i].number === store.id) {
-                        $scope.bakeries[i].cash = dataReceived.cash;
-                        $scope.bakeries[i].checks = dataReceived.checks;
-                        if (dataReceived.checks) {
-                            $scope.bakeries[i].averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
-                        } else {
-                            $scope.bakeries[i].averageCheck = 0;
-                        }
-                    }
+                bakery.cash = dataReceived.cash;
+                bakery.checks = dataReceived.checks;
+                if (dataReceived.checks) {
+                    bakery.averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                } else {
+                    bakery.averageCheck = 0;
                 }
             }).error(function () {
-                for (i = 0; i < $scope.bakeries.length; i = i + 1) {
-                    if ($scope.bakeries[i].number === store.id) {
-                        $scope.bakeries[i].cash = "Ошибка";
-                        $scope.bakeries[i].checks = 0;
-                        $scope.bakeries[i].averageCheck = 0;
-                    }
-                }
+                bakery.cash = "Ошибка";
+                bakery.checks = 0;
+                bakery.averageCheck = 0;
             });
         };
 
-        getStoresData = function (date, stores) {
+        getStoresData = function (date, bakeries) {
             var i;
-            for (i = 0; i < stores.length; i = i + 1) {
-                getData(stores[i], date);
+            for (i = 0; i < bakeries.length; i = i + 1) {
+                getData(bakeries[i], date);
             }
 
         };
 
-        dataInitOrDrop = function (stores) {
+        dataInitOrDrop = function (bakeries) {
             var i;
-            for (i = 0; i < stores.length; i = i + 1) {
-                $scope.bakeries[i] = {};
-                $scope.bakeries[i].number = stores[i].id;
-                $scope.bakeries[i].address = stores[i].address;
-                $scope.bakeries[i].cash = -1;
-                $scope.bakeries[i].checks = 0;
-                $scope.bakeries[i].averageCheck = 0;
+            for (i = 0; i < bakeries.length; i = i + 1) {
+                bakeries[i].cash = -1;
+                bakeries[i].checks = 0;
+                bakeries[i].averageCheck = 0;
             }
         };
 
-        (function () {
+        getAvailableStores = function () {
             $http.get('data/getUserStores.php').success(function (data) {
-                $scope.stores = data;
-                dataInitOrDrop($scope.stores);
+                $scope.bakeries = data;
+                dataInitOrDrop($scope.bakeries);
                 var date = new Date();
-                getStoresData(date, $scope.stores);
+                getStoresData(date, $scope.bakeries);
             });
-        }());
+        };
+
+        if (!$scope.bakeries.length) {
+            getAvailableStores();
+        }
 
         $scope.dateChanged = function (date) {
-            dataInitOrDrop($scope.stores);
-            getStoresData(date, $scope.stores);
+            dataInitOrDrop($scope.bakeries);
+            getStoresData(date, $scope.bakeries);
         };
     });
 }());

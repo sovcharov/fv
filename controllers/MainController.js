@@ -1,5 +1,6 @@
 (function () {
     "use strict";
+    angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router']);
     angular.module('InvestorPanel').controller("MainController", function ($scope, $http) {
 
         //check for user to exist before enter main page

@@ -15,10 +15,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="js/ui-bootstrap-tpls-1.0.3.min.js"></script>
 	<script src="js/angular-ui-router.min.js"></script>
-	<script src="services/RouterService.js"></script>
 	<script src="controllers/MainController.js"></script>
 	<script src="controllers/DataController.js"></script>
 	<script src="controllers/DatePickerController.js"></script>
+	<script src="services/RouterService.js"></script>
 </head>
 <body ng-controller="MainController">
 	<nav class="navbar navbar-inverse">
@@ -35,7 +35,8 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<!--<li><a href="#">{{}}</a></li>-->
+					<li><a ui-sref="login">login</a></li>
+					<li><a ui-sref="main">main</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -50,41 +51,6 @@
 		</div><!-- /.container-fluid -->
 	</nav>
 	<!--{{bakeries}}-->
-	<div ng-controller = "DataController as DataCtrl">
-		<div ng-controller="DateController">
-			<div class="col-xs-12">
-				<div class="col-md-3">
-					<p class="input-group input-group-lg">
-						<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open1(); addLog('Main date change');"><i class="glyphicon glyphicon-calendar"></i></button>
-							<button type="button" class="btn btn-default" ng-click="dateChanged(dt); addLog('Main date refresh');"><i class="glyphicon glyphicon-refresh"></i></button>
-						</span>
-					</p>
-				</div>
-			</div>
-			<br/><br/><br/>
-		</div>
-		<div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'number'" ng-click="newWindow()">
-			<div class="row">
-				<div class="col-sm-4">
-					<span class="col-xs-11 bakery-name">
-						<!--                        <button class="btn btn-xs btn-active plusButton">+</button>-->
-						№ {{bakery.number}}. {{bakery.address}}
-					</span>
-					<span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>
-				</div>
-				<div class="col-sm-8" ng-show = "bakery.cash < 0">
-					<span class = "col-xs-12"><div class="loader"></div></span>
-					<!-- <span class="col-sm-8"><uib-progressbar class="progress-striped active" value="dynamic" type=""></uib-progressbar></span> -->
-				</div>
-				<div class="col-sm-8" ng-show = "bakery.cash > -1">
-					<span class="col-xs-5">Выручка: <span class="bakery-data-cash">{{bakery.cash | currency: "" : 0}}</span></span>
-					<span class="col-xs-3">Чеков: <span class="bakery-data">{{bakery.checks}}</span></span>
-					<span class="col-xs-4">Средний: <span class="bakery-data">{{bakery.averageCheck | currency: "" : 0}}</span></span>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div ui-view></div>
 </body>
 </html>
