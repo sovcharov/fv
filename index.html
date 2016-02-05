@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="InvestorPanel">
+<head>
+	<title>fvolchek.net</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="icon" type="image/ico" href="../images/fvlogo.png">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Sergei Ovcharov">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="js/ui-bootstrap-tpls-1.0.3.min.js"></script>
+	<script src="js/angular-ui-router.min.js"></script>
+	<script src="services/RouterService.js"></script>
+	<script src="controllers/MainController.js"></script>
+	<script src="controllers/DataController.js"></script>
+	<script src="controllers/DatePickerController.js"></script>
+</head>
+<body ng-controller="MainController">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Булочные Ф. Вольчека</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<!--<li><a href="#">{{}}</a></li>-->
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/mainOld/">Старая версия</a></li>
+							<!--                <li><a href="#">Сменить пароль</a></li>-->
+							<li role="separator" class="divider"></li>
+							<li><a href="/mainOld/exitapp.php">Выход</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	<!--{{bakeries}}-->
+	<div ng-controller = "DataController as DataCtrl">
+		<div ng-controller="DateController">
+			<div class="col-xs-12">
+				<div class="col-md-3">
+					<p class="input-group input-group-lg">
+						<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open1(); addLog('Main date change');"><i class="glyphicon glyphicon-calendar"></i></button>
+							<button type="button" class="btn btn-default" ng-click="dateChanged(dt); addLog('Main date refresh');"><i class="glyphicon glyphicon-refresh"></i></button>
+						</span>
+					</p>
+				</div>
+			</div>
+			<br/><br/><br/>
+		</div>
+		<div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'number'" ng-click="newWindow()">
+			<div class="row">
+				<div class="col-sm-4">
+					<span class="col-xs-11 bakery-name">
+						<!--                        <button class="btn btn-xs btn-active plusButton">+</button>-->
+						№ {{bakery.number}}. {{bakery.address}}
+					</span>
+					<span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>
+				</div>
+				<div class="col-sm-8" ng-show = "bakery.cash < 0">
+					<span class = "col-xs-12"><div class="loader"></div></span>
+					<!-- <span class="col-sm-8"><uib-progressbar class="progress-striped active" value="dynamic" type=""></uib-progressbar></span> -->
+				</div>
+				<div class="col-sm-8" ng-show = "bakery.cash > -1">
+					<span class="col-xs-5">Выручка: <span class="bakery-data-cash">{{bakery.cash | currency: "" : 0}}</span></span>
+					<span class="col-xs-3">Чеков: <span class="bakery-data">{{bakery.checks}}</span></span>
+					<span class="col-xs-4">Средний: <span class="bakery-data">{{bakery.averageCheck | currency: "" : 0}}</span></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
