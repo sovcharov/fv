@@ -1,8 +1,11 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router']);
-    angular.module('InvestorPanel').controller("MainController", function ($scope, $http) {
-
+    angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router']).value('user', {
+        firstName: 'Sergei',
+        lastName: 'Ovcharov',
+        id: 2
+    }).controller("MainController", function ($http, $state) {
+        $state.go('main');
         //check for user to exist before enter main page
         // (function () {
         //     $http.get('data/checkUser.php').success(function (data) {
