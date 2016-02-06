@@ -2,11 +2,11 @@
 <div class="form-group form-group-lg my-login-formgroup" style="">
     <div class="form-group">
         <!-- <label class="sr-only" for="exampleInputEmail3">Email address</label> -->
-        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email"required>
+        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email" ng-model = "login.email" required>
     </div>
     <div class="form-group">
         <!-- <label class="sr-only" for="exampleInputPassword3">Password</label> -->
-        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"  ng-model = "login.password" required>
     </div>
-    <button type="submit" class="btn btn-primary active btn-lg btn-block">Sign in</button>
+    <button type="submit" class="btn btn-primary active btn-lg btn-block" ng-click="formSubmit()">Sign in</button>
 </div>
