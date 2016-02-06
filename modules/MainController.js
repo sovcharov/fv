@@ -3,9 +3,27 @@
     angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router']).value('user', {
         firstName: 'Sergei',
         lastName: 'Ovcharov',
-        id: 2
-    }).controller("MainController", function ($http, $state) {
-        $state.go('main');
+        id: 2,
+        authenticated: false
+    }).run(function (user, $http, $interval, $state) {
+        user.getAuthenticated = function ($http) {
+            $http.get('data/checkUser.php').success(function (data) {
+                if (!parseInt(data, 10)) {
+                    user.authenticated = false;
+                    $state.go('login');
+                } else {
+                    user.authenticated = true;
+                    $state.go('main');
+                }
+                console.log(user.authenticated);
+            });
+        };
+        user.getAuthenticated($http);
+        $interval(function () {
+            user.getAuthenticated($http);
+        }, 20000);
+    }).controller("MainController", function () {
+
         //check for user to exist before enter main page
         // (function () {
         //     $http.get('data/checkUser.php').success(function (data) {

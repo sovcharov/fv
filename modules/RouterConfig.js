@@ -1,8 +1,9 @@
 (function () {
     "use strict";
     angular.module('InvestorPanel').config(function ($stateProvider) {
-        function authenticate($state, $q, $timeout, user) {
-            if (user.id === 2) {
+        function authenticate($state, $q, $timeout, user, $http) {
+            user.getAuthenticated($http);
+            if (user.authenticated) {
                 return $q.when();
             }
             $timeout(function () {
