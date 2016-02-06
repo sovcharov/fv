@@ -1,11 +1,11 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router']).value('user', {
-        firstName: 'Sergei',
-        lastName: 'Ovcharov',
-        id: 2,
+    angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router', 'ngCookies']).value('user', {
+        firstName: '',
+        lastName: '',
+        id: 0,
         authenticated: false
-    }).run(function (user, $http, $interval, $state) {
+    }).run(function (user, $http, $interval, $state, $log) {
         user.getAuthenticated = function ($http) {
             $http.get('data/checkUser.php').success(function (data) {
                 if (!parseInt(data, 10)) {
@@ -15,7 +15,7 @@
                     user.authenticated = true;
                     $state.go('main');
                 }
-                console.log(user.authenticated);
+                // $log.info(data);
             });
         };
         user.getAuthenticated($http);
