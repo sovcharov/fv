@@ -23,7 +23,9 @@
             user.getAuthenticated($http);
         }, 20000);
     }).controller("MainController", function ($scope, user) {
-        $scope.authenticated = user.authenticated;
+        $scope.authenticated = function () {
+            return user.authenticated;
+        };
 
         //check for user to exist before enter main page
         // (function () {
