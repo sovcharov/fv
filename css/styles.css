@@ -53,6 +53,11 @@
     font-weight: normal;
 }
 
+.my-login-formgroup {
+    margin: 0 auto;
+    width:380px;
+}
+
 /*Spinning wheel start*/
 /*Copyright (c) 2014 Luke Haas*/
 .loader {
