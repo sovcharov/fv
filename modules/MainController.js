@@ -17,13 +17,18 @@
                 }
             });
         };
-        user.getAuthenticated($http);
+        $state.go('main');
         $interval(function () {
             user.getAuthenticated($http);
         }, 20000);
-    }).controller("MainController", function ($rootScope, user) {
+    }).controller("MainController", function ($rootScope, $log, $cookies, $http, user) {
         $rootScope.authenticated = function () {
             return user.authenticated;
+        };
+
+        $rootScope.exitApp = function () {
+            $cookies.remove('token');
+            user.getAuthenticated($http);
         };
 
         // $scope.addLog = function (action) {

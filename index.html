@@ -37,15 +37,13 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a ui-sref="login">login</a></li>
-					<li><a ui-sref="main">main</a></li>
+					<li><a href="/mainOld/">Старая версия</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/mainOld/">Старая версия</a></li>
 							<!--                <li><a href="#">Сменить пароль</a></li>-->
 							<li role="separator" class="divider"></li>
-							<li><a href="/mainOld/exitapp.php">Выход</a></li>
+							<li><a href="#" ng-click="exitApp()">Выход</a></li>
 						</ul>
 					</li>
 				</ul>

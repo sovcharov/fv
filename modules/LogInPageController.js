@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel').controller("LogInPageController", function ($scope, $http, $log, user, $cookies) {
+    angular.module('InvestorPanel').controller("LogInPageController", function ($scope, $http, $log, user, $cookies, $rootScope) {
         $cookies.put('userID', 1);
         //$cookies.put('token', 1925484);
         if (user.authenticated) {
@@ -27,6 +27,8 @@
                         email: '',
                         password: ''
                     };
+                    user.getAuthenticated($http);
+                    $cookies.put('token', 1925484);
                 })
             }
         };
