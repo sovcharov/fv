@@ -4,7 +4,7 @@
         firstName: '',
         lastName: '',
         id: 0,
-        authenticated: false
+        authenticated: null
     }).run(function (user, $http, $interval, $state, $log) {
         user.getAuthenticated = function ($http) {
             $http.get('data/checkUser.php').success(function (data) {
@@ -22,8 +22,8 @@
         $interval(function () {
             user.getAuthenticated($http);
         }, 20000);
-    }).controller("MainController", function ($scope, user) {
-        $scope.authenticated = function () {
+    }).controller("MainController", function ($rootScope, user) {
+        $rootScope.authenticated = function () {
             return user.authenticated;
         };
 
