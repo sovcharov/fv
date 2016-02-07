@@ -5,7 +5,7 @@
         lastName: '',
         id: 0,
         authenticated: null
-    }).run(function (user, $http, $interval, $state, $log) {
+    }).run(function (user, $http, $interval, $state) {
         user.getAuthenticated = function ($http) {
             $http.get('data/checkUser.php').success(function (data) {
                 if (!parseInt(data, 10)) {
@@ -15,7 +15,6 @@
                     user.authenticated = true;
                     $state.go('main');
                 }
-                // $log.info(data);
             });
         };
         user.getAuthenticated($http);
@@ -27,19 +26,10 @@
             return user.authenticated;
         };
 
-        //check for user to exist before enter main page
-        // (function () {
-        //     $http.get('data/checkUser.php').success(function (data) {
-        //         if (!parseInt(data, 10)) {
-        //             window.open("http://www.fvolchek.net", "_self", false);
-        //             // window.location.assign("http://www.fvolchek.net");
-        //         }
-        //     });
-        // }());
-        //
         // $scope.addLog = function (action) {
-        //     var data = {};
-        //     data.action = action;
+        //     var data = {
+        //         action: action
+        //     };
         //     $http({
         //         method: 'POST',
         //         url: 'services/addLog.php',
