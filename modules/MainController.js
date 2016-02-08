@@ -30,6 +30,7 @@
             $cookies.remove('token');
             $cookies.remove('userID');
             $cookies.remove('userType');
+            $cookies.remove('userName');
             user.getAuthenticated($http);
         };
         $rootScope.addLog = function (action) {

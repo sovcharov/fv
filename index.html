@@ -3,7 +3,6 @@
 <head>
 	<title>fvolchek.net</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="icon" type="image/ico" href="../images/fvlogo.png">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -12,6 +11,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="js/ui-bootstrap-tpls-1.0.3.min.js"></script>
@@ -23,7 +23,7 @@
 	<script src="modules/DatePickerController.js"></script>
 </head>
 <body ng-controller="MainController">
-	<nav class="navbar navbar-inverse" ng-show = "authenticated()">
+	<nav class="navbar navbar-inverse my-navbar" ng-show = "authenticated()">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">

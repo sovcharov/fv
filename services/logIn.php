@@ -14,7 +14,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password)){
     while ($row = $q->fetch())
     {
         $result["userID"] = (int)$row['userID'];
-        $result["userType"] = (int)$row['userType'];
+        $result["userType"] = (int)$row['typeID'];
         $result["firstName"] = $row['firstName'];
         $result["lastName"] = $row['lastName'];
         $result["token"] = $token;

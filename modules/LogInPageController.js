@@ -26,6 +26,7 @@
                         $cookies.put('token', dataReceived.token, {'expires': date});
                         $cookies.put('userID', dataReceived.userID, {'expires': date});
                         $cookies.put('userType', dataReceived.userType, {'expires': date});
+                        $cookies.put('userName', dataReceived.firstName, {'expires': date});
                         user.getAuthenticated($http);
                         $scope.login = {
                             email: '',
