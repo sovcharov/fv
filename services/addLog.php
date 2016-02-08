@@ -3,7 +3,7 @@
     $request = json_decode($postdata);
     $action =  $request->action;
 	$user = $_COOKIE['userID'];
-	require '../../../pdodbconnect.php';
+	require '../../pdodbconnect.php';
 	$q=$dbh->query("call addLog('.$user.','$action');");
 	$q->closeCursor();
 	$q= null;

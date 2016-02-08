@@ -1,8 +1,6 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel').controller("LogInPageController", function ($scope, $http, $log, user, $cookies) {
-        $cookies.put('userID', 1);
-        //$cookies.put('token', 1925484);
+    angular.module('InvestorPanel').controller("LogInPageController", function ($scope, $http, user, $cookies) {
         if (user.authenticated) {
             user.getAuthenticated($http);
         }
@@ -23,7 +21,11 @@
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).success(function (dataReceived) {
                     if (dataReceived) {
-                        $cookies.put('token', dataReceived.token);
+                        var date = new Date();
+                        date.setDate(date.getDate() + 1);
+                        $cookies.put('token', dataReceived.token, {'expires': date});
+                        $cookies.put('userID', dataReceived.userID, {'expires': date});
+                        $cookies.put('userType', dataReceived.userType, {'expires': date});
                         user.getAuthenticated($http);
                         $scope.login = {
                             email: '',

@@ -28,20 +28,21 @@
 
         $rootScope.exitApp = function () {
             $cookies.remove('token');
+            $cookies.remove('userID');
+            $cookies.remove('userType');
             user.getAuthenticated($http);
         };
-
-        // $scope.addLog = function (action) {
-        //     var data = {
-        //         action: action
-        //     };
-        //     $http({
-        //         method: 'POST',
-        //         url: 'services/addLog.php',
-        //         data: data,
-        //         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        //     });
-        // };
-        // $scope.addLog("Main load");
+        $rootScope.addLog = function (action) {
+            var data = {
+                action: action
+            };
+            $http({
+                method: 'POST',
+                url: 'services/addLog.php',
+                data: data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        };
+        $rootScope.addLog("Main load");
     });
 }());

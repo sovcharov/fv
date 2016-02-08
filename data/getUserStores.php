@@ -1,11 +1,5 @@
 <?php
-    // require 'verifyID.php';
-
-    //
-    $user = '1';
-    $count = 1;
-    //
-
+    require 'verifyID.php';
     if ($count){
         require '../../pdodbconnect.php';
         $index = 0;
