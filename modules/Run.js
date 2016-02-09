@@ -10,13 +10,12 @@
             authenticated: null
         })
 
-        .run(function (user, $http, $interval, $state, $cookies, $log) {
+        .run(function (user, $http, $interval, $state, $cookies) {
 
             var fillUserData = function () {
                 user.type = parseInt($cookies.get('userType'), 10);
                 user.id = parseInt($cookies.get('userID'), 10);
                 user.firstName = $cookies.get('userName');
-                $log.log(user);
             };
 
             fillUserData();

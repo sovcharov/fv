@@ -2,6 +2,8 @@
     "use strict";
     angular.module('InvestorPanel').controller("MainController", function ($rootScope, $http, user, $cookies, $state) {
 
+        $rootScope.bakeries = [];
+
         $rootScope.authenticated = function () {
             return user.authenticated;
         };
@@ -33,7 +35,7 @@
         };
 
         $rootScope.accessToOrders = function () {
-            if (user.type === 4 || user.id === 1) {
+            if (user.type === 1 || user.id === 1) {
                 return true;
             }
             return false;

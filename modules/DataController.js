@@ -1,9 +1,7 @@
 (function () {
     "use strict";
-    angular.module("InvestorPanel").controller("DataController", function ($scope, $http) {
+    angular.module("InvestorPanel").controller("DataController", function ($rootScope, $scope, $http) {
         var getStoresData, getData, dataInitOrDrop, getAvailableStores;
-
-        $scope.bakeries = [];
 
         getData = function (bakery, date) {
             var data = {};
@@ -48,20 +46,20 @@
 
         getAvailableStores = function () {
             $http.get('data/getUserStores.php').success(function (data) {
-                $scope.bakeries = data;
-                dataInitOrDrop($scope.bakeries);
+                $rootScope.bakeries = data;
+                dataInitOrDrop($rootScope.bakeries);
                 var date = new Date();
-                getStoresData(date, $scope.bakeries);
+                getStoresData(date, $rootScope.bakeries);
             });
         };
 
-        if (!$scope.bakeries.length) {
+        if (!$rootScope.bakeries.length) {
             getAvailableStores();
         }
 
         $scope.dateChanged = function (date) {
-            dataInitOrDrop($scope.bakeries);
-            getStoresData(date, $scope.bakeries);
+            dataInitOrDrop($rootScope.bakeries);
+            getStoresData(date, $rootScope.bakeries);
         };
     });
 }());
