@@ -20,6 +20,13 @@
             return $q.reject();
         }
 
+        function ordersShow($q, $rootScope) {
+            if ($rootScope.accessToOrders()) {
+                return $q.when();
+            }
+            return $q.reject();
+        }
+
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -32,6 +39,12 @@
                 templateUrl: 'templates/main.html',
                 controller: 'DataController',
                 resolve: {authenticate: authenticate}
+            })
+            .state('orders', {
+                url: '/orders',
+                templateUrl: 'templates/orders.html',
+                controller: 'OrdersController',
+                resolve: {ordersShow: ordersShow}
             });
     });
 }());

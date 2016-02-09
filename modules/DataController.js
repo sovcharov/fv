@@ -2,7 +2,9 @@
     "use strict";
     angular.module("InvestorPanel").controller("DataController", function ($scope, $http) {
         var getStoresData, getData, dataInitOrDrop, getAvailableStores;
+
         $scope.bakeries = [];
+
         getData = function (bakery, date) {
             var data = {};
             data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();

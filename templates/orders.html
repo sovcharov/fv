@@ -1,0 +1,21 @@
+<div>YOU ARE IN ORDERS</div>
+<div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'id'" ng-click="newWindow()">
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="col-xs-11 bakery-name">
+                <!--                        <button class="btn btn-xs btn-active plusButton">+</button>-->
+                № {{bakery.id}}. {{bakery.address}}
+            </span>
+            <span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>
+        </div>
+        <div class="col-sm-8" ng-show = "bakery.cash < 0">
+            <span class = "col-xs-12"><div class="loader"></div></span>
+            <!-- <span class="col-sm-8"><uib-progressbar class="progress-striped active" value="dynamic" type=""></uib-progressbar></span> -->
+        </div>
+        <div class="col-sm-8" ng-show = "bakery.cash > -1">
+            <span class="col-xs-5">Выручка: <span class="bakery-data-cash">{{bakery.cash | currency: "" : 0}}</span></span>
+            <span class="col-xs-3">Чеков: <span class="bakery-data">{{bakery.checks}}</span></span>
+            <span class="col-xs-4">Средний: <span class="bakery-data">{{bakery.averageCheck | currency: "" : 0}}</span></span>
+        </div>
+    </div>
+</div>

@@ -1,38 +1,13 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel', ['ui.bootstrap', 'ui.router', 'ngCookies']).value('user', {
-        firstName: '',
-        lastName: '',
-        id: 0,
-        authenticated: null
-    }).run(function (user, $http, $interval, $state) {
-        user.getAuthenticated = function ($http) {
-            $http.get('data/checkUser.php').success(function (data) {
-                if (!parseInt(data, 10)) {
-                    user.authenticated = false;
-                    $state.go('login');
-                } else {
-                    user.authenticated = true;
-                    $state.go('main');
-                }
-            });
-        };
-        $state.go('main');
-        $interval(function () {
-            user.getAuthenticated($http);
-        }, 20000);
-    }).controller("MainController", function ($rootScope, $log, $cookies, $http, user) {
+    angular.module('InvestorPanel').controller("MainController", function ($rootScope, $http, user, $cookies, $state) {
+
         $rootScope.authenticated = function () {
             return user.authenticated;
         };
 
-        $rootScope.exitApp = function () {
-            $cookies.remove('token');
-            $cookies.remove('userID');
-            $cookies.remove('userType');
-            $cookies.remove('userName');
-            user.getAuthenticated($http);
-        };
+        $rootScope.user = user;
+
         $rootScope.addLog = function (action) {
             var data = {
                 action: action
@@ -44,6 +19,24 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
         };
+
         $rootScope.addLog("Main load");
+
+        $rootScope.exitApp = function () {
+            $cookies.remove('token');
+            $cookies.remove('userID');
+            $cookies.remove('userType');
+            $cookies.remove('userName');
+            user.authenticated = false;
+            $state.go('login');
+            $rootScope.addLog("Exit");
+        };
+
+        $rootScope.accessToOrders = function () {
+            if (user.type === 4 || user.id === 1) {
+                return true;
+            }
+            return false;
+        };
     });
 }());

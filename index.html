@@ -16,11 +16,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="js/ui-bootstrap-tpls-1.0.3.min.js"></script>
 	<script src="js/angular-ui-router.min.js"></script>
+	<script src="modules/Run.js"></script>
 	<script src="modules/MainController.js"></script>
 	<script src="modules/RouterConfig.js"></script>
 	<script src="modules/DataController.js"></script>
 	<script src="modules/LogInPageController.js"></script>
 	<script src="modules/DatePickerController.js"></script>
+	<script src="modules/OrdersController.js"></script>
 </head>
 <body ng-controller="MainController">
 	<nav class="navbar navbar-inverse my-navbar" ng-show = "authenticated()">
@@ -33,17 +35,18 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Булочные Ф. Вольчека</a>
+				<a class="navbar-brand">Булочные Ф. Вольчека</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/mainOld/">Старая версия</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<!--                <li><a href="#">Сменить пароль</a></li>-->
+							<li><a ui-sref="orders" ng-if="accessToOrders()">Заказы</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#" ng-click="exitApp()">Выход</a></li>
+							<li><a href ng-click="exitApp()">Выход</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -1,18 +1,22 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel').controller("LogInPageController", function ($scope, $http, user, $cookies) {
+    angular.module('InvestorPanel').controller("LogInPageController", function ($rootScope, $scope, $http, user, $cookies, $state) {
+
         if (user.authenticated) {
             user.getAuthenticated($http);
         }
+
         var regex = {
             email: /^[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*@[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*\.[A-Za-z]{2,4}$/,
             password: /^[A-Za-z0-9.\-_*$]{5,}$/
         };
+
         $scope.login = {
             email: '',
             password: ''
         };
-        $scope.formSubmit = function () {
+
+        $scope.logIn = function () {
             if (regex.email.test($scope.login.email) && regex.password.test($scope.login.password)) {
                 $http({
                     method: 'POST',
@@ -27,11 +31,16 @@
                         $cookies.put('userID', dataReceived.userID, {'expires': date});
                         $cookies.put('userType', dataReceived.userType, {'expires': date});
                         $cookies.put('userName', dataReceived.firstName, {'expires': date});
-                        user.getAuthenticated($http);
+                        user.authenticated = true;
+                        $state.go('main');
                         $scope.login = {
                             email: '',
                             password: ''
                         };
+                        user.id = dataReceived.userID;
+                        user.type =  dataReceived.userID;
+                        user.firstName = dataReceived.firstName;
+                        user.lastName = dataReceived.lastName;
                     }
                 });
             }
