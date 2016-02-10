@@ -22,7 +22,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password)){
     $q->closeCursor();
     $q= null;
     $dbh = null;
-    echo json_encode($result);
-}
-echo false;
+    if ($result) echo json_encode($result);
+    else echo false;
+} else echo false;
 ?>

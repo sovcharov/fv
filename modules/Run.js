@@ -10,7 +10,7 @@
             authenticated: null
         })
 
-        .run(function (user, $http, $interval, $state, $cookies) {
+        .run(function (user, $http, $interval, $state, $cookies, $rootScope) {
 
             var fillUserData = function () {
                 user.type = parseInt($cookies.get('userType'), 10);
@@ -24,6 +24,7 @@
                 $http.get('data/checkUser.php').success(function (data) {
                     if (!parseInt(data, 10)) {
                         user.authenticated = false;
+                        $rootScope.bakeries = [];
                         $state.go('login');
                     } else {
                         if (!user.authenticated) {

@@ -46,10 +46,14 @@
                             email: '',
                             password: ''
                         };
-                        $rootScope.addInfoEvent(1, 'Неверные данные');
+                        $rootScope.addInfoEvent(1, 'Введены неверные данные');
                     }
                 });
             } else {
+                $scope.login = {
+                    email: '',
+                    password: ''
+                };
                 $rootScope.addInfoEvent(1, 'Введены неверные данные');
             }
         };
