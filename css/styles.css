@@ -62,6 +62,35 @@
     border-radius: 0;
 }
 
+/*Info Event start*/
+/*Copyright (c) 2015 Sergei Ovcharov*/
+.infoEventMain{
+	position:fixed;
+	bottom:0px;
+	right:0px;
+	z-index:5;
+}
+.infoEvent{
+	height:60px;
+	width:250px;
+	opacity: 0.7;
+	border-radius:5px;
+	margin:1px;
+	text-align:center;
+	vertical-align: middle;
+	font-family: Arial;
+	font-size:17px;
+	color:white;
+	line-height:40px;
+}
+.infoEventWarning{
+	background-color:#B20000;
+}
+.infoEventSuccess{
+	background-color:#4DB870;
+}
+/*Info Event end*/
+
 /*Spinning wheel start*/
 /*Copyright (c) 2014 Luke Haas*/
 .loader {

@@ -23,6 +23,7 @@
 	<script src="modules/LogInPageController.js"></script>
 	<script src="modules/DatePickerController.js"></script>
 	<script src="modules/OrdersController.js"></script>
+	<script src="modules/InfoEventController.js"></script>
 </head>
 <body ng-controller="MainController">
 	<nav class="navbar navbar-inverse my-navbar" ng-show = "authenticated()">
@@ -55,5 +56,11 @@
 	</nav>
 	<!--{{bakeries}}-->
 	<div ui-view></div>
+	<div class="infoEventMain" ng-controller="InfoEventController">
+		<div ng-repeat="event in infoEvents"  class="infoEvent" ng-class="{'infoEventWarning': checkInfoEventClass(event),'infoEventSuccess': !checkInfoEventClass(event)}">
+			<div>{{event.text}}</div>
+			<div style="font-size:12px;line-height:10px">{{event.comment}}</div>
+		</div>
+	</div>
 </body>
 </html>

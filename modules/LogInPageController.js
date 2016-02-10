@@ -41,8 +41,16 @@
                         user.type =  dataReceived.userID;
                         user.firstName = dataReceived.firstName;
                         user.lastName = dataReceived.lastName;
+                    } else {
+                        $scope.login = {
+                            email: '',
+                            password: ''
+                        };
+                        $rootScope.addInfoEvent(1, 'Неверные данные');
                     }
                 });
+            } else {
+                $rootScope.addInfoEvent(1, 'Введены неверные данные');
             }
         };
     });
