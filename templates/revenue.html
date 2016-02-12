@@ -1,9 +1,13 @@
 <div ng-controller="DateController" ng-cloak>
     <div class="col-xs-12">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <p class="input-group input-group-lg">
-                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
+                <!-- <span class="input-group-btn">
+                </span> -->
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
                 <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="datePlusMinus(-1);dateChanged(dt);"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="datePlusMinus(1);dateChanged(dt);"><i class="glyphicon glyphicon-chevron-right"></i></button>
                     <button type="button" class="btn btn-default" ng-click="open1(); addLog('Main date change');"><i class="glyphicon glyphicon-calendar"></i></button>
                     <button type="button" class="btn btn-default" ng-click="dateChanged(dt); addLog('Main date refresh');"><i class="glyphicon glyphicon-refresh"></i></button>
                 </span>
@@ -12,6 +16,7 @@
     </div>
     <br/><br/><br/>
 </div>
+
 <div class="bakery" ng-repeat="bakery in bakeries | orderBy: 'id'" ng-click="newWindow()" ng-cloak>
     <div class="row">
         <div class="col-sm-4">

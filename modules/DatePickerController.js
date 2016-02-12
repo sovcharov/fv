@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     angular.module('ui.bootstrap')
-        .controller('DateController', function ($scope) {
+        .controller('DateController', function ($scope, $log) {
             $scope.today = function () {
                 $scope.dt = new Date();
             };
@@ -12,9 +12,9 @@
             };
 
             // Disable weekend selection
-            $scope.disabled = function (date, mode) {
-    //        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-            };
+    //         $scope.disabled = function (date, mode) {
+    // //        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    //         };
 
             $scope.toggleMin = function () {
                 //$scope.minDate = $scope.minDate ? null : new Date
@@ -27,6 +27,7 @@
             $scope.maxDate = new Date();
 
             $scope.open1 = function () {
+                $scope.maxDate = new Date();
                 $scope.popup1.opened = true;
             };
 
@@ -83,5 +84,16 @@
                 }
                 return '';
             };
+
+            $scope.datePlusMinus = function (x) {
+                var year, month, day, date;
+                date = $scope.dt;
+                year = date.getFullYear();
+                month = date.getMonth();
+                day = date.getDate() + x;
+                $scope.setDate(year, month, day);
+            };
+
+
         });
 }());
