@@ -18,16 +18,17 @@
                 }
             };
         $rootScope.addInfoEvent = function (eventClass, text, comment) {
-            var event = {},
+            var event = {
+                eventClass: eventClass,
+                text: text,
+                life: 5
+            },
                 index = $rootScope.infoEvents.length;
-            event.eventClass = eventClass;
-            event.text = text;
-            if (!comment) {
-                event.comment = "---------";
-            } else {
+            if (comment) {
                 event.comment = comment;
+            } else {
+                event.comment = "---------";
             }
-            event.life = 5;
             $rootScope.infoEvents[index] = event;
             if (index === 0) {
                 stop = $interval(updateInfoEvents, 500);

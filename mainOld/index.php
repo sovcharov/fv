@@ -56,7 +56,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
 	<script src="controllers/MainController.js"></script>
 </head>
-<body ng-controller="MainController">
+<body ng-controller="MainController" ng-cloak>
     <nav class="navbar navbar-default">
         <a class="navbar-brand" href="/"><img alt="Brand" height="30" width="34" src="../images/fvlogo.png"></a>
 		<a class="navbar-brand" href="/">Пекарня Ф. Вольчека</a>

@@ -29,15 +29,24 @@
                     } else {
                         if (!user.authenticated) {
                             user.authenticated = true;
-                            $state.go('main');
+                            $state.go('main.revenue');
                         }
                         user.authenticated = true;
                     }
                 });
             };
-            $state.go('main');
+
+            $state.go('main.revenue');
+
             $interval(function () {
                 user.getAuthenticated($http);
             }, 20000);
+
+            $rootScope.$on('$stateChangeStart', function (evt, to, params) {
+                if (to.redirectTo) {
+                    evt.preventDefault();
+                    $state.go(to.redirectTo, params);
+                }
+            });
         });
 }());

@@ -37,10 +37,16 @@
             .state('main', {
                 url: '/main',
                 templateUrl: 'templates/main.html',
-                controller: 'DataController',
+                controller: 'MainController',
+                redirectTo: 'main.revenue',
                 resolve: {authenticate: authenticate}
             })
-            .state('orders', {
+            .state('main.revenue', {
+                url: '/revenue',
+                templateUrl: 'templates/revenue.html',
+                controller: 'DataController'
+            })
+            .state('main.orders', {
                 url: '/orders',
                 templateUrl: 'templates/orders.html',
                 controller: 'OrdersController',

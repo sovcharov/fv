@@ -32,7 +32,7 @@
                         $cookies.put('userType', dataReceived.userType, {'expires': date});
                         $cookies.put('userName', dataReceived.firstName, {'expires': date});
                         user.authenticated = true;
-                        $state.go('main');
+                        $state.go('main.revenue');
                         $scope.login = {
                             email: '',
                             password: ''
