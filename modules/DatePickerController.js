@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     angular.module('ui.bootstrap')
-        .controller('DateController', function ($scope, $log) {
+        .controller('DateController', function ($scope) {
             $scope.today = function () {
                 $scope.dt = new Date();
             };
@@ -85,14 +85,14 @@
                 return '';
             };
 
-            $scope.datePlusMinus = function (x) {
-                var year, month, day, date;
-                date = $scope.dt;
-                year = date.getFullYear();
-                month = date.getMonth();
-                day = date.getDate() + x;
-                $scope.setDate(year, month, day);
-            };
+            // $scope.datePlusMinus = function (x) {
+            //     var year, month, day, date;
+            //     date = $scope.dt;
+            //     year = date.getFullYear();
+            //     month = date.getMonth();
+            //     day = date.getDate() + x;
+            //     $scope.setDate(year, month, day);
+            // };
 
 
         });
