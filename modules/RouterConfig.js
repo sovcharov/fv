@@ -27,6 +27,13 @@
             return $q.reject();
         }
 
+        function bakeryShow($q, $rootScope) {
+            if ($rootScope.accessToBakeryPage()) {
+                return $q.when();
+            }
+            return $q.reject();
+        }
+
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -42,15 +49,21 @@
                 resolve: {authenticate: authenticate}
             })
             .state('main.revenue', {
-                url: '/revenue',
+                url: '^/revenue',
                 templateUrl: 'templates/revenue.html',
                 controller: 'DataController'
             })
             .state('main.orders', {
-                url: '/orders',
+                url: '^/orders',
                 templateUrl: 'templates/orders.html',
                 controller: 'OrdersController',
                 resolve: {ordersShow: ordersShow}
+            })
+            .state('main.bakery', {
+                url: '^/bakery/{bakeryID:[0-9]}',
+                templateUrl: 'templates/bakery.html',
+                controller: 'BakeryPageController',
+                resolve: {bakeryShow: bakeryShow}
             });
     });
 }());

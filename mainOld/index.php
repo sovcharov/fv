@@ -69,10 +69,10 @@
 					<script type="text/javascript" src="js/mySpin.js"></script>
 				</li>
 				<?php
-					if($_COOKIE['userID']==1 || $_COOKIE['userType']==1 || $_COOKIE['userID']==20) echo '<li><a href="/cakesorder/">orders</a></li>';
-					if($_COOKIE['userID']==1) echo '<li><a href="../admin">admin</a></li>';
+					// if($_COOKIE['userID']==1 || $_COOKIE['userType']==1 || $_COOKIE['userID']==20) echo '<li><a href="/cakesorder/">orders</a></li>';
+					// if($_COOKIE['userID']==1) echo '<li><a href="../admin">admin</a></li>';
 				?>
-                <li><a href="../passwordchange/">Сменить Пароль</a></li>
+                <!-- <li><a href="../passwordchange/">Сменить Пароль</a></li> -->
                 <li class=""><a href="exitapp.php">Выход</a></li>
             </ul>
         </div>

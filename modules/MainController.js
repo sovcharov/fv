@@ -40,5 +40,12 @@
             }
             return false;
         };
+
+        $rootScope.accessToBakeryPage = function () {
+            if (user.type === 1 || user.id === 1) {
+                return true;
+            }
+            return false;
+        };
     });
 }());
