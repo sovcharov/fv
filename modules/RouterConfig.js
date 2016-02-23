@@ -59,10 +59,10 @@
                 controller: 'OrdersController',
                 resolve: {ordersShow: ordersShow}
             })
-            .state('main.bakery', {
-                url: '^/bakery/{bakeryID:[0-9]}',
-                templateUrl: 'templates/bakery.html',
-                controller: 'BakeryPageController',
+            .state('main.hourlystats', {
+                url: '^/hourlystats/{bakeryID:[0-9]}',
+                templateUrl: 'pages/hourlyStats.html',
+                controller: 'HourlyStatsPageController',
                 resolve: {bakeryShow: bakeryShow}
             });
     });

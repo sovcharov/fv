@@ -1,0 +1,61 @@
+<date-picker></date-picker>
+<div class="col-xs-12">
+    <div class="col-md-3">
+        <form class="form-group form-group-lg">
+            <select class="form-control" ng-model = "bakeryID" ng-change = "changeBakery(bakeryID);">
+                <option ng-repeat = "bakery in bakeries" value = "{{bakery.id}}">№ {{bakery.id}}. {{bakery.address}}</option>
+            </select>
+        </form>
+    </div>
+</div>
+<div class="col-xs-12">
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th colspan="2">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+            <th class="">...</th>
+        </tr>
+        <div>
+            <tr>
+                <td rowspan="3" class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+            </tr>
+            <tr>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+            </tr>
+            <tr>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+                <td class="">...</td>
+            </tr>
+        </div>
+    </table>
+</div>

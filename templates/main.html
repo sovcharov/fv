@@ -17,7 +17,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <!--                <li><a href="#">Сменить пароль</a></li>-->
-                        <li><a ui-sref="main.bakery({bakeryID: 1})" ng-if="accessToBakeryPage()">Подробно</a></li>
+                        <li><a ui-sref="main.hourlystats({bakeryID: 1})" ng-if="accessToBakeryPage()">Подробно</a></li>
                         <li><a ui-sref="main.orders" ng-if="accessToOrders()">Заказы</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href ng-click="exitApp()">Выход</a></li>
