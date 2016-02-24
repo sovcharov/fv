@@ -1,0 +1,36 @@
+<div class="col-xs-12">
+
+    <div class="page-header">
+        <h1>Инструменты <small><i class="glyphicon glyphicon-wrench"></i></small></h1>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Аналитика</h3>
+        </div>
+        <div class="panel-body">
+            <p ng-if="access.toHourlyStatsPage()"><a ui-sref="main.hourlystats({bakeryID: 1})"><i class="glyphicon glyphicon-time"></i>  Почасовая статистика</a></p>
+            <p ng-if = "access.toAdmin();"><a ui-sref="main.hourlystats({bakeryID: 1})" ng-if="access.toHourlyStatsPage()"><i class="glyphicon glyphicon-usd"></i>  Чеки</a></p>
+            <p ng-if = "access.toAdmin();"><a ui-sref="main.hourlystats({bakeryID: 1})" ng-if="access.toHourlyStatsPage()"><i class="glyphicon glyphicon-eye-open"></i>  Эффективность заказов</a></p>
+        </div>
+    </div>
+
+    <div class="panel panel-primary" ng-if = "access.toAdmin();">
+        <div class="panel-heading">
+            <h3 class="panel-title">Управляющим</h3>
+        </div>
+        <div class="panel-body">
+            <a ui-sref="main.orders" ng-if="access.toOrdersPage()"><i class="glyphicon glyphicon-shopping-cart"></i>  Заказы</a>
+        </div>
+    </div>
+
+    <div class="panel panel-primary" ng-if = "access.toAdmin();">
+        <div class="panel-heading">
+            <h3 class="panel-title">Администратору</h3>
+        </div>
+        <div class="panel-body">
+            <a ui-sref="main.hourlystats({bakeryID: 1})" ng-if="access.toHourlyStatsPage()"><i class="glyphicon glyphicon-time"></i>  Почасовая статистика</a>
+        </div>
+    </div>
+
+</div>

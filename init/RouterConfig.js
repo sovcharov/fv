@@ -21,14 +21,21 @@
         }
 
         function ordersShow($q, $rootScope) {
-            if ($rootScope.accessToOrders()) {
+            if ($rootScope.access.toOrdersPage()) {
                 return $q.when();
             }
             return $q.reject();
         }
 
-        function bakeryShow($q, $rootScope) {
-            if ($rootScope.accessToBakeryPage()) {
+        function hourlyStatsShow($q, $rootScope) {
+            if ($rootScope.access.toHourlyStatsPage()) {
+                return $q.when();
+            }
+            return $q.reject();
+        }
+
+        function toolsShow($q, $rootScope) {
+            if ($rootScope.access.toToolsPage()) {
                 return $q.when();
             }
             return $q.reject();
@@ -53,6 +60,12 @@
                 templateUrl: 'pages/revenue.html',
                 controller: 'RevenuePageController'
             })
+            .state('main.tools', {
+                url: '^/tools',
+                templateUrl: 'pages/tools.html',
+                controller: 'ToolsPageController',
+                resolve: {toolsShow: toolsShow}
+            })
             .state('main.orders', {
                 url: '^/orders',
                 templateUrl: 'pages/orders.html',
@@ -63,7 +76,7 @@
                 url: '^/hourlystats/{bakeryID:[0-9]}',
                 templateUrl: 'pages/hourlyStats.html',
                 controller: 'HourlyStatsPageController',
-                resolve: {bakeryShow: bakeryShow}
+                resolve: {hourlyStatsShow: hourlyStatsShow}
             });
     });
 }());

@@ -33,19 +33,5 @@
             $state.go('login');
             $rootScope.addLog("Exit");
         };
-
-        $rootScope.accessToOrders = function () {
-            if (user.type === 1 || user.id === 1) {
-                return true;
-            }
-            return false;
-        };
-
-        $rootScope.accessToBakeryPage = function () {
-            if (user.type === 1 || user.id === 1) {
-                return true;
-            }
-            return false;
-        };
     });
 }());

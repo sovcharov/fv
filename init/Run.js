@@ -42,11 +42,43 @@
                 user.getAuthenticated($http);
             }, 20000);
 
+            //this function is needed for redirect to work (in our case when you hit main you have to redirect to main.revenue state)
             $rootScope.$on('$stateChangeStart', function (evt, to, params) {
                 if (to.redirectTo) {
                     evt.preventDefault();
                     $state.go(to.redirectTo, params);
                 }
             });
+
+            $rootScope.access = {
+
+                toOrdersPage: function () {
+                    if (user.type === 1 || user.id === 1) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toHourlyStatsPage: function () {
+                    if (user.type === 1 || user.id === 1) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toToolsPage: function () {
+                    if (user.type === 1 || user.id === 1) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toAdmin: function () {
+                    if (user.id === 1) {
+                        return true;
+                    }
+                    return false;
+                }
+            };
         });
 }());
