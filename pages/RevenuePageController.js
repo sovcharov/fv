@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    angular.module("InvestorPanel").controller("DataController", function ($rootScope, $scope, $http) {
+    angular.module("InvestorPanel").controller("RevenuePageController", function ($rootScope, $scope, $http) {
         var getStoresData, getData, dataInitOrDrop, getAvailableStores;
 
         getData = function (bakery, date) {
@@ -9,7 +9,7 @@
             data.store = bakery.id;
             $http({
                 method: 'POST',
-                url: 'data/getStoreData.php',
+                url: 'server/getStoreData.php',
                 data: data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (dataReceived) {
@@ -45,7 +45,7 @@
         };
 
         getAvailableStores = function () {
-            $http.get('data/getUserStores.php').success(function (data) {
+            $http.get('server/getUserStores.php').success(function (data) {
                 $rootScope.bakeries = data;
                 dataInitOrDrop($rootScope.bakeries);
                 var date = new Date();

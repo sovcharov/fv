@@ -20,7 +20,7 @@
             if (regex.email.test($scope.login.email) && regex.password.test($scope.login.password)) {
                 $http({
                     method: 'POST',
-                    url: 'services/logIn.php',
+                    url: 'server/logIn.php',
                     data: $scope.login,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).success(function (dataReceived) {

@@ -16,7 +16,7 @@
             };
             $http({
                 method: 'POST',
-                url: 'services/addLog.php',
+                url: 'server/addLog.php',
                 data: data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });

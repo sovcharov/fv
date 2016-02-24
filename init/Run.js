@@ -21,7 +21,7 @@
             fillUserData();
 
             user.getAuthenticated = function ($http) {
-                $http.get('data/checkUser.php').success(function (data) {
+                $http.get('server/checkUser.php').success(function (data) {
                     if (!parseInt(data, 10)) {
                         user.authenticated = false;
                         $rootScope.bakeries = [];

@@ -37,26 +37,26 @@
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: 'templates/login.html',
+                templateUrl: 'pages/login.html',
                 controller: 'LogInPageController',
                 resolve: {showLogin: showLogin}
             })
             .state('main', {
                 url: '/main',
-                templateUrl: 'templates/main.html',
+                templateUrl: 'pages/main.html',
                 controller: 'MainController',
                 redirectTo: 'main.revenue',
                 resolve: {authenticate: authenticate}
             })
             .state('main.revenue', {
                 url: '^/revenue',
-                templateUrl: 'templates/revenue.html',
-                controller: 'DataController'
+                templateUrl: 'pages/revenue.html',
+                controller: 'RevenuePageController'
             })
             .state('main.orders', {
                 url: '^/orders',
-                templateUrl: 'templates/orders.html',
-                controller: 'OrdersController',
+                templateUrl: 'pages/orders.html',
+                controller: 'OrdersPageController',
                 resolve: {ordersShow: ordersShow}
             })
             .state('main.hourlystats', {
