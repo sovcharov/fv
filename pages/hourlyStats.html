@@ -10,8 +10,9 @@
 </div>
 <div class="col-xs-12">
     <table class="table table-condensed table-bordered">
-        <tr>
-            <th class="active" colspan="2"></th>
+        <tr  class="active">
+            <th>Час</th>
+            <th>Дата -&gt</th>
             <th class="">{{getDateddMM(dateToday, 0)}}</th>
             <th class="">{{getDateddMM(dateToday, 1)}}</th>
             <th class="">{{getDateddMM(dateToday, 2)}}</th>
@@ -22,7 +23,7 @@
             <th class="">{{getDateddMM(dateToday, 7)}}</th>
         </tr>
         <tbody ng-repeat = "hour in bakeries[getCurrentBakery(bakeryID)].hourlystats">
-            <tr>
+            <tr class = "info">
                 <td rowspan="3" class="">{{hour.time}} - {{hour.time + 1}}</td>
                 <td class="">Выручка</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 0)].cash || 0}}</td>
@@ -35,18 +36,18 @@
                 <td class="">{{hour[getDateInStringFormat(dateToday, 7)].cash || 0}}</td>
             </tr>
             <tr>
-                <td class="">Сумма</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 3)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 4)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 5)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 6)].total || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].total || 0}}</td>
+                <td class="">Итого</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 3)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 4)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 5)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 6)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].sum || 0}}</td>
             </tr>
             <tr>
-                <td class="">Чеки</td>
+                <td class="">Чеков</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 0)].checks || 0}}</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 1)].checks || 0}}</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 2)].checks || 0}}</td>
@@ -59,4 +60,3 @@
         </tbody>
     </table>
 </div>
-{{bakeries[0].hourlystats}}
