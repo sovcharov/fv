@@ -59,15 +59,29 @@
                     return false;
                 },
 
-                toHourlyStatsPage: function () {
-                    if (user.type === 1 || user.id === 1) {
+                toToolsPage: function () {
+                    if (this.toAnalitics() || this.toManagersTool() || this.toAdmin()) {
                         return true;
                     }
                     return false;
                 },
 
-                toToolsPage: function () {
-                    if (user.type === 1 || user.id === 1) {
+                toAnalitics: function () {
+                    if (this.toHourlyStatsPage()) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toHourlyStatsPage: function () {
+                    if (user.id === 1 || user.id === 3) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toManagersTool: function () {
+                    if (this.toOrdersPage()) {
                         return true;
                     }
                     return false;
