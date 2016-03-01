@@ -7,21 +7,24 @@
         $scope.bakeryID = $stateParams.bakeryID || "1";
         $scope.dateToday = new Date();
 
-        $scope.dateChanged = function (date) {
-            $scope.dateToday = date;
-        };
-
         $scope.changeBakery = function (id) {
             $state.go('main.hourlystats', {bakeryID : id});
         };
 
         getData = function (bakery, date) {
-            var data = {};
+
+            var data = {},
+                dt,
+                year = date.getFullYear(),
+                month = date.getMonth(),
+                day = date.getDate();
             data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            dt = new Date(year, month, day);
+            dt.setDate(dt.getDate() - 7);
+            data.date2 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
             data.store = bakery.id;
 
-
-            // return;
+            bakery.hourlystats = null;
 
             $http({
                 method: 'POST',
@@ -30,8 +33,6 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (dataReceived) {
                 bakery.hourlystats = dataReceived;
-
-            }).error(function () {
 
             });
         };
@@ -51,19 +52,46 @@
         };
 
         $scope.getDateInStringFormat = function (date, offset) {
-            var month = date.getMonth() + 1;
+            var dt,
+                year = date.getFullYear(),
+                month = date.getMonth(),
+                day = date.getDate();
+            dt = new Date(year, month, day);
+            dt.setDate(dt.getDate() - offset);
+            year = dt.getFullYear();
+            month = dt.getMonth() + 1;
+            day = dt.getDate();
             if (month < 10) {
                 month = "0" + month;
             }
-            return date.getFullYear() + '-' + month + '-' + (date.getDate() - offset);
+            if (day < 10) {
+                day = "0" + day;
+            }
+            return year + '-' + month + '-' + day;
         };
 
         $scope.getDateddMM = function (date, offset) {
-            var month = date.getMonth() + 1;
+            var dt,
+                year = date.getFullYear(),
+                month = date.getMonth(),
+                day = date.getDate();
+            dt = new Date(year, month, day);
+            dt.setDate(dt.getDate() - offset);
+            year = dt.getFullYear();
+            month = dt.getMonth() + 1;
+            day = dt.getDate();
             if (month < 10) {
                 month = "0" + month;
             }
-            return (date.getDate() - offset) + '.' + month;
+            if (day < 10) {
+                day = "0" + day;
+            }
+            return day + '.' + month;
+        };
+
+        $scope.dateChanged = function (date) {
+            $scope.dateToday = date;
+            getData($scope.bakeries[$scope.getCurrentBakery($scope.bakeryID)], date);
         };
     });
 }());

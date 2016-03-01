@@ -22,7 +22,7 @@
             <th class="">{{getDateddMM(dateToday, 6)}}</th>
             <th class="">{{getDateddMM(dateToday, 7)}}</th>
         </tr>
-        <tbody ng-repeat = "hour in bakeries[getCurrentBakery(bakeryID)].hourlystats">
+        <tbody ng-repeat = "hour in bakeries[getCurrentBakery(bakeryID)].hourlystats" ng-if ="bakeries[getCurrentBakery(bakeryID)].hourlystats">
             <tr class = "info">
                 <td rowspan="3" class="">{{hour.time}} - {{hour.time + 1}}</td>
                 <td class="">Выручка</td>
@@ -56,6 +56,11 @@
                 <td class="">{{hour[getDateInStringFormat(dateToday, 5)].checks || 0}}</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 6)].checks || 0}}</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 7)].checks || 0}}</td>
+            </tr>
+        </tbody>
+        <tbody ng-if ="!bakeries[getCurrentBakery(bakeryID)].hourlystats">
+            <tr>
+                <td colspan="10"><span class = "col-xs-12"><div class="loader"></div></span></td>
             </tr>
         </tbody>
     </table>

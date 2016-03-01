@@ -3,11 +3,13 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 $store =  $request->store;
 $date =  $request->date;
+$date2 = $request->date2;
 require '../../dbconnectms.php';
 $msquery="
     select sum(c.Summa) as total, count(c.Summa) as checks, convert(date,c.DateOperation) as date,DATEPART(hh,c.DateOperation)as time
     from ChequeHead as c
-    where convert(date,c.DateOperation) > CONVERT(date,getdate()-8)
+    where convert(date,c.DateOperation) <= '".$date."'
+    and convert(date,c.DateOperation) >= '".$date2."'
     and c.Cash_Code = ".$store."
     group by convert(date,c.DateOperation), DATEPART(hh,c.DateOperation)
     order by DATEPART(hh,c.DateOperation), convert(date,c.DateOperation)
