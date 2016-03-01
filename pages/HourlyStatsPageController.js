@@ -7,6 +7,8 @@
         $scope.bakeryID = $stateParams.bakeryID || "1";
         $scope.dateToday = new Date();
 
+        $rootScope.addLog("HourlyStats load");
+
         $scope.changeBakery = function (id) {
             $state.go('main.hourlystats', {bakeryID : id});
         };
