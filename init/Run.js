@@ -67,7 +67,7 @@
                 },
 
                 toAnalitics: function () {
-                    if (this.toHourlyStatsPage()) {
+                    if (this.toHourlyStatsPage() || this.toReceiptsPage()) {
                         return true;
                     }
                     return false;
@@ -75,6 +75,13 @@
 
                 toHourlyStatsPage: function () {
                     if (user.id === 1 || user.id === 3) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toReceiptsPage: function () {
+                    if (user.id === 1) {
                         return true;
                     }
                     return false;

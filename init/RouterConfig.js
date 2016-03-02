@@ -41,6 +41,13 @@
             return $q.reject();
         }
 
+        function receiptsShow($q, $rootScope) {
+            if ($rootScope.access.toReceiptsPage()) {
+                return $q.when();
+            }
+            return $q.reject();
+        }
+
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -77,6 +84,12 @@
                 templateUrl: 'pages/hourlyStats.html',
                 controller: 'HourlyStatsPageController',
                 resolve: {hourlyStatsShow: hourlyStatsShow}
+            })
+            .state('main.receipts', {
+                url: '^/receipts/{bakeryID:[0-9]}',
+                templateUrl: 'pages/receipts.html',
+                controller: 'ReceiptsPageController',
+                resolve: {receiptsShow: receiptsShow}
             });
     });
 }());

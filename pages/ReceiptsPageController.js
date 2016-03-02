@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    angular.module('InvestorPanel').controller("HourlyStatsPageController", function ($scope, $state, $stateParams, $rootScope, $http) {
+    angular.module('InvestorPanel').controller("ReceiptsPageController", function ($scope, $state, $stateParams, $rootScope, $http) {
         var getData, i;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
@@ -9,31 +9,24 @@
         $rootScope.addLog("HourlyStats load");
 
         $scope.changeBakery = function (id) {
-            $state.go('main.hourlystats', {bakeryID : id});
+            $state.go('main.receipts', {bakeryID : id});
         };
 
         getData = function (bakery, date) {
 
-            var data = {},
-                dt,
-                year = date.getFullYear(),
-                month = date.getMonth(),
-                day = date.getDate();
+            var data = {};
             data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            dt = new Date(year, month, day);
-            dt.setDate(dt.getDate() - 7);
-            data.date2 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
             data.store = bakery.id;
 
-            bakery.hourlystats = null;
+            bakery.receipts = null;
 
             $http({
                 method: 'POST',
-                url: 'server/getHourlyStats.php',
+                url: 'server/getReceipts.php',
                 data: data,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (dataReceived) {
-                bakery.hourlystats = dataReceived;
+                bakery.receipts = dataReceived;
 
             });
         };
