@@ -6,7 +6,7 @@
         $scope.bakeryID = $stateParams.bakeryID || "1";
         $scope.dateToday = new Date();
 
-        $rootScope.addLog("HourlyStats load");
+        $rootScope.addLog("Receipts load" + $scope.bakeryID);
 
         $scope.changeBakery = function (id) {
             $state.go('main.receipts', {bakeryID : id});
@@ -43,44 +43,6 @@
                     return i;
                 }
             }
-        };
-
-        $scope.getDateInStringFormat = function (date, offset) {
-            var dt,
-                year = date.getFullYear(),
-                month = date.getMonth(),
-                day = date.getDate();
-            dt = new Date(year, month, day);
-            dt.setDate(dt.getDate() - offset);
-            year = dt.getFullYear();
-            month = dt.getMonth() + 1;
-            day = dt.getDate();
-            if (month < 10) {
-                month = "0" + month;
-            }
-            if (day < 10) {
-                day = "0" + day;
-            }
-            return year + '-' + month + '-' + day;
-        };
-
-        $scope.getDateddMM = function (date, offset) {
-            var dt,
-                year = date.getFullYear(),
-                month = date.getMonth(),
-                day = date.getDate();
-            dt = new Date(year, month, day);
-            dt.setDate(dt.getDate() - offset);
-            year = dt.getFullYear();
-            month = dt.getMonth() + 1;
-            day = dt.getDate();
-            if (month < 10) {
-                month = "0" + month;
-            }
-            if (day < 10) {
-                day = "0" + day;
-            }
-            return day + '.' + month;
         };
 
         $scope.dateChanged = function (date) {

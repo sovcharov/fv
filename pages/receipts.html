@@ -9,63 +9,28 @@
     </div>
 </div>
 <div class="col-xs-12">
-    <div ng-repeat = "receipt in bakeries[getCurrentBakery(bakeryID)].receipts">
-        {{receipt.number}} {{receipt.total}} 
+    <span ng-if = "!bakeries[getCurrentBakery(bakeryID)].receipts" class = "col-xs-12"><div class="loader"></div></span>
+    <div  ng-if = "bakeries[getCurrentBakery(bakeryID)].receipts" ng-repeat = "receipt in bakeries[getCurrentBakery(bakeryID)].receipts | orderBy: -'number'">
+        <div class="row">
+            <div class = "receipt-header">
+                <div class="col-sm-4">
+                    <span class="col-xs-12">
+                        # {{receipt.number}} {{receipt.time}}
+                    </span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="col-xs-6">Сумма: <span class="bakery-data-cash">{{receipt.total | currency: "" : 0}}</span></span>
+                    <span class="col-xs-6">Скидка: <span class="bakery-data">{{receipt.discount | currency: "" : 0}}</span></span>
+                </div>
+            </div>
+            <div ng-repeat = "good in receipt.goods">
+                <div class = "col-sm-5">
+                    <span class="col-xs-12">{{good.name}}</span>
+                </div>
+                <div class="col-sm-6">
+                    <span class="col-xs-offset-1 col-xs-11">{{good.price}} руб. x {{good.qty}} шт. = {{good.sum}} руб.</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- <table class="table table-condensed table-bordered">
-        <tr  class="active">
-            <th>Час</th>
-            <th>Дата -&gt</th>
-            <th class="">{{getDateddMM(dateToday, 0)}}</th>
-            <th class="">{{getDateddMM(dateToday, 1)}}</th>
-            <th class="">{{getDateddMM(dateToday, 2)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 3)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 4)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 5)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 6)}}</th>
-            <th class="">{{getDateddMM(dateToday, 7)}}</th>
-        </tr>
-        <tbody ng-repeat = "hour in bakeries[getCurrentBakery(bakeryID)].hourlystats" ng-if ="bakeries[getCurrentBakery(bakeryID)].receipts">
-            <tr class = "info">
-                <td rowspan="3" class="">{{hour.time}} - {{hour.time + 1}}</td>
-                <td class="">Выручка</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].cash || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].cash || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 3)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 4)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 5)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 6)].cash || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].cash || 0}}</td>
-            </tr>
-            <tr class="text-right">
-                <td class="text-left">Итого</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].sum || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].sum || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 3)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 4)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 5)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 6)].sum || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].sum || 0}}</td>
-            </tr>
-            <tr>
-                <td class="">Чеков</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 3)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 4)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 5)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 6)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].checks || 0}}</td>
-            </tr>
-        </tbody>
-        <tbody ng-if ="!bakeries[getCurrentBakery(bakeryID)].hourlystats">
-            <tr>
-                <td colspan="10"><span class = "col-xs-12"><div class="loader"></div></span></td>
-            </tr>
-        </tbody>
-    </table> -->
 </div>
-{{bakeries[0].receipts}}

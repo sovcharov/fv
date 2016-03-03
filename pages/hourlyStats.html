@@ -23,7 +23,7 @@
             <th class="">{{getDateddMM(dateToday, 7)}}</th>
         </tr>
         <tbody ng-repeat = "hour in bakeries[getCurrentBakery(bakeryID)].hourlystats" ng-if ="bakeries[getCurrentBakery(bakeryID)].hourlystats">
-            <tr class = "info">
+            <tr ng-class = "{'my-today': ifNow(hour.time), info: !ifNow(hour.time)}" class = "">
                 <td rowspan="3" class="">{{hour.time}} - {{hour.time + 1}}</td>
                 <td class="">Выручка</td>
                 <td class="">{{hour[getDateInStringFormat(dateToday, 0)].cash || 0}}</td>

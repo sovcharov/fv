@@ -62,6 +62,14 @@
     border-radius: 0;
 }
 
+.my-today {
+    background-color: #96cde9;
+}
+
+.receipt-header {
+    border-bottom: 1px;
+}
+
 /*Info Event start*/
 /*Copyright (c) 2015 Sergei Ovcharov*/
 .infoBoxMain{

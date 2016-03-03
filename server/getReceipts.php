@@ -52,6 +52,9 @@ while ($msrow = mssql_fetch_array($msqresult))
     // $myArray[$msrow['time']][$msrow['date']]['sum'] = $tempArray[$msrow['date']];
 }
 $result = [];
+foreach($myArray as $value) {
+    array_push($result, $value);
+}
 require '../../dbclosems.php';
-echo json_encode($myArray);
+echo json_encode($result);
 ?>

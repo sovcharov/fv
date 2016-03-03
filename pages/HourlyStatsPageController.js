@@ -6,7 +6,7 @@
         $scope.bakeryID = $stateParams.bakeryID || "1";
         $scope.dateToday = new Date();
 
-        $rootScope.addLog("HourlyStats load");
+        $rootScope.addLog("HourlyStats load" + $scope.bakeryID);
 
         $scope.changeBakery = function (id) {
             $state.go('main.hourlystats', {bakeryID : id});
@@ -93,6 +93,14 @@
         $scope.dateChanged = function (date) {
             $scope.dateToday = date;
             getData($scope.bakeries[$scope.getCurrentBakery($scope.bakeryID)], date);
+        };
+
+        $scope.ifNow = function (hour) {
+            var dt = new Date();
+            if (dt.getHours() === hour) {
+                return true;
+            }
+            return false;
         };
     });
 }());
