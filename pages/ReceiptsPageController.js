@@ -1,12 +1,12 @@
 (function () {
     "use strict";
     angular.module('InvestorPanel').controller("ReceiptsPageController", function ($scope, $state, $stateParams, $rootScope, $http) {
-        var getData, i;
+        var getData;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
-        $scope.dateToday = new Date();
+        // $scope.dateToday = new Date();
 
-        $rootScope.addLog("Receipts load" + $scope.bakeryID);
+        $rootScope.addLog("Receipts load " + $scope.bakeryID);
 
         $scope.changeBakery = function (id) {
             $state.go('main.receipts', {bakeryID : id});
@@ -31,13 +31,17 @@
             });
         };
 
-        for (i = 0; i < $rootScope.bakeries.length; i = i + 1) {
-            if ($rootScope.bakeries[i].id === parseInt($scope.bakeryID, 10)) {
-                getData($rootScope.bakeries[i], $scope.dateToday);
+        (function () {
+            var i;
+            for (i = 0; i < $rootScope.bakeries.length; i = i + 1) {
+                if ($rootScope.bakeries[i].id === parseInt($scope.bakeryID, 10)) {
+                    getData($rootScope.bakeries[i], $rootScope.commonDate);
+                }
             }
-        }
+        }());
 
         $scope.getCurrentBakery = function (bakeryID) {
+            var i;
             for (i = 0; i < $rootScope.bakeries.length; i = i + 1) {
                 if ($rootScope.bakeries[i].id === parseInt(bakeryID, 10)) {
                     return i;
@@ -46,7 +50,7 @@
         };
 
         $scope.dateChanged = function (date) {
-            $scope.dateToday = date;
+            $rootScope.commonDate = date;
             getData($scope.bakeries[$scope.getCurrentBakery($scope.bakeryID)], date);
         };
     });

@@ -12,6 +12,8 @@
 
         .run(function (user, $http, $interval, $state, $cookies, $rootScope) {
 
+            $rootScope.commonDate = new Date(); //this date should be shared date for receipts, hourlystats and revenue pages.
+
             var fillUserData = function () {
                 user.type = parseInt($cookies.get('userType'), 10);
                 user.id = parseInt($cookies.get('userID'), 10);
@@ -74,14 +76,14 @@
                 },
 
                 toHourlyStatsPage: function () {
-                    if (user.id === 1 || user.id === 3) {
+                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4) {
                         return true;
                     }
                     return false;
                 },
 
                 toReceiptsPage: function () {
-                    if (user.id === 1) {
+                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4) {
                         return true;
                     }
                     return false;

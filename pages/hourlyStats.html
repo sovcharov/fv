@@ -13,49 +13,49 @@
         <tr  class="active">
             <th>Час</th>
             <th>Дата -&gt</th>
-            <th class="">{{getDateddMM(dateToday, 0)}}</th>
-            <th class="">{{getDateddMM(dateToday, 1)}}</th>
-            <th class="">{{getDateddMM(dateToday, 2)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 3)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 4)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 5)}}</th>
-            <th class="hidden-xs">{{getDateddMM(dateToday, 6)}}</th>
-            <th class="">{{getDateddMM(dateToday, 7)}}</th>
+            <th class="">{{getDateddMM(commonDate, 0)}}</th>
+            <th class="">{{getDateddMM(commonDate, 1)}}</th>
+            <th class="">{{getDateddMM(commonDate, 2)}}</th>
+            <th class="hidden-xs">{{getDateddMM(commonDate, 3)}}</th>
+            <th class="hidden-xs">{{getDateddMM(commonDate, 4)}}</th>
+            <th class="hidden-xs">{{getDateddMM(commonDate, 5)}}</th>
+            <th class="hidden-xs">{{getDateddMM(commonDate, 6)}}</th>
+            <th class="">{{getDateddMM(commonDate, 7)}}</th>
         </tr>
         <tbody ng-repeat = "hour in bakeries[getCurrentBakery(bakeryID)].hourlystats" ng-if ="bakeries[getCurrentBakery(bakeryID)].hourlystats">
             <tr ng-class = "{'my-today': ifNow(hour.time), info: !ifNow(hour.time)}" class = "">
                 <td rowspan="3" class="">{{hour.time}} - {{hour.time + 1}}</td>
                 <td class="">Выручка</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].cash || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].cash || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 3)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 4)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 5)].cash || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 6)].cash || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].cash || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 0)].cash || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 1)].cash || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 2)].cash || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 3)].cash || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 4)].cash || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 5)].cash || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 6)].cash || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 7)].cash || 0}}</td>
             </tr>
             <tr class="text-right">
                 <td class="text-left">Итого</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].sum || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].sum || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 3)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 4)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 5)].sum || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 6)].sum || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 0)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 1)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 2)].sum || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 3)].sum || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 4)].sum || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 5)].sum || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 6)].sum || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 7)].sum || 0}}</td>
             </tr>
             <tr>
                 <td class="">Чеков</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 0)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 1)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 2)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 3)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 4)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 5)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(dateToday, 6)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(dateToday, 7)].checks || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 0)].checks || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 1)].checks || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 2)].checks || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 3)].checks || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 4)].checks || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 5)].checks || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 6)].checks || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 7)].checks || 0}}</td>
             </tr>
         </tbody>
         <tbody ng-if ="!bakeries[getCurrentBakery(bakeryID)].hourlystats">

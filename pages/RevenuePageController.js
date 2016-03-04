@@ -21,7 +21,7 @@
                     bakery.averageCheck = 0;
                 }
             }).error(function () {
-                bakery.cash = "Ошибка";
+                bakery.cash = 0;
                 bakery.checks = 0;
                 bakery.averageCheck = 0;
             });
@@ -58,6 +58,7 @@
         }
 
         $scope.dateChanged = function (date) {
+            $rootScope.commonDate = date;
             dataInitOrDrop($rootScope.bakeries);
             getStoresData(date, $rootScope.bakeries);
         };

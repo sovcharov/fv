@@ -1,9 +1,9 @@
 (function () {
     "use strict";
     angular.module('ui.bootstrap')
-        .controller('DateController', function ($scope) {
+        .controller('DateController', function ($scope, $rootScope) {
             $scope.today = function () {
-                $scope.dt = new Date();
+                $scope.dt = $rootScope.commonDate;//new Date();
             };
             $scope.today();
 
