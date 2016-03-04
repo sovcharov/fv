@@ -1,17 +1,26 @@
-<date-picker></date-picker>
-<div class="col-xs-12">
-    <div class="col-md-3">
-        <form class="form-group form-group-lg">
-            <select class="form-control" ng-model = "bakeryID" ng-change = "changeBakery(bakeryID);">
-                <option ng-repeat = "bakery in bakeries" value = "{{bakery.id}}">№ {{bakery.id}}. {{bakery.address}}</option>
-            </select>
-        </form>
-    </div>
+<div class = "col-xs-12">
+        <div class="col-md-3 my-row">
+            <date-picker>
+            </date-picker>
+        </div>
+        <div class="col-md-5 my-row">
+            <form class="form-group form-group-lg">
+                <select class="form-control" ng-model = "bakeryID" ng-change = "changeBakery(bakeryID);">
+                    <option ng-repeat = "bakery in bakeries" value = "{{bakery.id}}">№ {{bakery.id}}. {{bakery.address}}</option>
+                </select>
+            </form>
+        </div>
+        <div class="col-md-4 text-right"> Быстрые ссылки:
+            <span><a ui-sref="main.revenue"><i class="glyphicon glyphicon-usd"></i></a></span>
+            <span ng-if="access.toHourlyStatsPage()"><a ui-sref="main.hourlystats({bakeryID: bakeryID})"><i class="glyphicon glyphicon-time"></i></a></span>
+            <!-- <span ng-if="access.toReceiptsPage()"><a ui-sref="main.receipts({bakeryID: bakeryID})"><i class="glyphicon glyphicon-list"></i></a></span> -->
+            <br/>
+        </div>
 </div>
 <div class="col-xs-12">
     <span ng-if = "!bakeries[getCurrentBakery(bakeryID)].receipts" class = "col-xs-12"><div class="loader"></div></span>
     <div  ng-if = "bakeries[getCurrentBakery(bakeryID)].receipts" ng-repeat = "receipt in bakeries[getCurrentBakery(bakeryID)].receipts | orderBy: -'number'">
-        <div class="row">
+        <div class="row my-panel">
             <div class = "receipt-header">
                 <div class="col-sm-4">
                     <span class="col-xs-12">

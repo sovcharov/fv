@@ -1,18 +1,7 @@
-<div ng-cloak>
-    <div class="col-xs-12">
-        <div class="col-md-3">
-            <p class="input-group input-group-lg">
-                <!-- <span class="input-group-btn">
-                </span> -->
-                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
-                <span class="input-group-btn">
-                    <!-- <button type="button" class="btn btn-default" ng-click="datePlusMinus(-1);dateChanged(dt);"><i class="glyphicon glyphicon-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default" ng-click="datePlusMinus(1);dateChanged(dt);"><i class="glyphicon glyphicon-chevron-right"></i></button> -->
-                    <button type="button" class="btn btn-default" ng-click="open1();"><i class="glyphicon glyphicon-calendar"></i></button>
-                    <button type="button" class="btn btn-default" ng-click="dateChanged(dt);"><i class="glyphicon glyphicon-refresh"></i></button>
-                </span>
-            </p>
-        </div>
-    </div>
-    <br/><br/><br/>
+<div class="input-group input-group-lg">
+    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" readonly="true" ng-change="dateChanged(dt);"/>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open1();"><i class="glyphicon glyphicon-calendar"></i></button>
+        <button type="button" class="btn btn-default" ng-click="dateChanged(dt);"><i class="glyphicon glyphicon-refresh"></i></button>
+    </span>
 </div>
