@@ -3,14 +3,14 @@
             <date-picker>
             </date-picker>
         </div>
-        <div class="col-md-5 my-row">
+        <div class="col-md-4 my-row">
             <form class="form-group form-group-lg">
                 <select class="form-control" ng-model = "bakeryID" ng-change = "changeBakery(bakeryID);">
                     <option ng-repeat = "bakery in bakeries" value = "{{bakery.id}}">№ {{bakery.id}}. {{bakery.address}}</option>
                 </select>
             </form>
         </div>
-        <div class="col-md-4 text-right"> Быстрые ссылки:
+        <div class="col-md-5 text-right"> Быстрые ссылки:
             <span><a ui-sref="main.revenue"><i class="glyphicon glyphicon-usd"></i></a></span>
             <span ng-if="access.toHourlyStatsPage()"><a ui-sref="main.hourlystats({bakeryID: bakeryID})"><i class="glyphicon glyphicon-time"></i></a></span>
             <!-- <span ng-if="access.toReceiptsPage()"><a ui-sref="main.receipts({bakeryID: bakeryID})"><i class="glyphicon glyphicon-list"></i></a></span> -->

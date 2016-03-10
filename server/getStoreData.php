@@ -14,12 +14,12 @@ $msqresult = mssql_query($msquery);
 $result = [];
 while ($msrow = mssql_fetch_array($msqresult))
 {
-    $result['cash'] = $msrow['total'];
+    $result['total'] = $msrow['total'];
     $result['checks'] = $msrow['checks'];
 }
-if(!$result['cash']){
-    $result['cash'] = 0;
-    $result['checks'] = 0;
+if(!$result['total']){
+    $result['total'] = 0;
+    $result['total'] = 0;
 }
 require '../../dbclosems.php';
 echo json_encode($result);

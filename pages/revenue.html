@@ -10,8 +10,6 @@
             <div class="col-sm-4">
                 <span class="col-xs-11 bakery-name">
                     <span ng-if="access.toHourlyStatsPage()"><a ui-sref="main.hourlystats({bakeryID: bakery.id})"><i class="glyphicon glyphicon-time"></i></a></span>
-
-                    <!--                        <button class="btn btn-xs btn-active plusButton">+</button>-->
                     № {{bakery.id}}. {{bakery.address}}
                 </span>
                 <span class="col-xs-1 receipts-date" ng-class="{notCurrentDate:(1)}">{{bakery.date}}</span>

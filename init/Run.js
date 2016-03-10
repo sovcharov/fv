@@ -13,6 +13,7 @@
         .run(function (user, $http, $interval, $state, $cookies, $rootScope) {
 
             $rootScope.commonDate = new Date(); //this date should be shared date for receipts, hourlystats and revenue pages.
+            $rootScope.serverAddress = 'http://127.0.0.1:5555';
 
             var fillUserData = function () {
                 user.type = parseInt($cookies.get('userType'), 10);

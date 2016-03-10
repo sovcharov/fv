@@ -4,32 +4,30 @@
         var getStoresData, getData, dataInitOrDrop, getAvailableStores;
 
         getData = function (bakery, date) {
-            var data = {};
-            data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            data.store = bakery.id;
-            $http({
-                method: 'POST',
-                url: 'server/getStoreData.php',
-                data: data,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (dataReceived) {
-                bakery.cash = dataReceived.cash;
-                bakery.checks = dataReceived.checks;
-                if (dataReceived.checks) {
-                    bakery.averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
-                } else {
+            var url,
+                dateForUrl;
+            dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            url = $rootScope.serverAddress + '/api/storedata/store/' + bakery.id + '/date/' + dateForUrl;
+            // console.log(url);
+            $http.get(url)
+                .success(function (dataReceived) {
+                    bakery.cash = dataReceived.total;
+                    bakery.checks = dataReceived.checks;
+                    if (dataReceived.checks) {
+                        bakery.averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
+                    } else {
+                        bakery.averageCheck = 0;
+                    }
+                }).error(function () {
+                    bakery.cash = 0;
+                    bakery.checks = 0;
                     bakery.averageCheck = 0;
-                }
-            }).error(function () {
-                bakery.cash = 0;
-                bakery.checks = 0;
-                bakery.averageCheck = 0;
-            });
+                });
         };
 
         getStoresData = function (date, bakeries) {
             var i;
-            for (i = 0; i < bakeries.length; i = i + 1) {
+            for (i = 0; i < bakeries.length; i = i + 1) { //< bakeries.length
                 getData(bakeries[i], date);
             }
 
