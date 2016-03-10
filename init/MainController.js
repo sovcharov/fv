@@ -11,15 +11,8 @@
         $rootScope.user = user;
 
         $rootScope.addLog = function (action) {
-            var data = {
-                action: action
-            };
-            $http({
-                method: 'POST',
-                url: 'server/addLog.php',
-                data: data,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            });
+            var url = $rootScope.serverAddress + '/api/log/user/' + user.id + '/action/' + action;
+            $http.post(url);
         };
 
         $rootScope.addLog("Main load");
