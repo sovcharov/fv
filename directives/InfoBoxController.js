@@ -1,13 +1,13 @@
 (function () {
     "use strict";
-    angular.module("InvestorPanel").controller("InfoBoxController", function ($rootScope, $interval) {
+    angular.module("InvestorPanel").controller("InfoBoxController", function ($rootScope, $interval, $scope) {
 
         $rootScope.infoEvents = [];
 
         var stop, updateInfoEvents, eventClasses;
 
         eventClasses = {
-            danger: 'infoBoxWarning',
+            danger: 'infoBoxDanger',
             success: 'infoBoxSuccess'
         };
 
@@ -18,21 +18,31 @@
                     $rootScope.infoEvents[i].life -= 1;
                     i += 1;
                 } else {
-                    $rootScope.infoEvents.splice(i, 1);
+                    if (!$rootScope.infoEvents[i].waitForClick) {
+                        $rootScope.infoEvents.splice(i, 1);
+                    } else {
+                        i += 1;
+                    }
                 }
+
             }
             if (!$rootScope.infoEvents.length) {
                 $interval.cancel(stop);
             }
         };
 
-        $rootScope.addInfoEvent = function (eventClass, text, comment) {
+        $scope.deleteEvent = function (i) {
+            $rootScope.infoEvents.splice(i, 1);
+        };
+
+        $rootScope.addInfoEvent = function (eventClass, text, comment, waitForClick) {
             var index, event;
             event = {
                 eventClass: eventClasses[eventClass],
                 text: text,
                 comment: comment,
-                life: 5
+                life: 5,
+                waitForClick: waitForClick
             };
 
             if (!comment) {

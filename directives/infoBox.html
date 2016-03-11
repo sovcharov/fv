@@ -1,6 +1,6 @@
 <div class="infoBoxMain">
-    <div ng-repeat="event in infoEvents" class="infoBox" ng-class="event.eventClass">
+    <div ng-repeat="event in infoEvents" class="infoBox" ng-class="event.eventClass" ng-click = "deleteEvent($index);">
         <div>{{event.text}}</div>
-        <div class = "infoBoxComment">{{event.comment}}</div>
+        <div class = "infoBoxComment">{{event.comment}} {{$index}}</div>
     </div>
 </div>

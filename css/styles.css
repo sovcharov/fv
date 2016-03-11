@@ -94,12 +94,13 @@
 	font-size:17px;
 	color:white;
 	line-height:40px;
+    /*z-index:5;*/
 }
-.infoBoxWarning{
+.infoBoxDanger{
 	background-color:#B20000;
 }
 .infoBoxSuccess{
-	background-color:#4DB870;
+	background-color:#33804c;
 }
 .infoBoxComment{
     font-size:12px;
