@@ -46,7 +46,7 @@
                             email: '',
                             password: ''
                         };
-                        $rootScope.addInfoEvent(1, 'Введены неверные данные');
+                        $rootScope.addInfoEvent('danger', 'Введены неверные данные');
                     }
                 });
             } else {
@@ -54,7 +54,7 @@
                     email: '',
                     password: ''
                 };
-                $rootScope.addInfoEvent(1, 'Введены неверные данные');
+                $rootScope.addInfoEvent('danger', 'Введены неверные данные');
             }
         };
     });

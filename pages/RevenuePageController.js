@@ -19,6 +19,7 @@
                         bakery.averageCheck = 0;
                     }
                 }).error(function () {
+                    $rootScope.addInfoEvent('danger', 'Ошибка загрузки', bakery.id + ' ' + bakery.address);
                     bakery.cash = 0;
                     bakery.checks = 0;
                     bakery.averageCheck = 0;

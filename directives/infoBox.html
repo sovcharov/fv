@@ -1,5 +1,5 @@
 <div class="infoBoxMain">
-    <div ng-repeat="event in infoEvents" class="infoBox" ng-class="{'infoBoxWarning': checkInfoEventClass(event),'infoBoxSuccess': !checkInfoEventClass(event)}">
+    <div ng-repeat="event in infoEvents" class="infoBox" ng-class="event.eventClass">
         <div>{{event.text}}</div>
         <div class = "infoBoxComment">{{event.comment}}</div>
     </div>

@@ -79,6 +79,22 @@
     </nav>
 	<div id="divContainer">
 		<?php
+			$daysInMonths = array(0,29,28,31,30,31,30,31,31,30,31,30,31);//january has 29 days since 1st - 2nd store closed
+			if ((int)date('y')%4 == 0) $daysInMonths[2] += 1;
+			$daysThisMonth = $daysInMonths[(int)date('m')];
+			if ((int)date('m') == 0) {
+				$daysLastMonth = $daysInMonths[12];
+				$days2MonthAgo = $daysInMonths[11];
+			} else if ((int)date('m') == 1) {
+				$daysLastMonth = $daysInMonths[1];
+				$days2MonthAgo = $daysInMonths[12];
+			} else {
+				$daysLastMonth = $daysInMonths[(int)date('m')-1];
+				$days2MonthAgo = $daysInMonths[(int)date('m')-2];
+			}
+			$today = (int) date(d);
+			if ((int)date(H)<4) $today--; //
+			// echo $today;
 			echo  "<p class=\"paraOverTable\" style=\"margin-left:10px;\">Добро пожаловать, " . $_COOKIE['userName']. "!</p>";
 			require '../../dbconnect.php';
 			if($_COOKIE['userType']==4 || $_COOKIE['userID']==1  || $_COOKIE['userType']==5){
@@ -200,7 +216,7 @@
 				while ($msrow = mssql_fetch_array($msqresult))
 				{
 					$salesThisMonth = number_format(htmlspecialchars($msrow['sumCashThisMonth']),2);
-					$avCashMonth = number_format(htmlspecialchars($msrow['avCashMonth']),2);
+					$avCashMonth = number_format(htmlspecialchars($msrow['sumCashThisMonth']/$today),2);
 					$avCheckAmountMonth = number_format(htmlspecialchars($msrow['avCheckAmountMonth']),0);
 					$checksPerDayThisMonth = number_format(htmlspecialchars($msrow['avChecksThisMonth']),0);
 				}
@@ -224,7 +240,7 @@
 				while ($msrow = mssql_fetch_array($msqresult))
 				{
 					$salesLastMonth = number_format(htmlspecialchars($msrow['sumCashLastMonth']),2);
-					$avCashLastMonth = number_format(htmlspecialchars($msrow['avCashLastMonth']),2);
+					$avCashLastMonth = number_format(htmlspecialchars($msrow['sumCashLastMonth']/$daysLastMonth),2);
 					$avCheckAmountLastMonth = number_format(htmlspecialchars($msrow['avCheckAmountLastMonth']),0);
 					$checksPerDayLastMonth = number_format(htmlspecialchars($msrow['avChecksLastMonth']),0);
 				}
@@ -248,7 +264,7 @@
 				while ($msrow = mssql_fetch_array($msqresult))
 				{
 					$sales2Month = number_format(htmlspecialchars($msrow['sumCash']),2);
-					$avCash2Months = number_format(htmlspecialchars($msrow['avCash']),2);
+					$avCash2Months = number_format($msrow['sumCash']/$days2MonthAgo,2);//number_format(htmlspecialchars($msrow['avCash']),2);
 					$avCheckAmount2Month = number_format(htmlspecialchars($msrow['avCheckAmountYear']),0);
 					$checksPerDay2Month = number_format(htmlspecialchars($msrow['avChecks']),0);
 				}
@@ -401,8 +417,8 @@
 				while ($msrow = mssql_fetch_array($msqresult))
 				{
 					$salesThisMonth = number_format(htmlspecialchars($msrow['sumCashThisMonth']),2);
-					$avCashMonth = number_format(htmlspecialchars($msrow['avCashMonth']),2);
-                    $avCashMonth2 = (int)$msrow['avCashMonth'];
+					$avCashMonth = number_format($msrow['sumCashThisMonth']/$today,2);
+                    $avCashMonth2 = (int)$msrow['sumCashThisMonth']/$today;
 					$avCheckAmountMonth = number_format(htmlspecialchars($msrow['avCheckAmountMonth']),0);
 					$checksPerDayThisMonth = number_format(htmlspecialchars($msrow['avChecksThisMonth']),0);
 					$plannedSumma = $msrow['plannedSumma'];
@@ -425,7 +441,7 @@
 				while ($msrow = mssql_fetch_array($msqresult))
 				{
 					$salesLastMonth = number_format(htmlspecialchars($msrow['sumCashLastMonth']),2);
-					$avCashLastMonth = number_format(htmlspecialchars($msrow['avCashLastMonth']),2);
+					$avCashLastMonth = number_format(htmlspecialchars($msrow['sumCashLastMonth']/$daysLastMonth),2);
 					$avCheckAmountLastMonth = number_format(htmlspecialchars($msrow['avCheckAmountLastMonth']),0);
 					$checksPerDayLastMonth = number_format(htmlspecialchars($msrow['avChecksLastMonth']),0);
 				}
@@ -447,7 +463,7 @@
 				while ($msrow = mssql_fetch_array($msqresult))
 				{
 					$sales2Month = number_format(htmlspecialchars($msrow['sumCash']),2);
-					$avCash2Months = number_format(htmlspecialchars($msrow['avCash']),2);
+					$avCash2Months = number_format(htmlspecialchars($msrow['sumCash']/$days2MonthAgo),2);
 					$avCheckAmount2Month = number_format(htmlspecialchars($msrow['avCheckAmountYear']),0);
 					$checksPerDay2Month = number_format(htmlspecialchars($msrow['avChecks']),0);
 				}
@@ -465,9 +481,9 @@
 				echo '<tr><td style="width:50%;">Прошлый месяц:</td><td style="text-align:right; width:25%;">'. $avCheckAmountLastMonth . '  </td><td style="text-align:right;">'.$checksPerDayLastMonth.' </td></tr>';
 				echo '<tr><td style="width:50%;">Позапрошлый:</td><td style="text-align:right; width:25%;">'. $avCheckAmount2Month . '  </td><td style="text-align:right;"> '.$checksPerDay2Month.'</td></tr>';
 				echo '</table>';
-                $daysInMonths = array(0,31,28,31,30,31,30,31,31,30,31,30,31);
-                $daysThisMonth = $daysInMonths[(int)date('m')];
-                if ((int)date('y')%4 == 0 && date('m') == 2) $daysThisMonth += 1;
+                // $daysInMonths = array(0,31,28,31,30,31,30,31,31,30,31,30,31);
+                // $daysThisMonth = $daysInMonths[(int)date('m')];
+                // if ((int)date('y')%4 == 0 && date('m') == 2) $daysThisMonth += 1;
                 $plannedSumma = $avCashMonth2 * $daysThisMonth;
 				echo '<span style ="">Планируемая выручка: '.number_format($plannedSumma,2);
 				echo '<br>Планируемая выручка производства: '.number_format($plannedSumma*0.37,2);

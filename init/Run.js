@@ -55,13 +55,6 @@
 
             $rootScope.access = {
 
-                toOrdersPage: function () {
-                    if (user.type === 1 || user.id === 1) {
-                        return true;
-                    }
-                    return false;
-                },
-
                 toToolsPage: function () {
                     if (this.toAnalitics() || this.toManagersTool() || this.toAdmin()) {
                         return true;
@@ -92,6 +85,13 @@
 
                 toManagersTool: function () {
                     if (this.toOrdersPage()) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toOrdersPage: function () {
+                    if (user.type === 1 || user.id === 1) {
                         return true;
                     }
                     return false;

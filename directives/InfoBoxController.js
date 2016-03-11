@@ -4,7 +4,12 @@
 
         $rootScope.infoEvents = [];
 
-        var stop, updateInfoEvents;
+        var stop, updateInfoEvents, eventClasses;
+
+        eventClasses = {
+            danger: 'infoBoxWarning',
+            success: 'infoBoxSuccess'
+        };
 
         updateInfoEvents = function () {
             var i = 0;
@@ -24,27 +29,23 @@
         $rootScope.addInfoEvent = function (eventClass, text, comment) {
             var index, event;
             event = {
-                eventClass: eventClass,
+                eventClass: eventClasses[eventClass],
                 text: text,
+                comment: comment,
                 life: 5
             };
-            index = $rootScope.infoEvents.length;
 
-            if (comment) {
-                event.comment = comment;
-            } else {
+            if (!comment) {
                 event.comment = "---------";
             }
+
+            index = $rootScope.infoEvents.length;
 
             $rootScope.infoEvents[index] = event;
 
             if (index === 0) {
                 stop = $interval(updateInfoEvents, 500);
             }
-        };
-
-        $rootScope.checkInfoEventClass = function (event) {
-            return event.eventClass ? true : false;
         };
     });
 }());
