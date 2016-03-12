@@ -40,14 +40,10 @@
             event = {
                 eventClass: eventClasses[eventClass],
                 text: text,
-                comment: comment,
+                comment: comment || '---------',
                 life: 5,
                 waitForClick: waitForClick
             };
-
-            if (!comment) {
-                event.comment = "---------";
-            }
 
             index = $rootScope.infoEvents.length;
 

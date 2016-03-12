@@ -11,7 +11,7 @@
             // console.log(url);
             $http.get(url)
                 .success(function (dataReceived) {
-                    bakery.cash = dataReceived.total;
+                    bakery.cash = dataReceived.total || 0;
                     bakery.checks = dataReceived.checks;
                     if (dataReceived.checks) {
                         bakery.averageCheck = parseInt(dataReceived.cash, 10) / parseInt(dataReceived.checks, 10);
