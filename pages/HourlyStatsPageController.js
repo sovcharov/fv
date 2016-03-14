@@ -18,23 +18,18 @@
                 dt,
                 year = date.getFullYear(),
                 month = date.getMonth(),
-                day = date.getDate();
-            data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                day = date.getDate(),
+                url,
+                dateForUrl,
+                dateForUrl2;
+            dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             dt = new Date(year, month, day);
             dt.setDate(dt.getDate() - 7);
-            data.date2 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
-            data.store = bakery.id;
-
+            dateForUrl2 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
             bakery.hourlystats = null;
-
-            $http({
-                method: 'POST',
-                url: 'server/getHourlyStats.php',
-                data: data,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (dataReceived) {
+            url = $rootScope.serverAddress + '/api/hourlystats/store/' + bakery.id + '/date/' + dateForUrl + '/datefrom/' + dateForUrl2;
+            $http.get(url).success(function (dataReceived) {
                 bakery.hourlystats = dataReceived;
-
             });
         };
 
@@ -66,12 +61,12 @@
             year = dt.getFullYear();
             month = dt.getMonth() + 1;
             day = dt.getDate();
-            if (month < 10) {
-                month = "0" + month;
-            }
-            if (day < 10) {
-                day = "0" + day;
-            }
+            // if (month < 10) {
+            //     month = "0" + month;
+            // }
+            // if (day < 10) {
+            //     day = "0" + day;
+            // }
             return year + '-' + month + '-' + day;
         };
 
