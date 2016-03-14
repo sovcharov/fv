@@ -19,7 +19,7 @@
 </div>
 <div class="col-xs-12">
     <span ng-if = "!bakeries[getCurrentBakery(bakeryID)].receipts" class = "col-xs-12"><div class="loader"></div></span>
-    <div  ng-if = "bakeries[getCurrentBakery(bakeryID)].receipts" ng-repeat = "receipt in bakeries[getCurrentBakery(bakeryID)].receipts | orderBy: -'number'">
+    <div  ng-if = "bakeries[getCurrentBakery(bakeryID)].receipts" ng-repeat = "receipt in bakeries[getCurrentBakery(bakeryID)].receipts | orderBy: '-number'">
         <div class="row my-panel">
             <div class = "receipt-header">
                 <div class="col-sm-4">

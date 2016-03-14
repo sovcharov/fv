@@ -13,23 +13,46 @@
         };
 
         getData = function (bakery, date) {
-
-            var data = {};
-            data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            data.store = bakery.id;
-
             bakery.receipts = null;
 
-            $http({
-                method: 'POST',
-                url: 'server/getReceipts.php',
-                data: data,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (dataReceived) {
-                bakery.receipts = dataReceived;
-
-            });
+            var url,
+                dateForUrl;
+            dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            url = $rootScope.serverAddress + '/api/receipts/store/' + bakery.id + '/date/' + dateForUrl;
+            // console.log(url);
+            $http.get(url)
+                .success(function (dataReceived) {
+                    bakery.receipts = dataReceived;
+                });
+            // var data = {};
+            // data.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            // data.store = bakery.id;
+            //
+            // bakery.receipts = null;
+            //
+            // $http({
+            //     method: 'POST',
+            //     url: 'server/getReceipts.php',
+            //     data: data,
+            //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            // }).success(function (dataReceived) {
+            //     bakery.receipts = dataReceived;
+            //
+            // });
         };
+
+                    // bakery.receipts = null;
+                    //
+                    // var url,
+                    //     dateForUrl;
+                    // dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                    // url = $rootScope.serverAddress + '/api/receipts/store/' + bakery.id + '/date/' + dateForUrl;
+                    // // console.log(url);
+                    // $http.get(url)
+                    //     .success(function (dataReceived) {
+                    //         bakery.receipts = dataReceived;
+                    //
+                    //     });
 
         (function () {
             var i;
