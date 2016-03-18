@@ -11,7 +11,7 @@
                 <p><a ui-sref="main.revenue"><i class="glyphicon glyphicon-usd"></i>  Выручка</a></p>
                 <p ng-if="access.toHourlyStatsPage()"><a ui-sref="main.hourlystats({bakeryID: bakeries[0].id})"><i class="glyphicon glyphicon-time"></i>  Почасовая статистика</a></p>
                 <p ng-if="access.toReceiptsPage()"><a ui-sref="main.receipts({bakeryID: bakeries[0].id})"><i class="glyphicon glyphicon-list"></i>  Чеки</a></p>
-                <p ng-if = "access.toAdmin();"><a ui-sref="main.hourlystats({bakeryID: 1})" ng-if="access.toHourlyStatsPage()"><i class="glyphicon glyphicon-eye-open"></i>  Эффективность заказов</a></p>
+                <p ng-if = "access.toAdmin();"><a ui-sref="main.hourlystats({bakeryID: 1})"><i class="glyphicon glyphicon-eye-open"></i>  Эффективность заказов</a></p>
             </div>
         </div>
     </div>

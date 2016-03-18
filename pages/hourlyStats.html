@@ -57,14 +57,14 @@
             </tr>
             <tr>
                 <td class="">Чеков</td>
-                <td class="">{{hour[getDateInStringFormat(commonDate, 0)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(commonDate, 1)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(commonDate, 2)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 3)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 4)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 5)].checks || 0}}</td>
-                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 6)].checks || 0}}</td>
-                <td class="">{{hour[getDateInStringFormat(commonDate, 7)].checks || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 0)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 0)].checksByTime || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 1)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 1)].checksByTime || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 2)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 2)].checksByTime || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 3)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 3)].checksByTime || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 4)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 4)].checksByTime || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 5)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 5)].checksByTime || 0}}</td>
+                <td class="hidden-xs">{{hour[getDateInStringFormat(commonDate, 6)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 6)].checksByTime || 0}}</td>
+                <td class="">{{hour[getDateInStringFormat(commonDate, 7)].checks || 0}} / {{hour[getDateInStringFormat(commonDate, 7)].checksByTime || 0}}</td>
             </tr>
         </tbody>
         <tbody ng-if ="!bakeries[getCurrentBakery(bakeryID)].hourlystats">
