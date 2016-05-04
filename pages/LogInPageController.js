@@ -38,7 +38,7 @@
                             password: ''
                         };
                         user.id = dataReceived.userID;
-                        user.type =  dataReceived.userID;
+                        user.type =  dataReceived.userType;
                         user.firstName = dataReceived.firstName;
                         user.lastName = dataReceived.lastName;
                     } else {

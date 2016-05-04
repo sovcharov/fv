@@ -74,7 +74,7 @@
                 resolve: {toolsShow: toolsShow}
             })
             .state('main.orders', {
-                url: '^/orders',
+                url: '^/orders/{bakeryID:[0-9]}',
                 templateUrl: 'pages/orders.html',
                 controller: 'OrdersPageController',
                 resolve: {ordersShow: ordersShow}

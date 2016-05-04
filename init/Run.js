@@ -70,14 +70,14 @@
                 },
 
                 toHourlyStatsPage: function () {
-                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4 || user.type === 4) {
+                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4 || user.id === 8 || user.type === 4) {
                         return true;
                     }
                     return false;
                 },
 
                 toReceiptsPage: function () {
-                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4 || user.type === 4) {
+                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4 || user.id === 8 || user.type === 4) {
                         return true;
                     }
                     return false;
