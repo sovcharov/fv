@@ -22,7 +22,7 @@
                 <h3 class="panel-title">Управляющему</h3>
             </div>
             <div class="panel-body">
-                <a ui-sref="main.orders" ng-if="access.toOrdersPage()"><i class="glyphicon glyphicon-shopping-cart"></i>  Заказы</a>
+                <a ui-sref="main.orders({bakeryID: bakeries[0].id})" ng-if="access.toOrdersPage()"><i class="glyphicon glyphicon-shopping-cart"></i>  Заказы</a>
             </div>
         </div>
     </div>

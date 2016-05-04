@@ -4,6 +4,7 @@
         var getData;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
+        $scope.order = {};
         // $scope.dateToday = new Date();
 
         // $rootScope.addLog("Receipts load " + $scope.bakeryID);
@@ -13,17 +14,17 @@
         };
 
         getData = function (bakery, date) {
-            bakery.receipts = null;
 
             var url,
                 dateForUrl;
+
             dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             url = $rootScope.serverAddress + '/api/orders/store/' + bakery.id + '/date/' + dateForUrl;
             console.log(url);
-            // $http.get(url)
-            //     .success(function (dataReceived) {
-            //         bakery.receipts = dataReceived;
-            //     });
+            $http.get(url)
+                .success(function (dataReceived) {
+                    $scope.order.message = dataReceived;
+                });
         };
 
         (function () {
