@@ -19,7 +19,7 @@
                 dateForUrl;
 
             dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            url = $rootScope.serverAddress + '/api/orders/store/' + bakery.id + '/date/' + dateForUrl;
+            url = $rootScope.serverAddress + '/api/orders/store/' + bakery + '/date/' + dateForUrl;
             console.log(url);
             $http.get(url)
                 .success(function (dataReceived) {
@@ -27,27 +27,13 @@
                 });
         };
 
-        (function () {
+        $scope.createOrder = function (bakeryID) {
             var i;
-            for (i = 0; i < $rootScope.bakeries.length; i = i + 1) {
-                if ($rootScope.bakeries[i].id === parseInt($scope.bakeryID, 10)) {
-                    getData($rootScope.bakeries[i], $rootScope.commonDate);
-                }
-            }
-        }());
-
-        $scope.getCurrentBakery = function (bakeryID) {
-            var i;
-            for (i = 0; i < $rootScope.bakeries.length; i = i + 1) {
-                if ($rootScope.bakeries[i].id === parseInt(bakeryID, 10)) {
-                    return i;
-                }
-            }
+            getData(bakeryID, $rootScope.commonDate);
         };
 
         $scope.dateChanged = function (date) {
             $rootScope.commonDate = date;
-            getData($scope.bakeries[$scope.getCurrentBakery($scope.bakeryID)], date);
         };
     });
 }());

@@ -10,11 +10,8 @@
                 </select>
             </form>
         </div>
-        <div class="col-md-5 text-right"> Быстрые ссылки:
-            <span><a ui-sref="main.revenue"><i class="glyphicon glyphicon-usd"></i></a></span>
-            <span ng-if="access.toHourlyStatsPage()"><a ui-sref="main.hourlystats({bakeryID: bakeryID})"><i class="glyphicon glyphicon-time"></i></a></span>
-            <!-- <span ng-if="access.toReceiptsPage()"><a ui-sref="main.receipts({bakeryID: bakeryID})"><i class="glyphicon glyphicon-list"></i></a></span> -->
-            <br/>
+        <div class="col-md-3 my-row">
+            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click = "createOrder(bakeryID)">Сформировать</button>
         </div>
 </div>
 <div class="col-xs-12">
