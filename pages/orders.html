@@ -29,27 +29,62 @@
             <th class="hidden-xs">{{getDateddMM(commonDate, 6)}}</th>
             <th class="">{{getDateddMM(commonDate, 7)}}</th>
         </tr> -->
-        <tr  class="active">
-            <th>Наименование</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>Заказ</th>
+        <tbody>
+        <tr  class="hidden-xs">
+            <th colspan=""></th>
+            <th style = "border-left-style: hidden; border-right-style: hidden;"></th>
+            <th style = "border-left-style: hidden; border-right-style: hidden;"></th>
+            <th style = "border-left-style: hidden;"></th>
+            <th colspan="5" style = "text-align:right; background: #f0ad4e;">Продажи -1 неделя</th>
+        </tr>
+        <tr  class="hidden-xs">
+            <th colspan="" style = "background: #96cde9;">Последняя продажа -2 недели</th>
+            <th style = "border-left-style: hidden; border-right-style: hidden; background: #96cde9;"></th>
+            <th style = "border-left-style: hidden; border-right-style: hidden; background: #96cde9;"></th>
+            <th style = "border-left-style: hidden; border-bottom-style: hidden; background: #96cde9;"></th>
+            <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
+            <th colspan="4" style = "text-align:right; background: #f0ad4e;">Списания -1 неделя</th>
+        </tr>
+        <tr  class="hidden-xs">
+            <th colspan="" style = "background: #96cde9;">Списания -2 недели</th>
+            <th style = "border-left-style: hidden; border-right-style: hidden; background: #96cde9;"></th>
+            <th style = "border-left-style: hidden; border-bottom-style: hidden; background: #96cde9;"></th>
+            <th style = "border-top-style: hidden; background: #96cde9;"></th>
+            <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
+            <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
+            <th colspan="3" style = "text-align:right; background: #f0ad4e;">Последняя продажа -1 неделя</th>
+        </tr>
+        <tr  class="hidden-xs">
+            <th colspan="" style = "background: #96cde9;">Продажи -2 недели</th>
+            <th style = "border-left-style: hidden; border-bottom-style: hidden; background: #96cde9;"></th>
+            <th style = "border-top-style: hidden; background: #96cde9;"></th>
+            <th style = "border-top-style: hidden; background: #96cde9;"></th>
+            <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
+            <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
+            <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
+            <th colspan="2" style = "text-align:right; background: #5cb85c;">Рекомендация</th>
+        </tr>
+        <tr  class="">
+            <th style = "">Наименование</th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #96cde9;"></th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #96cde9;"></th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #96cde9;"></th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #f0ad4e;"></th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #f0ad4e;"></th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #f0ad4e;"></th>
+            <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #5cb85c;"></th>
+            <th style = "text-align:right;">Заказ</th>
         </tr>
         <tbody ng-repeat = "item in order | orderBy: 'good'" ng-if ="order">
             <tr ng-class = "" class = "">
                 <td class=""><span><a href = "" ng-click = "deleteItem(item)"><i class="glyphicon glyphicon-remove"></i></a></span> {{item.good}} - {{item.code}}</td>
-                <td class="hidden-xs">{{getNiceNumber(item.qtyTwo)}}</td>
-                <td class="hidden-xs">{{getNiceNumber(item.lossTwo)}}</td>
-                <td class="hidden-xs">{{getLastSaleTime(item, 2)}}</td>
-                <td class="hidden-xs">{{getNiceNumber(item.qtyOne)}}</td>
-                <td class="hidden-xs">{{getNiceNumber(item.lossOne)}}</td>
-                <td class="hidden-xs">{{getLastSaleTime(item, 1)}}</td>
-                <td class="hidden-xs">{{item.qtyRecommended || 0}}</td>
+                <td class="hidden-xs" style = "background: #96cde9;">{{getNiceNumber(item.qtyTwo)}}</td>
+                <td class="hidden-xs" style = "background: #96cde9;">{{getNiceNumber(item.lossTwo)}}</td>
+                <td class="hidden-xs" style = "background: #96cde9;">{{getLastSaleTime(item, 2)}}</td>
+                <td class="hidden-xs" style = "background: #f0ad4e;">{{getNiceNumber(item.qtyOne)}}</td>
+                <td class="hidden-xs" style = "background: #f0ad4e;">{{getNiceNumber(item.lossOne)}}</td>
+                <td class="hidden-xs" style = "background: #f0ad4e;">{{getLastSaleTime(item, 1)}}</td>
+                <td class="hidden-xs" style = "background: #5cb85c;">{{item.qtyRecommended || 0}}</td>
                 <td class="" style = "width: 130px; text-align: center;">
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" class="btn btn-default" ng-click = "addOrReduceQty(0, item)">-</button>

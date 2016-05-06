@@ -4,7 +4,7 @@
         var getData;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
-        $scope.order = {};
+        $scope.order = [];
         // $scope.dateToday = new Date();
 
         // $rootScope.addLog("Receipts load " + $scope.bakeryID);
@@ -14,6 +14,7 @@
         };
 
         getData = function (bakery, date) {
+            $scope.order = 0;
 
             var url,
                 dateForUrl;
