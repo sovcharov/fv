@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     angular.module('InvestorPanel').controller("OrdersPageController", function ($scope, $state, $stateParams, $rootScope, $http) {
-        var getData;
+        var getData, getWeather;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
         $scope.order = [];
@@ -27,6 +27,15 @@
                     $scope.order = dataReceived;
                 });
         };
+        getWeather = function () {
+            var url = $rootScope.serverAddress + '/api/weather/'
+            $http.get(url)
+                .success(function (dataReceived) {
+                    console.log(dataReceived);
+                    $scope.weather = dataReceived;
+                });
+        };
+        getWeather();
 
         $scope.createOrder = function (bakeryID) {
             var i;
