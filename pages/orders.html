@@ -15,6 +15,7 @@
         </div>
 </div>
 <div class="col-xs-12">
+    <!-- {{order}} -->
     <table class="table table-condensed table-bordered">
         <!-- <tr  class="active">
             <th>Час</th>
@@ -28,21 +29,32 @@
             <th class="hidden-xs">{{getDateddMM(commonDate, 6)}}</th>
             <th class="">{{getDateddMM(commonDate, 7)}}</th>
         </tr> -->
+        <tr  class="active">
+            <th>Наименование</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Заказ</th>
+        </tr>
         <tbody ng-repeat = "item in order | orderBy: 'good'" ng-if ="order">
             <tr ng-class = "" class = "">
-                <td class="">{{item.good}} - {{item.code}}</td>
+                <td class=""><span><a href = "" ng-click = "deleteItem(item)"><i class="glyphicon glyphicon-remove"></i></a></span> {{item.good}} - {{item.code}}</td>
                 <td class="hidden-xs">{{getNiceNumber(item.qtyTwo)}}</td>
                 <td class="hidden-xs">{{getNiceNumber(item.lossTwo)}}</td>
                 <td class="hidden-xs">{{getLastSaleTime(item, 2)}}</td>
                 <td class="hidden-xs">{{getNiceNumber(item.qtyOne)}}</td>
                 <td class="hidden-xs">{{getNiceNumber(item.lossOne)}}</td>
                 <td class="hidden-xs">{{getLastSaleTime(item, 1)}}</td>
-                <td class="hidden-xs">10</td>
+                <td class="hidden-xs">{{item.qtyRecommended || 0}}</td>
                 <td class="" style = "width: 130px; text-align: center;">
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default">-</button>
-                      <button type="button" class="btn btn-default" disabled="disabled">555</button>
-                      <button type="button" class="btn btn-default">+</button>
+                      <button type="button" class="btn btn-default" ng-click = "addOrReduceQty(0, item)">-</button>
+                      <button type="button" class="btn btn-default" disabled="disabled" style = "width: 50px;">{{item.qtyToOrder || 0}}</button>
+                      <button type="button" class="btn btn-default" ng-click = "addOrReduceQty(1, item)">+</button>
                     </div>
                 </td>
             </tr>

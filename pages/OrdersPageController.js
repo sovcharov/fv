@@ -65,5 +65,18 @@
                 return number.toFixed(2);
             }
         };
+
+        $scope.addOrReduceQty = function (option, item) {
+            option ? item.qtyToOrder += 1 : ((item.qtyToOrder > 0) ? item.qtyToOrder -= 1 : 0);
+        };
+
+        $scope.deleteItem = function (item) {
+            var i;
+            for(i = 0; i < $scope.order.length; i += 1) {
+                if($scope.order[i].code === item.code) {
+                    $scope.order.splice(i,1);
+                }
+            }
+        };
     });
 }());
