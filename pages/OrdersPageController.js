@@ -23,7 +23,7 @@
             console.log(url);
             $http.get(url)
                 .success(function (dataReceived) {
-                    $scope.order.message = dataReceived;
+                    $scope.order = dataReceived;
                 });
         };
 
@@ -34,6 +34,36 @@
 
         $scope.dateChanged = function (date) {
             $rootScope.commonDate = date;
+        };
+
+        $scope.getLastSaleTime = function (item, weekAgo) {
+            if (weekAgo === 1) {
+                if (item.lossOne === 0) {
+                    if (item.lastSaleWeekAgo) {
+                        return item.lastSaleWeekAgo;
+                    }
+                    return '-';
+                } else {
+                    return '-';
+                }
+            } else {
+                if (item.lossTwo === 0) {
+                    if (item.lastSaleTwoWeeksAgo) {
+                        return item.lastSaleTwoWeeksAgo;
+                    }
+                    return '-';
+                } else {
+                    return '-';
+                }
+            }
+        };
+
+        $scope.getNiceNumber = function (number) {
+            if (parseInt(number, 10) === number) {
+                return number;
+            } else {
+                return number.toFixed(2);
+            }
         };
     });
 }());
