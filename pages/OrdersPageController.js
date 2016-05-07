@@ -21,21 +21,29 @@
 
             dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             url = $rootScope.serverAddress + '/api/orders/store/' + bakery + '/date/' + dateForUrl;
-            console.log(url);
-            $http.get(url)
-                .success(function (dataReceived) {
-                    $scope.order = dataReceived;
-                });
-        };
-        getWeather = function () {
-            var url = $rootScope.serverAddress + '/api/weather/'
+            // $http.get(url)
+            //     .success(function (dataReceived) {
+            //         $scope.order = dataReceived;
+            //     });
+            url = $rootScope.serverAddress + '/api/weather/date/' + dateForUrl;
             $http.get(url)
                 .success(function (dataReceived) {
                     console.log(dataReceived);
                     $scope.weather = dataReceived;
                 });
+
         };
-        getWeather();
+        getWeather = function (date) {
+            var url = $rootScope.serverAddress + '/api/weather/',
+                dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            $http.get(url)
+                .success(function (dataReceived) {
+                    console.log(dataReceived);
+                    $scope.weather = dataReceived.daily;
+
+                });
+        };
+        getWeather($rootScope.commonDate);
 
         $scope.createOrder = function (bakeryID) {
             var i;

@@ -1,9 +1,15 @@
 (function () {
     "use strict";
     angular.module('ui.bootstrap')
-        .controller('DateController', function ($scope, $rootScope) {
+        .controller('DateController', function ($scope, $rootScope, $state) {
+            // console.log($state.current);
             $scope.today = function () {
-                $scope.dt = $rootScope.commonDate;//new Date();
+                if ($state.current.name === 'main.orders') {
+                    $scope.dt = new Date();
+                    $scope.dt.setDate($scope.dt.getDate() + 1);
+                } else {
+                    $scope.dt = $rootScope.commonDate;//new Date();
+                }
             };
             $scope.today();
 
@@ -19,15 +25,25 @@
             $scope.toggleMin = function () {
                 //$scope.minDate = $scope.minDate ? null : new Date
                 var date = new Date();
-                date.setDate(date.getDate() - 30);
+                if ($state.current.name === 'main.orders') {
+                    date.setDate(date.getDate() + 1);
+                } else {
+                    date.setDate(date.getDate() - 30);
+                }
                 $scope.minDate = $scope.minDate ? null : date;
             };
 
             $scope.toggleMin();
+
             $scope.maxDate = new Date();
+            if ($state.current.name === 'main.orders') {
+                $scope.maxDate.setDate($scope.maxDate.getDate() + 7);
+            }
 
             $scope.open1 = function () {
-                $scope.maxDate = new Date();
+                if ($state.current.name !== 'main.orders') {
+                    $scope.maxDate = new Date();
+                }
                 $scope.popup1.opened = true;
             };
 
