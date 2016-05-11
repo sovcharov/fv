@@ -4,7 +4,7 @@
         var getData, getWeather;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
-        $scope.order = [];
+
         // $scope.dateToday = new Date();
 
         // $rootScope.addLog("Receipts load " + $scope.bakeryID);
@@ -15,6 +15,8 @@
 
         getData = function (bakery, date) {
             $scope.order = 0;
+            $scope.weather = 0;
+
 
             var url,
                 dateForUrl;
@@ -33,25 +35,25 @@
                 });
 
         };
-        getWeather = function (date) {
-            var url = $rootScope.serverAddress + '/api/weather/',
-                dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-            $http.get(url)
-                .success(function (dataReceived) {
-                    console.log(dataReceived);
-                    $scope.weather = dataReceived.daily;
-
-                });
-        };
-        getWeather($rootScope.commonDate);
+        // getWeather = function (date) {
+        //     var url = $rootScope.serverAddress + '/api/weather/',
+        //         dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        //     $http.get(url)
+        //         .success(function (dataReceived) {
+        //             console.log(dataReceived);
+        //             $scope.weather = dataReceived.daily;
+        //
+        //         });
+        // };
+        // getWeather($rootScope.commonDate);
 
         $scope.createOrder = function (bakeryID) {
             var i;
-            getData(bakeryID, $rootScope.commonDate);
+            getData(bakeryID, $rootScope.ordersDate);
         };
 
         $scope.dateChanged = function (date) {
-            $rootScope.commonDate = date;
+            $rootScope.ordersDate = date;
         };
 
         $scope.getLastSaleTime = function (item, weekAgo) {

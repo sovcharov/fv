@@ -16,8 +16,41 @@
 </div>
 <div class="col-xs-12">
     <!-- {{order}} -->
-    {{weather}}
-    <table class="table table-condensed table-bordered">
+    <!-- {{weather}} -->
+    <span ng-if = "weather">Погода:</span>
+    <table class="table table-condensed table-bordered" ng-if = "weather">
+        <tr  class="hidden-xs">
+            <th style="widht: 10%;"></th>
+            <th style="widht: 30%; background: #96cde9;">2 недели назад</th>
+            <th style="widht: 30%; background: #f0ad4e;">1 неделя назад</th>
+            <th style="widht: 30%;">Прогноз на дату заказа</th>
+        </tr>
+        <tr  class="hidden-xs">
+            <td class="" style = "">Температура:</td>
+            <td class="" style = "background: #96cde9;">{{weather.twoWeeksAgo.temperature}}</td>
+            <td class="" style = " background: #f0ad4e;">{{weather.weekAgo.temperature}}</td>
+            <td class="" style = "">{{weather.dateOfOrder.temperature}}</td>
+        </tr>
+        <tr  class="hidden-xs">
+            <td class="" style = "">Влажность:</td>
+            <td class="" style = "background: #96cde9;">{{weather.twoWeeksAgo.humidity}} %</td>
+            <td class="" style = " background: #f0ad4e;">{{weather.weekAgo.humidity}} %</td>
+            <td class="" style = "">{{weather.dateOfOrder.humidity}} %</td>
+        </tr>
+        <tr  class="hidden-xs">
+            <td class="" style = "">Облачность:</td>
+            <td class="" style = "background: #96cde9;">{{weather.twoWeeksAgo.cloudCover}} %</td>
+            <td class="" style = " background: #f0ad4e;">{{weather.weekAgo.cloudCover}} %</td>
+            <td class="" style = "">{{weather.dateOfOrder.cloudCover}} %</td>
+        </tr>
+        <tr  class="hidden-xs">
+            <td class="" style = "">Обстановка:</td>
+            <td class="" style = "background: #96cde9;">{{weather.twoWeeksAgo.text}}</td>
+            <td class="" style = " background: #f0ad4e;">{{weather.weekAgo.text}}</td>
+            <td class="" style = "">{{weather.dateOfOrder.text}}</td>
+        </tr>
+    </table>
+    <table class="table table-condensed table-bordered" ng-if = "order">
         <tr  class="hidden-xs">
             <th colspan=""></th>
             <th style = "border-left-style: hidden; border-right-style: hidden;"></th>
@@ -87,5 +120,10 @@
                 <td colspan="10"><span class = "col-xs-12"><div class="loader"></div></span></td>
             </tr>
         </tbody>
+    </table>
+    <table class="table table-condensed table-bordered" ng-if ="order === 0">
+        <tr>
+            <td colspan="10"><span class = "col-xs-12"><div class="loader"></div></span></td>
+        </tr>
     </table>
 </div>

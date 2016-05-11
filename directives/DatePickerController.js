@@ -7,6 +7,7 @@
                 if ($state.current.name === 'main.orders') {
                     $scope.dt = new Date();
                     $scope.dt.setDate($scope.dt.getDate() + 1);
+                    $rootScope.ordersDate = $scope.dt;
                 } else {
                     $scope.dt = $rootScope.commonDate;//new Date();
                 }
