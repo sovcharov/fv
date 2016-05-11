@@ -1,13 +1,11 @@
 (function () {
     "use strict";
     angular.module('InvestorPanel').controller("OrdersPageController", function ($scope, $state, $stateParams, $rootScope, $http) {
-        var getData, getWeather;
+        var getData;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
 
-        // $scope.dateToday = new Date();
-
-        // $rootScope.addLog("Receipts load " + $scope.bakeryID);
+        $rootScope.addLog("Receipts load " + $scope.bakeryID);
 
         $scope.changeBakery = function (id) {
             $state.go('main.orders', {bakeryID : id});
@@ -16,39 +14,23 @@
         getData = function (bakery, date) {
             $scope.order = 0;
             $scope.weather = 0;
-
-
             var url,
                 dateForUrl;
 
             dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             url = $rootScope.serverAddress + '/api/orders/store/' + bakery + '/date/' + dateForUrl;
-            // $http.get(url)
-            //     .success(function (dataReceived) {
-            //         $scope.order = dataReceived;
-            //     });
+            $http.get(url)
+                .success(function (dataReceived) {
+                    $scope.order = dataReceived;
+                });
             url = $rootScope.serverAddress + '/api/weather/date/' + dateForUrl;
             $http.get(url)
                 .success(function (dataReceived) {
-                    console.log(dataReceived);
                     $scope.weather = dataReceived;
                 });
-
         };
-        // getWeather = function (date) {
-        //     var url = $rootScope.serverAddress + '/api/weather/',
-        //         dateForUrl = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-        //     $http.get(url)
-        //         .success(function (dataReceived) {
-        //             console.log(dataReceived);
-        //             $scope.weather = dataReceived.daily;
-        //
-        //         });
-        // };
-        // getWeather($rootScope.commonDate);
 
         $scope.createOrder = function (bakeryID) {
-            var i;
             getData(bakeryID, $rootScope.ordersDate);
         };
 
@@ -92,9 +74,9 @@
 
         $scope.deleteItem = function (item) {
             var i;
-            for(i = 0; i < $scope.order.length; i += 1) {
-                if($scope.order[i].code === item.code) {
-                    $scope.order.splice(i,1);
+            for (i = 0; i < $scope.order.length; i += 1) {
+                if ($scope.order[i].code === item.code) {
+                    $scope.order.splice(i, 1);
                 }
             }
         };
