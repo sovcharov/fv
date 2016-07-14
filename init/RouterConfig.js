@@ -90,6 +90,11 @@
                 templateUrl: 'pages/receipts.html',
                 controller: 'ReceiptsPageController',
                 resolve: {receiptsShow: receiptsShow}
+            })
+            .state('main.passwordChange', {
+                url: '^/passwordChange',
+                templateUrl: 'pages/passwordChange.html',
+                controller: 'PasswordChangePageController'
             });
     });
 }());
