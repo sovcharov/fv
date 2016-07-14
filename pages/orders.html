@@ -14,11 +14,6 @@
             <button type="button" class="btn btn-primary btn-lg btn-block" ng-click = "createOrder(bakeryID)">Сформировать</button>
         </div>
 </div>
-{{totalIncome}}
-{{forecast}}
-<div ng-repeat = "day in forecast">
-{{day.incomeWouldBe.toFixed(0)}} {{day.income.toFixed(0)}} {{(day.incomeWouldBe - day.income).toFixed(0)}}
-</div>
 <div class="col-xs-12">
     <span ng-if = "weather" class="hidden-xs">Погода:</span>
     <table class="table table-condensed table-bordered" ng-if = "weather">
