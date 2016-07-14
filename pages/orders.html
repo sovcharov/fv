@@ -81,7 +81,7 @@
             <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
             <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
             <th style = "border-top-style: hidden; background: #f0ad4e;"></th>
-            <th colspan="2" style = "text-align:right; background: #5cb85c;">Рекомендация</th>
+            <th colspan="2" style = "text-align:right; background: #5cb85c;">Средний спрос за 3 мес.</th>
         </tr>
         <tr  class="">
             <th style = "">Наименование</th>
@@ -103,7 +103,10 @@
                 <td class="hidden-xs" style = "background: #f0ad4e;">{{getNiceNumber(item.qtyOne)}}</td>
                 <td class="hidden-xs" style = "background: #f0ad4e;">{{getNiceNumber(item.lossOne)}}</td>
                 <td class="hidden-xs" style = "background: #f0ad4e;">{{getLastSaleTime(item, 1)}}</td>
-                <td class="hidden-xs" style = "background: #5cb85c;">{{item.qtyRecommended || 0}}</td>
+                <td class="hidden-xs" style = "background: #5cb85c;">
+                    <span ng-if ="item.qtyRecommended === 'loading'" class = "col-xs-12"><div class="loader"></div></span>
+                    <span ng-if ="item.qtyRecommended !== 'loading'">{{getNiceNumber(item.qtyRecommended) || 0}}</span>
+                </td>
                 <td class="" style = "width: 130px; text-align: center;">
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" class="btn btn-default" ng-click = "addOrReduceQty(0, item)">-</button>

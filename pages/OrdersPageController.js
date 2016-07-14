@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     angular.module('InvestorPanel').controller("OrdersPageController", function ($scope, $state, $stateParams, $rootScope, $http) {
-        var getData, getForecast, getTest;
+        var getData, getForecast, getTest, getForecastFromServer;
 
         $scope.bakeryID = $stateParams.bakeryID || "1";
 
@@ -22,7 +22,7 @@
             $http.get(url)
                 .success(function (dataReceived) {
                     $scope.order = dataReceived;
-                    // getForecast(dateForUrl, bakery);
+                    getForecast(dateForUrl, bakery);
                 });
             url = $rootScope.serverAddress + '/api/weather/date/' + dateForUrl;
             $http.get(url)
@@ -31,22 +31,26 @@
                 });
         };
 
+        getForecastFromServer = function (item, url) {
+                $http.get(url).success(function (dataReceived) {
+                    // console.log(item.code);
+                    item.qtyRecommended = dataReceived.forecast;
+                    item.qtyToOrder = Math.ceil(dataReceived.forecast);
+                });
+        };
+
         getForecast = function (dateForUrl, bakery) {
             var url, i;
             for (i = 0; i < $scope.order.length; i += 1) {
-                if($scope.order[i].code === 'УТ000000057') {
-                    url = $rootScope.serverAddress + '/api/forecast/store/' + bakery + '/date/' + dateForUrl + '/item/' + $scope.order[i].code;
-                    $http.get(url)
-                        .success(function (dataReceived) {
-                            $scope.forecast = dataReceived;
-                        });
-                }
+                $scope.order[i].qtyRecommended = 'loading';
+                url = $rootScope.serverAddress + '/api/forecast/store/' + bakery + '/date/' + dateForUrl + '/item/' + $scope.order[i].code;
+                getForecastFromServer($scope.order[i], url);
             }
         };
 
         $scope.createOrder = function (bakeryID) {
             getData(bakeryID, $rootScope.ordersDate);
-            getTest();
+            // getTest();
         };
 
         $scope.dateChanged = function (date) {
