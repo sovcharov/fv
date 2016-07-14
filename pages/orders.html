@@ -94,7 +94,7 @@
             <th class="hidden-xs" style = "border-top-style: hidden; width: 7%; background: #5cb85c;"></th>
             <th style = "text-align:right;">Заказ</th>
         </tr>
-        <tbody ng-repeat = "item in order | orderBy: 'good'" ng-if ="order">
+        <tbody ng-repeat = "item in order | orderBy: ['group','good']" ng-if ="order">
             <tr ng-class = "" class = "">
                 <td class=""><span><a href = "" ng-click = "deleteItem(item)"><i class="glyphicon glyphicon-remove"></i></a></span> {{item.good}} - {{item.code}}</td>
                 <td class="hidden-xs" style = "background: #96cde9;">{{getNiceNumber(item.qtyTwo)}}</td>
