@@ -328,7 +328,7 @@
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//start of TOTAL FOR ALL BAKERIES                                                                                               //
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			if($_COOKIE['userType']==1 || $_COOKIE['userID']==4 || $_COOKIE['userID']==3 || $_COOKIE['userID']==8 || $_COOKIE['userID']==2)
+			if($_COOKIE['userType']==1 || $_COOKIE['userID']==4 || $_COOKIE['userID']==3 || $_COOKIE['userID']==8 || $_COOKIE['userID']==2 || $_COOKIE['userID']==30)
 			{
 				require '../../dbconnectms.php';
 				echo '<div style="

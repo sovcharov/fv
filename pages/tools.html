@@ -33,7 +33,7 @@
                 <h3 class="panel-title">Администратору</h3>
             </div>
             <div class="panel-body">
-                <a ui-sref="main.hourlystats({bakeryID: 1})" ng-if="access.toHourlyStatsPage()"><i class="glyphicon glyphicon-time"></i>  Почасовая статистика</a>
+                <p ng-if="access.toUsersManagementPage()"><a ui-sref="main.usersManagement"><i class="glyphicon glyphicon-user"></i>  Управление пользователями</a></p>
             </div>
         </div>
     </div>

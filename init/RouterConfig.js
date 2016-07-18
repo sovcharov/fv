@@ -48,6 +48,13 @@
             return $q.reject();
         }
 
+        function usersManagementShow($q, $rootScope) {
+            if ($rootScope.access.toUsersManagementPage()) {
+                return $q.when();
+            }
+            return $q.reject();
+        }
+
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -95,6 +102,12 @@
                 url: '^/passwordChange',
                 templateUrl: 'pages/passwordChange.html',
                 controller: 'PasswordChangePageController'
+            })
+            .state('main.usersManagement', {
+                url: '^/usersManagement',
+                templateUrl: 'pages/usersManagement.html',
+                controller: 'UsersManagementPageController',
+                resolve: {usersManagementShow: usersManagementShow}
             });
     });
 }());
