@@ -14,7 +14,7 @@
 
             $rootScope.commonDate = new Date(); //this date should be shared date for receipts, hourlystats and revenue pages.
             $rootScope.serverAddress = 'https://fvolchek.net:5555';//'http://127.0.0.1:5555';//'http://fvolchek.net:5555';
-            // $rootScope.serverAddress = 'http://127.0.0.1:5555';//'http://fvolchek.net:5555';
+            $rootScope.serverAddress = 'http://127.0.0.1:5555';//'http://fvolchek.net:5555';
 
 
             var fillUserData = function () {
