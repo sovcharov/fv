@@ -107,7 +107,7 @@
                 },
 
                 toUsersManagementPage: function () {
-                    if (user.id === 1) {
+                    if (user.id === 1 || user.id === 3) {
                         return true;
                     }
                     return false;

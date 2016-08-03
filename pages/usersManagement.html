@@ -4,24 +4,17 @@
     </div>
     <div class="col-xs-12">
         <table class="table table-condensed table-bordered">
-            <tr  class="active">
-                <!-- <th>Id</th> -->
-                <th class="col-sm-3">Фамилия</th>
-                <th class="col-sm-3">Имя</th>
-                <th class="col-sm-3">email</th>
-                <th class="col-sm-3"></th>
-            </tr>
             <tr ng-class = "" class = "">
                 <!-- <td class="">{{user.id}}</td> -->
                 <td class="col-sm-3"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="Фамилия" ng-model="newUser.lastName"></td>
                 <td class="col-sm-3"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="Имя" ng-model="newUser.firstName"></td>
-                <td class="col-sm-3"><input type="email" class="form-control" id="exampleInputEmail1" placeholder="email" ng-model="newUser.email"></td>
+                <td class="col-sm-3"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="email" ng-model="newUser.email"></td>
                 <td class="col-sm-3">
-                    <button class="btn btn-primary col-xs-6" type="submit">Добавить</button>
+                    <button class="btn btn-primary col-xs-6" type="submit" ng-click = "addUser()">Добавить</button>
                 </td>
             </tr>
             <tbody ng-repeat = "user in users | orderBy: ['lastName','firstName']" ng-if ="users">
-                <tr ng-class = "" class = "">
+                <tr ng-class = "{'info': user.new} " class = "">
                     <!-- <td class="">{{user.id}}</td> -->
                     <td class="col-sm-3">{{user.lastName}}</td>
                     <td class="col-sm-3">{{user.firstName}}</td>
@@ -34,6 +27,5 @@
                 </tr>
             </tbody>
         </table>
-        {{newUser}}
     </div>
 </div>

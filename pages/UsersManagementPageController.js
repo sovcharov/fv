@@ -4,8 +4,18 @@
     angular.module('InvestorPanel').controller("UsersManagementPageController", function ($scope, $rootScope, $http, $cookies) {
 
         var getUsers,
-            i;
+            i,
+            regex = {
+                email: /^[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*@[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*\.[A-Za-z]{2,4}$/,
+                firstName: /^[ A-Za-zА-ЯЁа-яё\-]{2,20}$/,
+                lastName: /^[ A-Za-zА-ЯЁа-яё\-]{2,20}$/
+            };
 
+        $scope.newUser = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        };
 
         getUsers = function () {
             var url = $rootScope.serverAddress + '/api/users/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10);
@@ -45,6 +55,37 @@
                 $rootScope.addInfoEvent('danger', 'Произошла ошибка');
                 user.toDelete = false;
             });
+        };
+
+        $scope.addUser = function () {
+            if (regex.email.test($scope.newUser.email) && regex.firstName.test($scope.newUser.firstName) && regex.lastName.test($scope.newUser.lastName)) {
+                var user = $scope.newUser,
+                    url = $rootScope.serverAddress + '/api/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/userFirstName/' + user.firstName + '/userLastName/' + user.lastName + '/userEmail/' + user.email;
+                $http({
+                    method: 'PUT',
+                    url: url
+                }).then(function (data) {
+                    console.log(data);
+                    if (data.data[0][0]) {
+                        $rootScope.addInfoEvent('success', 'Пользователь добавлен');
+                        data.data[0][0].new = true;
+                        $scope.users[$scope.users.length] = data.data[0][0];
+                        $scope.newUser = {
+                            firstName: '',
+                            lastName: '',
+                            email: ''
+                        };
+                    } else {
+                        $rootScope.addInfoEvent('danger', 'Произошла ошибка');
+                    }
+                }, function () {
+                    $rootScope.addInfoEvent('danger', 'Произошла ошибка');
+                });
+
+            } else {
+                $rootScope.addInfoEvent('danger', 'Введены неверные данные');
+            }
+
         };
 
     });
