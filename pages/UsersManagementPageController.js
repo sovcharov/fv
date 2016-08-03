@@ -59,6 +59,7 @@
 
         $scope.addUser = function () {
             if (regex.email.test($scope.newUser.email) && regex.firstName.test($scope.newUser.firstName) && regex.lastName.test($scope.newUser.lastName)) {
+                $scope.addingUser = true;
                 var user = $scope.newUser,
                     url = $rootScope.serverAddress + '/api/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/userFirstName/' + user.firstName + '/userLastName/' + user.lastName + '/userEmail/' + user.email;
                 $http({
@@ -78,7 +79,9 @@
                     } else {
                         $rootScope.addInfoEvent('danger', 'Произошла ошибка');
                     }
+                    $scope.addingUser = false;
                 }, function () {
+                    $scope.addingUser = false;
                     $rootScope.addInfoEvent('danger', 'Произошла ошибка');
                 });
 

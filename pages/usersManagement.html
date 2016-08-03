@@ -10,8 +10,10 @@
                 <td class="col-sm-3"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="Имя" ng-model="newUser.firstName"></td>
                 <td class="col-sm-3"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="email" ng-model="newUser.email"></td>
                 <td class="col-sm-3">
-                    <button class="btn btn-primary col-xs-6" type="submit" ng-click = "addUser()">Добавить</button>
+                    <button class="btn btn-primary col-xs-6" type="submit" ng-click = "addUser()" ng-if ="!addingUser">Добавить</button>
+                    <span class = "col-xs-12" ng-if ="addingUser"><div class="loader"></div></span>
                 </td>
+
             </tr>
             <tbody ng-repeat = "user in users | orderBy: ['lastName','firstName']" ng-if ="users">
                 <tr ng-class = "{'info': user.new} " class = "">
@@ -24,6 +26,11 @@
                         <button class="btn btn-primary col-xs-6" type="submit" ng-if="user.toDelete" ng-click = "deleteCanceled(user)">Отменить</button>
                         <button class="btn btn-danger col-xs-6" type="submit" ng-if="user.toDelete" ng-click = "deleteUser(user)">Удалить</button>
                     </td>
+                </tr>
+            </tbody>
+            <tbody ng-if ="!users.length">
+                <tr>
+                    <td colspan="4"><span class = "col-xs-12"><div class="loader"></div></span></td>
                 </tr>
             </tbody>
         </table>
