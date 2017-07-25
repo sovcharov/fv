@@ -66,10 +66,9 @@
                     method: 'PUT',
                     url: url
                 }).then(function (data) {
-                    console.log(data);
                     if (data.data[0][0]) {
                         $rootScope.addInfoEvent('success', 'Пользователь добавлен');
-                        data.data[0][0].new = true;
+                        data.data[0][0].newElement = true;
                         $scope.users[$scope.users.length] = data.data[0][0];
                         $scope.newUser = {
                             firstName: '',

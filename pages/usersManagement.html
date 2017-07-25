@@ -16,7 +16,7 @@
 
             </tr>
             <tbody ng-repeat = "user in users | orderBy: ['lastName','firstName']" ng-if ="users">
-                <tr ng-class = "{'info': user.new} " class = "">
+                <tr ng-class = "{'info': user.newElement} " class = "">
                     <!-- <td class="">{{user.id}}</td> -->
                     <td class="col-sm-3">{{user.lastName}}</td>
                     <td class="col-sm-3">{{user.firstName}}</td>
