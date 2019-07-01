@@ -53,7 +53,7 @@
         };
 
         if (!$rootScope.bakeries.length) {
-            getAvailableStores();
+            // getAvailableStores();
         }
 
         $scope.dateChanged = function (date) {
