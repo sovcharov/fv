@@ -14,7 +14,7 @@
 
             $rootScope.commonDate = new Date(); //this date should be shared date for receipts, hourlystats and revenue pages.
             $rootScope.serverAddress = 'https://fvolchek.net:5555';//'http://127.0.0.1:5555';//'http://fvolchek.net:5555';
-            $rootScope.serverAddress = 'http://127.0.0.1:5555';//'http://fvolchek.net:5555';
+            // $rootScope.serverAddress = 'http://127.0.0.1:5555';//'http://fvolchek.net:5555';
 
 
             var fillUserData = function () {
@@ -72,14 +72,14 @@
                 },
 
                 toHourlyStatsPage: function () {
-                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4 || user.id === 8 || user.type === 4) {
+                    if (user.id === 1) {
                         return true;
                     }
                     return false;
                 },
 
                 toReceiptsPage: function () {
-                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.id === 4 || user.id === 8 || user.type === 4) {
+                    if (user.id === 1) {
                         return true;
                     }
                     return false;
@@ -93,14 +93,14 @@
                 },
 
                 toOrdersPage: function () {
-                    if (user.id === 1 || user.id === 2 || user.id === 3 || user.type === 4) {
+                    if (user.id === 1) {
                         return true;
                     }
                     return false;
                 },
 
                 toAdmin: function () {
-                    if (this.toUsersManagementPage()) {
+                    if (this.toUsersManagementPage() || this.toUsersManagementKVPage()) {
                         return true;
                     }
                     return false;
@@ -108,6 +108,27 @@
 
                 toUsersManagementPage: function () {
                     if (user.id === 1 || user.id === 3) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toUsersManagementKVPage: function () {
+                    if (user.id === 1 || user.id === 25) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toFV: function () {
+                    if (this.toAdmin() || user.type === 4 || user.type === 5) {
+                        return true;
+                    }
+                    return false;
+                },
+
+                toKV: function () {
+                    if (this.toAdmin() || user.type === 6 || user.type === 5) {
                         return true;
                     }
                     return false;

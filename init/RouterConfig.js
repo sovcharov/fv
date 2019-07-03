@@ -55,6 +55,13 @@
             return $q.reject();
         }
 
+        function usersManagementKVShow($q, $rootScope) {
+            if ($rootScope.access.toUsersManagementKVPage()) {
+                return $q.when();
+            }
+            return $q.reject();
+        }
+
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -108,6 +115,12 @@
                 templateUrl: 'pages/usersManagement.html',
                 controller: 'UsersManagementPageController',
                 resolve: {usersManagementShow: usersManagementShow}
+            })
+            .state('main.usersManagementKV', {
+                url: '^/usersManagementKV',
+                templateUrl: 'pages/usersManagementKV.html',
+                controller: 'UsersManagementKVPageController',
+                resolve: {usersManagementKVShow: usersManagementKVShow}
             });
     });
 }());

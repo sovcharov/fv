@@ -1,7 +1,7 @@
 /*global angular*/
 (function () {
     "use strict";
-    angular.module('InvestorPanel').controller("UsersManagementPageController", function ($scope, $rootScope, $http, $cookies) {
+    angular.module('InvestorPanel').controller("UsersManagementKVPageController", function ($scope, $rootScope, $http, $cookies) {
 
         var getUsers,
             i,
@@ -18,8 +18,7 @@
         };
 
         getUsers = function () {
-            var url = $rootScope.serverAddress + '/api/users/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/type/4';
-            console.log(url);
+            var url = $rootScope.serverAddress + '/api/users/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/type/6';
             $http.get(url).then(function (data) {
                 $scope.users = data.data;
             }, function () {
@@ -62,7 +61,7 @@
             if (regex.email.test($scope.newUser.email) && regex.firstName.test($scope.newUser.firstName) && regex.lastName.test($scope.newUser.lastName)) {
                 $scope.addingUser = true;
                 var user = $scope.newUser,
-                    url = $rootScope.serverAddress + '/api/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/userFirstName/' + user.firstName + '/userLastName/' + user.lastName + '/userEmail/' + user.email + '/type/4';
+                    url = $rootScope.serverAddress + '/api/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/userFirstName/' + user.firstName + '/userLastName/' + user.lastName + '/userEmail/' + user.email + '/type/6';
                 $http({
                     method: 'PUT',
                     url: url

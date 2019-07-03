@@ -102,7 +102,7 @@ else
 		// echo $today;
 		echo  "<p class=\"paraOverTable\" style=\"margin-left:10px;\">Добро пожаловать, " . $_COOKIE['userName']. "!</p>";
 		// require '../../dbconnect.php';
-		if($_COOKIE['userType']==4 || $_COOKIE['userID']==1  || $_COOKIE['userType']==5){
+		if($_COOKIE['userType']==6 || $_COOKIE['userID']==1  || $_COOKIE['userType']==5){
 			$query ="
 			select distinct stores.id storeID, stores.bakery as bakery, stores.name as storeName, stores.venue as venue
 			from storeskv as stores
