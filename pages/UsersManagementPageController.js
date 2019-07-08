@@ -19,7 +19,6 @@
 
         getUsers = function () {
             var url = $rootScope.serverAddress + '/api/users/user/' + parseInt($cookies.get('userID'), 10) + '/token/' + parseInt($cookies.get('token'), 10) + '/type/4';
-            console.log(url);
             $http.get(url).then(function (data) {
                 $scope.users = data.data;
             }, function () {

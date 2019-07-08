@@ -121,7 +121,7 @@
                 },
 
                 toFV: function () {
-                    if (this.toAdmin() || user.type === 4 || user.type === 5) {
+                    if (this.toAdmin() || user.type === 4 || user.type === 5 || user.type === 0) {
                         return true;
                     }
                     return false;
