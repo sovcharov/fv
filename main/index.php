@@ -172,15 +172,15 @@ else
 			}
 			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["revenue"] += $storesData[$j]["bakeryData"]["thisMonth"]["revenue"];
 			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["checks"] += $storesData[$j]["bakeryData"]["thisMonth"]["checks"];
-			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] += $storesData[$j]["bakeryData"]["thisMonth"]["average"];
 			$storesData[$currentIndex]["bakeryData"]["lastMonth"]["revenue"] += $storesData[$j]["bakeryData"]["lastMonth"]["revenue"];
 			$storesData[$currentIndex]["bakeryData"]["lastMonth"]["checks"] += $storesData[$j]["bakeryData"]["lastMonth"]["checks"];
-			$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] += $storesData[$j]["bakeryData"]["lastMonth"]["average"];
 			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["revenue"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["revenue"];
 			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["checks"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"];
-			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["average"];
 
 		}
+		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] = $storesData[$j]["bakeryData"]["thisMonth"]["revenue"]/$storesData[$j]["bakeryData"]["thisMonth"]["checks"];
+		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] = $storesData[$j]["bakeryData"]["lastMonth"]["revenue"]/$storesData[$j]["bakeryData"]["lastMonth"]["checks"];
+		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] = $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["revenue"]/$storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"];
 
 
 		for($j=$currentIndex; $j>=0; $j--)
