@@ -1,8 +1,8 @@
 <?php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 if(isset($_COOKIE['token']))
 {
@@ -84,31 +84,28 @@ else
 	</nav>
 	<div id="divContainer">
 		<?php
-		$daysInMonths = array(0,29,28,31,30,31,30,31,31,30,31,30,31);//january has 29 days since 1st - 2nd store closed
-		if ((int)date('y')%4 == 0) $daysInMonths[2] += 1;
-		$daysThisMonth = $daysInMonths[(int)date('m')];
-		if ((int)date('m') == 0) {
-			$daysLastMonth = $daysInMonths[12];
-			$days2MonthAgo = $daysInMonths[11];
-		} else if ((int)date('m') == 1) {
-			$daysLastMonth = $daysInMonths[1];
-			$days2MonthAgo = $daysInMonths[12];
-		} else {
-			$daysLastMonth = $daysInMonths[(int)date('m')-1];
-			$days2MonthAgo = $daysInMonths[(int)date('m')-2];
-		}
-		$today = (int) date('d');
-		if ((int)date('H')<4) $today--; //
-		// echo $today;
-		echo  "<p class=\"paraOverTable\" style=\"margin-left:10px;\">Добро пожаловать, " . $_COOKIE['userName']. "!</p>";
+
+		$string = file_get_contents("../../../soft/bakerydata.json");
+		// if ($string === false) {
+		//     // deal with error...
+		// }
+
+		$json = json_decode($string, true);
+		// if ($json_a === null) {
+		//     // deal with error...
+		// }
+		// var_dump ($json);
+		$timeCreated = $json[sizeof($json)-1];
+		// echo $timeCreated;
+		array_pop($json);
+		// var_dump ($json);
+
+		echo  "<p class=\"paraOverTable\" style=\"margin-left:10px;\">Добро пожаловать, " . $_COOKIE['userName']. "!<span style = 'font-size: 12px;'> Обновлено: " .$timeCreated. "</span></p>";
 		// require '../../dbconnect.php';
+
+
 		if($_COOKIE['userType']==4 || $_COOKIE['userID']==1  || $_COOKIE['userType']==5){
-			$query ="
-			select distinct stores.id storeID, stores.bakery as bakery, stores.name as storeName, stores.venue as venue
-			from stores
-			where bakery < 1000
-			order by stores.bakery
-			";
+			$storesData = $json;
 		}
 		else{
 			$query ="
@@ -119,169 +116,74 @@ else
 			and users.id='".$_COOKIE['userID']."'
 			order by stores.bakery
 			";
-		}
-		$qresult = mysqli_query($db, $query);
-		$i=0;
-		$msqueryStores = '';
 
-		while ($row = mysqli_fetch_array($qresult))
-		{
-			if ($i==0) {
-				$msqueryStores = $msqueryStores . " (t1.IPRINTSTATION = ".$row['storeID'];
-			} else {
-				$msqueryStores = $msqueryStores . " or t1.IPRINTSTATION = ".$row['storeID']." ";
-			}
-			$mass[$i][0]=(int) $row['storeID'];
-			$mass[$i][1]=$row['storeName'];
-			$mass[$i][2]=(string) $row['venue'];
-			$mass[$i][3]=(int) $row['bakery'];
-			$mass[$i][4]=[];
-			$mass[$i][5]=[];
+			// $query ="
+			// select distinct stores.id storeID, stores.bakery as bakery, stores.name as storeName, stores.venue as venue
+			// from stores, userStores, users
+			// where stores.bakery=userStores.storeID
+			// and  users.id=userStores.userID
+			// and users.id='10'
+			// order by stores.bakery
+			// ";
 
-			$mass[$i][4][0]=[];
-			$mass[$i][4][0]["totalCash"] =0;
-			$mass[$i][4][0]["totalChecks"] =0;
-			$mass[$i][4][1]=[];
-			$mass[$i][4][1]["totalCash"] =0;
-			$mass[$i][4][1]["totalChecks"] =0;
-			$mass[$i][4][2]=[];
-			$mass[$i][4][2]["totalCash"] =0;
-			$mass[$i][4][2]["totalChecks"] =0;
-
-			$mass[$i][5][0]=[];
-			$mass[$i][5][1]=[];
-			$mass[$i][5][2]=[];
-			$mass[$i][5][3]=[];
-			$mass[$i][5][4]=[];
-			$mass[$i][5][5]=[];
-			$mass[$i][5][6]=[];
-
-			//echo $mass[$i][0];
-			$i++;
-		}
-		$msqueryStores = $msqueryStores . ")";
-
-		$mass[$i][0]=0;
-		$mass[$i][1]="СУММАРНАЯ";
-		$mass[$i][2]="";
-		$mass[$i][3]="";
-		$mass[$i][4]=[];
-		$mass[$i][5]=[];
-
-		$mass[$i][4][0]=[];
-		$mass[$i][4][0]["totalCash"] =0;
-		$mass[$i][4][0]["totalChecks"] =0;
-		$mass[$i][4][1]=[];
-		$mass[$i][4][1]["totalCash"] =0;
-		$mass[$i][4][1]["totalChecks"] =0;
-		$mass[$i][4][2]=[];
-		$mass[$i][4][2]["totalCash"] =0;
-		$mass[$i][4][2]["totalChecks"] =0;
-
-		$mass[$i][5][0]=[];
-		$mass[$i][5][0]["cash"] = 0;
-		$mass[$i][5][0]["checks"] = 0;
-
-		$mass[$i][5][1]=[];
-		$mass[$i][5][1]["cash"] = 0;
-		$mass[$i][5][1]["checks"] = 0;
-		$mass[$i][5][2]=[];
-		$mass[$i][5][2]["cash"] = 0;
-		$mass[$i][5][2]["checks"] = 0;
-		$mass[$i][5][3]=[];
-		$mass[$i][5][3]["cash"] = 0;
-		$mass[$i][5][3]["checks"] = 0;
-		$mass[$i][5][4]=[];
-		$mass[$i][5][4]["cash"] = 0;
-		$mass[$i][5][4]["checks"] = 0;
-		$mass[$i][5][5]=[];
-		$mass[$i][5][5]["cash"] = 0;
-		$mass[$i][5][5]["checks"] = 0;
-		$mass[$i][5][6]=[];
-		$mass[$i][5][6]["cash"] = 0;
-		$mass[$i][5][6]["checks"] = 0;
-		$mass[$i][5][7]=[];
-		$mass[$i][5][7]["cash"] = 0;
-		$mass[$i][5][7]["checks"] = 0;
-
-
-		// echo $msqueryStores;
-// var_dump ($mass);
-		require '../../dbclose.php';
-		require '../../dbconnectms.php';
-		$msquery="
-		select sum(t1.nationalsum)as cash, count(t1.nationalsum) as checks,
-	  t1.IPRINTSTATION as cassa,
-	  day(t1.CLOSEDATETIME) as day, month(t1.CLOSEDATETIME) as month,
-		DATEPART(dw,t1.CLOSEDATETIME) as dw
-	  from  [RK7].[dbo].[PRINTCHECKS] as t1
-	  where year(t1.CLOSEDATETIME) = year(getdate())
-	  and month(t1.CLOSEDATETIME) >= month(getdate())-2
-	  and ".$msqueryStores."
-		group by t1.IPRINTSTATION, day(t1.CLOSEDATETIME), month(t1.CLOSEDATETIME), DATEPART(dw,t1.CLOSEDATETIME)
-	  order by cassa, month desc, day desc;
-		";
-		// echo $msquery;
-		// echo "<br>";
-		$msqresult = mssql_query($msquery);
-		$currentCassa = 0;
-		$indexCurrentBakery = 0;
-		$indexDay = 0;
-		while ($msrow = mssql_fetch_array($msqresult))
-		{
-			// var_dump ($msrow);
-
-			if ($currentCassa != (int) $msrow["cassa"]) {
-				// echo "<br>".$msrow["cassa"];
-				for($j=0; $j<$i; $j++)
-				{
-					if($mass[$j][0] == (int) $msrow["cassa"])
-					{
-						$indexCurrentBakery = $j;
-						$currentCassa = $msrow["cassa"];
-						$indexDay = 0;
-						$currentMonth = $msrow["month"];
-						$indexMonth = 0;
-
-
-
-						// var_dump ($mass[$indexCurrentBakery]);
-
-						break;
-					}
+			$qresult = mysqli_query($db, $query);
+			$i=0;
+			$msqueryStores = '';
+			$storesData = [];
+			while ($row = mysqli_fetch_array($qresult))
+			{
+				while ((int)$json[$i]["id"] <> (int)$row['storeID']) {
+					$i ++;
 				}
+				echo " ".$row['storeID'];
+				$currentIndex = sizeof($storesData);
+				$storesData[$currentIndex] = $json[$i];
 			}
-			if ($currentMonth != $msrow["month"]){
-				$currentMonth = $msrow["month"];
-				$indexMonth++;
+		}
+		// var_dump ($storesData);
+
+		$currentIndex = sizeof($storesData);
+
+		for ($i=0; $i <= 7; $i++) {
+			$storesData[$currentIndex]["bakeryData"]["eightDays"]["date"][$i] = $storesData[0]["bakeryData"]["eightDays"]["date"][$i];
+			$storesData[$currentIndex]["bakeryData"]["eightDays"]["revenue"][$i] = 0;
+			$storesData[$currentIndex]["bakeryData"]["eightDays"]["checks"][$i] = 0;
+			$storesData[$currentIndex]["bakeryData"]["eightDays"]["average"][$i] = 0;
+		}
+		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["revenue"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["checks"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["revenue"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["checks"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["revenue"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["checks"] = 0;
+		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] = 0;
+		$storesData[$currentIndex]["name"] = "Суммарная";
+
+
+		for($j=0; $j<$currentIndex; $j++)
+		{
+
+			for ($i=0; $i <= 7; $i++) {
+					$storesData[$currentIndex]["bakeryData"]["eightDays"]["revenue"][$i] += $storesData[$j]["bakeryData"]["eightDays"]["revenue"][$i];
+					$storesData[$currentIndex]["bakeryData"]["eightDays"]["checks"][$i] += $storesData[$j]["bakeryData"]["eightDays"]["checks"][$i];
+					$storesData[$currentIndex]["bakeryData"]["eightDays"]["average"][$i] += $storesData[$j]["bakeryData"]["eightDays"]["average"][$i];
 			}
-			if ($indexDay < 8) {
-				$mass[$indexCurrentBakery][5][$indexDay]["cash"] = $msrow["cash"];
-				$mass[$indexCurrentBakery][5][$indexDay]["checks"] = $msrow["checks"];
-				$mass[$indexCurrentBakery][5][$indexDay]["date"] = $msrow["day"]."/".$msrow["month"];
-				$mass[$indexCurrentBakery][5][$indexDay]["dw"] = $msrow["dw"];
-				$mass[$i][5][$indexDay]["cash"] = $mass[$i][5][$indexDay]["cash"] + $msrow["cash"];
-				$mass[$i][5][$indexDay]["checks"] = $mass[$i][5][$indexDay]["checks"] + $msrow["checks"];
-				$mass[$i][5][$indexDay]["date"] = $msrow["day"]."/".$msrow["month"];
-				$mass[$i][5][$indexDay]["dw"] = $msrow["dw"];
-			}
-			$indexDay++;
-			// echo $indexMonth;
-			$mass[$indexCurrentBakery][4][$indexMonth]["month"] = $msrow["month"];
-			$mass[$indexCurrentBakery][4][$indexMonth]["totalCash"] = $mass[$indexCurrentBakery][4][$indexMonth]["totalCash"] + $msrow["cash"];
-
-			$mass[$indexCurrentBakery][4][$indexMonth]["totalChecks"] = $mass[$indexCurrentBakery][4][$indexMonth]["totalChecks"] + $msrow["checks"];
-
-		$mass[$i][4][$indexMonth]["totalCash"] = 	$mass[$i][4][$indexMonth]["totalCash"] + $msrow["cash"];
-			$mass[$i][4][$indexMonth]["totalChecks"] = $mass[$i][4][$indexMonth]["totalChecks"] + $msrow["checks"];
-
-			// echo $msrow['dw'];
+			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["revenue"] += $storesData[$j]["bakeryData"]["thisMonth"]["revenue"];
+			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["checks"] += $storesData[$j]["bakeryData"]["thisMonth"]["checks"];
+			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] += $storesData[$j]["bakeryData"]["thisMonth"]["average"];
+			$storesData[$currentIndex]["bakeryData"]["lastMonth"]["revenue"] += $storesData[$j]["bakeryData"]["lastMonth"]["revenue"];
+			$storesData[$currentIndex]["bakeryData"]["lastMonth"]["checks"] += $storesData[$j]["bakeryData"]["lastMonth"]["checks"];
+			$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] += $storesData[$j]["bakeryData"]["lastMonth"]["average"];
+			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["revenue"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["revenue"];
+			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["checks"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"];
+			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["average"];
 
 		}
-		// var_dump ($mass);
 
 
-		for($j=0; $j<=$i; $j++)
+		for($j=$currentIndex; $j>=0; $j--)
 		{
 			echo '<div style="
 			width:229px;
@@ -293,10 +195,8 @@ else
 			padding:3px;
 			border-radius:5px;
 			border-color:gray;
-			box-shadow: 0px 0px 15px black;
-
-			" id ="'.$mass[$j][0].'">';
-			echo '<div style="clear:both; text-align:center; font-family: Underdog;">№ '.$mass[$j][3].' '.$mass[$j][1].'</div>';
+			box-shadow: 0px 0px 15px black;">';
+			echo '<div style="clear:both; text-align:center; font-family: Underdog;">'.$storesData[$j]["name"].'</div>';
 			echo "<div id='divAllTables' style='height:320px; clear:both;'>";
 			echo '
 			<table style="width:; float:left;">
@@ -306,12 +206,13 @@ else
 			<th style="font-size:8px;width:35px;">Чеков</th>
 			<th style="font-size:8px;width:35px;">Средний</th>
 			</tr>';
-			for ($z = 7; $z >= 0; $z--) {
-				$x = number_format(htmlspecialchars($mass[$j][5][$z]['cash']),2);
-				$x2= htmlspecialchars($mass[$j][5][$z]['checks']);
-				$x3= number_format($mass[$j][5][$z]['cash']/$mass[$j][5][$z]['checks']);
-				$day = $mass[$j][5][$z]['date'];
-				$dw = (int) $mass[$j][5][$z]['dw'];
+			for ($z = 0; $z <= 7; $z++) {
+				$x = number_format(htmlspecialchars($storesData[$j]["bakeryData"]["eightDays"]["revenue"][$z]),2);
+				$x2= htmlspecialchars($storesData[$j]["bakeryData"]["eightDays"]["checks"][$z]);
+				$x3= number_format($storesData[$j]["bakeryData"]["eightDays"]["average"][$z]);
+				$day = $storesData[$j]["bakeryData"]["eightDays"]["date"][$z]["day"];//$mass[$j][5][$z]['date'];
+				$dw = $storesData[$j]["bakeryData"]["eightDays"]["date"][$z]["dw"];//(int) $mass[$j][5][$z]['dw'];
+				$month = $storesData[$j]["bakeryData"]["eightDays"]["date"][$z]["month"];
 				if($day==(int) date('d'))
 				{
 					echo '<tr style="background-color:#E3FFE3;">';//E3FFE3 B8FFDB
@@ -327,7 +228,7 @@ else
 					//$totalChecks+=$msrow['checks'];
 				}
 				echo '
-				<td>',$day,'</td>
+				<td>',$day,'/',$month,'</td>
 				<td style="text-align:right;">',$x,'</td>
 				<td style="text-align:right;">',$x2,'</td>
 				<td style="text-align:right;">',$x3,'</td>
@@ -339,9 +240,9 @@ else
 			echo '<div style="font-size:11px; clear:both;">';
 			echo '<table>';
 			echo '<tr><th style="background:#E6E6E6;" colspan="4">Выручка/Чеков/Средний</th></tr>';
-			echo '<tr><td style="width:30%;">Этот месяц:</td><td style="text-align:right;">'. number_format($mass[$j][4][0]["totalCash"]) . '  </td><td style="text-align:right;">'. number_format($mass[$j][4][0]["totalChecks"])  . '  </td><td style="text-align:right;">  ' .number_format($mass[$j][4][0]["totalCash"]/$mass[$j][4][0]["totalChecks"]). '</td></tr>';
-			echo '<tr><td style="width:30%;">Прошлый:</td><td style="text-align:right;">'. number_format($mass[$j][4][1]["totalCash"]) . '  </td><td style="text-align:right;">'. number_format($mass[$j][4][1]["totalChecks"])  . '  </td><td style="text-align:right;">  ' .number_format($mass[$j][4][1]["totalCash"]/$mass[$j][4][1]["totalChecks"]). '</td></tr>';
-			echo '<tr><td style="width:30%;">Позапрошлый:</td><td style="text-align:right;">'. number_format($mass[$j][4][2]["totalCash"]) . '  </td><td style="text-align:right;">'. number_format($mass[$j][4][2]["totalChecks"])  . '  </td><td style="text-align:right;">  ' .number_format($mass[$j][4][2]["totalCash"]/$mass[$j][4][2]["totalChecks"]). '</td></tr>';
+			echo '<tr><td style="width:29%;">Этот месяц:</td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["thisMonth"]["revenue"]) . '  </td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["thisMonth"]["checks"])  . '  </td><td style="text-align:right;">  ' .number_format($storesData[$j]["bakeryData"]["thisMonth"]["average"]).'</td></tr>';
+			echo '<tr><td style="width:29%;">Прошлый:</td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["lastMonth"]["revenue"]) . '  </td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["lastMonth"]["checks"])  . '  </td><td style="text-align:right;">  ' .number_format($storesData[$j]["bakeryData"]["lastMonth"]["average"]). '</td></tr>';
+			echo '<tr><td style="width:29%;">Позапрошлый:</td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["revenue"]) . '  </td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"])  . '  </td><td style="text-align:right;">  ' .number_format($storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["average"]). '</td></tr>';
 			echo '</table>';
 			// echo '<table>';
 			// echo '<tr><th style="background:#E6E6E6" colspan="3">Чеков / Средний чек</th></tr>';
@@ -380,14 +281,14 @@ else
 <p class="paraOverTable" style="margin-left:10px;clear:both; padding-top:50px;"></p>
 </div>
 <?php
-if($_COOKIE['userID']==1){
-	$msquery="SELECT SIFR, CODE, NAME, NETNAME FROM CASHES;";
-	$msqresult = mssql_query($msquery);
-	while ($msrow = mssql_fetch_array($msqresult))
-	{
-		echo "<span style='clear:both'> NETNAME: ".$msrow["NETNAME"].", SIFR: ".$msrow["SIFR"]."</span><br/>";
-	}
-}
+// if($_COOKIE['userID']==1){
+// 	$msquery="SELECT SIFR, CODE, NAME, NETNAME FROM CASHES;";
+// 	$msqresult = mssql_query($msquery);
+// 	while ($msrow = mssql_fetch_array($msqresult))
+// 	{
+// 		echo "<span style='clear:both'> NETNAME: ".$msrow["NETNAME"].", SIFR: ".$msrow["SIFR"]."</span><br/>";
+// 	}
+// }
 ?>
 </body>
 </html>
