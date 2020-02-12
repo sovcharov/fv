@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 if(isset($_COOKIE['token']))
 {
@@ -114,7 +114,7 @@ else
 			where stores.bakery=userStores.storeID
 			and  users.id=userStores.userID
 			and users.id='".$_COOKIE['userID']."'
-			order by stores.bakery
+			order by stores.bakery;
 			";
 
 			// $query ="
@@ -135,7 +135,7 @@ else
 				while ((int)$json[$i]["id"] <> (int)$row['storeID']) {
 					$i ++;
 				}
-				echo " ".$row['storeID'];
+				// echo " ".$row['storeID'];
 				$currentIndex = sizeof($storesData);
 				$storesData[$currentIndex] = $json[$i];
 			}
@@ -168,7 +168,6 @@ else
 			for ($i=0; $i <= 7; $i++) {
 					$storesData[$currentIndex]["bakeryData"]["eightDays"]["revenue"][$i] += $storesData[$j]["bakeryData"]["eightDays"]["revenue"][$i];
 					$storesData[$currentIndex]["bakeryData"]["eightDays"]["checks"][$i] += $storesData[$j]["bakeryData"]["eightDays"]["checks"][$i];
-					$storesData[$currentIndex]["bakeryData"]["eightDays"]["average"][$i] += $storesData[$j]["bakeryData"]["eightDays"]["average"][$i];
 			}
 			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["revenue"] += $storesData[$j]["bakeryData"]["thisMonth"]["revenue"];
 			$storesData[$currentIndex]["bakeryData"]["thisMonth"]["checks"] += $storesData[$j]["bakeryData"]["thisMonth"]["checks"];
@@ -178,9 +177,12 @@ else
 			$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["checks"] += $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"];
 
 		}
-		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] = $storesData[$j]["bakeryData"]["thisMonth"]["revenue"]/$storesData[$j]["bakeryData"]["thisMonth"]["checks"];
-		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] = $storesData[$j]["bakeryData"]["lastMonth"]["revenue"]/$storesData[$j]["bakeryData"]["lastMonth"]["checks"];
-		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] = $storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["revenue"]/$storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"];
+		for ($i=0; $i <= 7; $i++) {
+				$storesData[$currentIndex]["bakeryData"]["eightDays"]["average"][$i] = $storesData[$currentIndex]["bakeryData"]["eightDays"]["revenue"][$i]/$storesData[$currentIndex]["bakeryData"]["eightDays"]["checks"][$i];
+		}
+		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["thisMonth"]["revenue"]/$storesData[$currentIndex]["bakeryData"]["thisMonth"]["checks"];
+		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["lastMonth"]["revenue"]/$storesData[$currentIndex]["bakeryData"]["lastMonth"]["checks"];
+		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["revenue"]/$storesData[$currentIndexj]["bakeryData"]["monthBeforeLastMonth"]["checks"];
 
 
 		for($j=$currentIndex; $j>=0; $j--)
