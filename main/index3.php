@@ -296,6 +296,8 @@ if($_COOKIE['userID']==1){
 	{
 		echo "<span style='clear:both'> NETNAME: ".$msrow["NETNAME"].", SIFR: ".$msrow["SIFR"]."</span><br/>";
 	}
+} else {
+	// echo "no signal";
 }
 ?>
 </body>

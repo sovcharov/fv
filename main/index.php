@@ -108,6 +108,7 @@ else
 			$storesData = $json;
 		}
 		else{
+			// echo $_COOKIE['userID'];
 			$query ="
 			select distinct stores.id storeID, stores.bakery as bakery, stores.name as storeName, stores.venue as venue
 			from stores, userStores, users
@@ -127,21 +128,22 @@ else
 			// ";
 
 			$qresult = mysqli_query($db, $query);
-			$i=0;
 			$msqueryStores = '';
 			$storesData = [];
 			while ($row = mysqli_fetch_array($qresult))
 			{
-				while ((int)$json[$i]["id"] <> (int)$row['storeID']) {
-					$i ++;
+				for ($i = 0; $i < sizeof($json); $i++)
+				{
+					if ((int)$json[$i]["id"] == (int)$row['storeID'])
+					{
+							$currentIndex = sizeof($storesData);
+							$storesData[$currentIndex] = $json[$i];
+					}
 				}
-				// echo " ".$row['storeID'];
-				$currentIndex = sizeof($storesData);
-				$storesData[$currentIndex] = $json[$i];
 			}
 		}
 		// var_dump ($storesData);
-
+		// exit();
 		$currentIndex = sizeof($storesData);
 
 		for ($i=0; $i <= 7; $i++) {
@@ -182,7 +184,7 @@ else
 		}
 		$storesData[$currentIndex]["bakeryData"]["thisMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["thisMonth"]["revenue"]/$storesData[$currentIndex]["bakeryData"]["thisMonth"]["checks"];
 		$storesData[$currentIndex]["bakeryData"]["lastMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["lastMonth"]["revenue"]/$storesData[$currentIndex]["bakeryData"]["lastMonth"]["checks"];
-		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["revenue"]/$storesData[$currentIndexj]["bakeryData"]["monthBeforeLastMonth"]["checks"];
+		$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["average"] = $storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["revenue"]/$storesData[$currentIndex]["bakeryData"]["monthBeforeLastMonth"]["checks"];
 
 
 		for($j=$currentIndex; $j>=0; $j--)
