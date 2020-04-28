@@ -8,14 +8,14 @@ require __DIR__ . '/../../pdodbconnect.php';
 
 $regexEmail = '/^[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*@[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*\.[A-Za-z]{2,4}$/';
 $regexPassword = '/^[A-Za-z0-9.\-_*$]{5,}$/';
-if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password)){
+if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
   // require __DIR__ . '/../../pdodbconnect.php';
 
-    echo $password;
+    echo $password2;
     echo $email;
-    $password = SHA1($password);
+    $password2 = SHA1($password2);
     $token = rand(10000,9999999);
-    echo $password;
+    echo $password2;
     echo $email;
     echo $token;
 
@@ -25,7 +25,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password)){
   	if ($conn->connect_error) {
   	    die("Connection failed: " . $conn->connect_error);
   	}
-  	$sql = "call logIn('$email','$password','.$token.');";
+  	$sql = "call logIn('$email','$password2','.$token.');";
   	$result = $conn->query($sql);
   	if ($result->num_rows > 0) {
   	    // output data of each row
