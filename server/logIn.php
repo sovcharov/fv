@@ -31,7 +31,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
   	    // output data of each row
         echo "ey";
   	    while($row = $result->fetch_assoc()) {
-          echo $row;
+          var_dump($row);
           // $res["userID"] = (int)$row['userID'];
           // $res["userType"] = (int)$row['typeID'];
           // $res["firstName"] = $row['firstName'];
