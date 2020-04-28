@@ -12,9 +12,10 @@ try {
     $stmt->bindParam(1, $user);
     $stmt->bindParam(2, $token);
     $stmt->execute();
-    $rs = $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo $result[0];
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
 
 
     }
@@ -22,7 +23,11 @@ catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
     }
+
+    $dbh = null;
+
 ?>
+
 
 
     // require 'verifyID.php';
