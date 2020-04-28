@@ -29,6 +29,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
   	$result = $conn->query($sql);
   	if ($result->num_rows > 0) {
   	    // output data of each row
+        echo "ey";
   	    while($row = $result->fetch_assoc()) {
           echo $row;
           // $res["userID"] = (int)$row['userID'];
