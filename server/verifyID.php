@@ -10,7 +10,7 @@
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-	$sql = "call verifyUID(1, 3151463)";
+	$sql = "call verifyUID('1', '3151463')";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
