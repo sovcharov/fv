@@ -1,8 +1,11 @@
 <?php
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
-$email = $request->email;
-$password2 = $request->password;
+// $email = $request->email;
+// $password2 = $request->password;
+require __DIR__ . '/../../pdodbconnect.php';
+
+
 $regexEmail = '/^[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*@[A-Za-z0-9]+((([.\-_])[A-Za-z0-9]+)?)*\.[A-Za-z]{2,4}$/';
 $regexPassword = '/^[A-Za-z0-9.\-_*$]{5,}$/';
 if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
