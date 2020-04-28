@@ -3,10 +3,21 @@ require __DIR__ . '/../../pdodbconnect.php';
 
 
 try {
-    // $dbh = new PDO("mysql:host=$servername;dbname=myDB", $username, $password);
-    // set the PDO error mode to exception
+  $user = 1;//$_COOKIE['userID'];
+    $token = 3151463;//$_COOKIE['token'];
+
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
+    $stmt = $dbh->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (:firstname, :lastname, :email)");
+    $stmt = $dbh->prepare("Call verifyUID(:user, :token)");
+    $stmt->bindParam(':user', $user);
+    $stmt->bindParam(':token', $token);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $rs = $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo $result[0];
+
+
     }
 catch(PDOException $e)
     {
