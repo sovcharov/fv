@@ -3,15 +3,12 @@
 	require __DIR__ . '/../../pdodbconnect.php';
 	$user = 1;//$_COOKIE['userID'];
     $token = 3151463;//$_COOKIE['token'];
+		// Create connection
+	$conn = new mysqli($servername, $username, $password);
 
-	$q=$dbh->query("call verifyUID('.$user.','.$token.');");
-
-
-	$q->setFetchMode(PDO::FETCH_ASSOC);
-	while ($row = $q->fetch())
-	{
-		$count = (int)$row['outCount'];
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
 	}
-	$q->closeCursor();
-	$q= null;
-	$dbh = null;
+	echo "Connected successfully";
+?>
