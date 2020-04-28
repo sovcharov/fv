@@ -32,7 +32,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
           $res["token"] = $token;
   	    }
         echo json_encode($res);
-        else echo false;
+        // else echo false;
   	} else {
   		echo false;
   		// echo "0 results";
