@@ -2,10 +2,11 @@
 	// require '../../pdodbconnect.php';
 	$user = $_COOKIE['userID'];
     $token = $_COOKIE['token'];
-
+		echo "hello";
 		echo $user;
 		echo $token;
 		echo $dbh;
+
 		$count = 1;
 	// exit();
 	// $q=$dbh->query("call verifyUID('.$user.','.$token.');");
