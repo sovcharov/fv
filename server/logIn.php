@@ -57,6 +57,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
     // $q->closeCursor();
     // $q= null;
     // $dbh = null;
+    echo $res;
     if ($res) echo json_encode($res);
     else echo false;
 } else echo false;
