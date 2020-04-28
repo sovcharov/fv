@@ -30,11 +30,12 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
   	if ($result->num_rows > 0) {
   	    // output data of each row
   	    while($row = $result->fetch_assoc()) {
-          $res["userID"] = (int)$row['userID'];
-          $res["userType"] = (int)$row['typeID'];
-          $res["firstName"] = $row['firstName'];
-          $res["lastName"] = $row['lastName'];
-          $res["token"] = $token;
+          echo $row;
+          // $res["userID"] = (int)$row['userID'];
+          // $res["userType"] = (int)$row['typeID'];
+          // $res["firstName"] = $row['firstName'];
+          // $res["lastName"] = $row['lastName'];
+          // $res["token"] = $token;
   	    }
   	} else {
   		echo false;
