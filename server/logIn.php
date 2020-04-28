@@ -31,7 +31,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
           $res["lastName"] = $row['lastName'];
           $res["token"] = $token;
   	    }
-        if ($res) echo json_encode($res);
+        echo json_encode($res);
         else echo false;
   	} else {
   		echo false;
