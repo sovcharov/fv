@@ -1,6 +1,6 @@
 <?php
 	// require './../../pdodbconnect.php';
-	echo __DIR__ . '/../../pdodbconnect.php';
+	require __DIR__ . '/../../pdodbconnect.php';
 		// $user = $_COOKIE['userID'];
     // $token = $_COOKIE['token'];
 		echo "hello";
