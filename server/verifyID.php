@@ -6,7 +6,8 @@
 		// echo "hello";
 		// echo $user;
 		// echo $token;
-		// echo $dbh;
+		echo $dbh;
+		?>
 		//
 		// $count = 1;
 	// exit();
