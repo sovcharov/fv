@@ -4,13 +4,13 @@
 	$user = 1;//$_COOKIE['userID'];
     $token = 3151463;//$_COOKIE['token'];
 		// Create connection
-	$conn = new mysqli($servername, $username, $password);
+	$conn = new mysqli($servername, $username, $password, $dbname);
 
 	// Check connection
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-	$sql = "SELECT id, firstname, lastname FROM users";
+	$sql = "SELECT id, firsName, lastName FROM users";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
