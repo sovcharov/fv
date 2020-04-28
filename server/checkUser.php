@@ -11,7 +11,6 @@ try {
     $stmt = $dbh->prepare("Call verifyUID(:user, :token)");
     $stmt->bindParam(':user', $user);
     $stmt->bindParam(':token', $token);
-    $stmt->bindParam(':email', $email);
     $stmt->execute();
     $rs = $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
