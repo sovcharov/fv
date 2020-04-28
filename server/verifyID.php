@@ -1,12 +1,12 @@
 <?php
 	// require './../../pdodbconnect.php';
-	echo __DIR__ . '../../pdodbconnect.php';
+	echo __DIR__ . '/../../pdodbconnect.php';
 		// $user = $_COOKIE['userID'];
     // $token = $_COOKIE['token'];
 		echo "hello";
 		// echo $user;
 		// echo $token;
-		// echo $dbh;
+		echo $dbh;
 		?>
 		//
 		// $count = 1;
