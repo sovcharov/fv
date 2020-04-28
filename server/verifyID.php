@@ -10,7 +10,7 @@
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-	$sql = "call verifyUID('1', '3151463')";
+	$sql = "call verifyUID($user, $token)";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -19,7 +19,7 @@
 	        $count = $row["outCount"];
 	    }
 	} else {
-		$count = $row["outCount"];
+		$count = 0;
 		// echo "0 results";
 	}
 	$conn->close();
