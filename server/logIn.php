@@ -31,13 +31,15 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
   	    // output data of each row
         echo "ey";
   	    while($row = $result->fetch_assoc()) {
-          var_dump($row);
-          // $res["userID"] = (int)$row['userID'];
-          // $res["userType"] = (int)$row['typeID'];
-          // $res["firstName"] = $row['firstName'];
-          // $res["lastName"] = $row['lastName'];
-          // $res["token"] = $token;
+          // var_dump($row);
+          $res["userID"] = (int)$row['userID'];
+          $res["userType"] = (int)$row['typeID'];
+          $res["firstName"] = $row['firstName'];
+          $res["lastName"] = $row['lastName'];
+          $res["token"] = $token;
   	    }
+        var_dump($res);
+        echo json_encode($res)
   	} else {
   		echo false;
   		// echo "0 results";
