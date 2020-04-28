@@ -10,13 +10,13 @@
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-	$sql = "SELECT id, firstName, lastName FROM users";
+	$sql = "call verifyUID(1, 3151463)";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
-	        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+	        echo $row["outCount"];
 	    }
 	} else {
 	    echo "0 results";
