@@ -26,14 +26,14 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password)){
   	if ($result->num_rows > 0) {
   	    // output data of each row
   	    while($row = $result->fetch_assoc()) {
-          $result["userID"] = (int)$row['userID'];
-          $result["userType"] = (int)$row['typeID'];
-          $result["firstName"] = $row['firstName'];
-          $result["lastName"] = $row['lastName'];
-          $result["token"] = $token;
+          $res["userID"] = (int)$row['userID'];
+          $res["userType"] = (int)$row['typeID'];
+          $res["firstName"] = $row['firstName'];
+          $res["lastName"] = $row['lastName'];
+          $res["token"] = $token;
   	    }
   	} else {
-  		$count = 0;
+  		echo false;
   		// echo "0 results";
   	}
   	$conn->close();
@@ -53,7 +53,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password)){
     // $q->closeCursor();
     // $q= null;
     // $dbh = null;
-    if ($result) echo json_encode($result);
+    if ($res) echo json_encode($res);
     else echo false;
 } else echo false;
 ?>
