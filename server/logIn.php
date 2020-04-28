@@ -25,7 +25,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
   	if ($conn->connect_error) {
   	    die("Connection failed: " . $conn->connect_error);
   	}
-  	$sql = "call logIn('$email','$password2','.$token.');";
+  	$sql = "call logIn($email,$password2,$token)";
   	$result = $conn->query($sql);
   	if ($result->num_rows > 0) {
   	    // output data of each row
