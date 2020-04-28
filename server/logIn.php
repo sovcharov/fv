@@ -39,7 +39,7 @@ if(preg_match($regexEmail,$email) && preg_match($regexPassword,$password2)){
           $res["token"] = $token;
   	    }
         var_dump($res);
-        echo json_encode($res)
+        echo json_encode($res);
   	} else {
   		echo false;
   		// echo "0 results";
