@@ -7,7 +7,7 @@ try {
     $token = 3151463;//$_COOKIE['token'];
 
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("Call verifyUID(1,3151463)");
+    $stmt = $conn->prepare("select * from users");
       $stmt->execute();
 
       // set the resulting array to associative
