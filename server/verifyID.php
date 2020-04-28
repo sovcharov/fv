@@ -1,5 +1,5 @@
 <?php
-	require '../../pdodbconnect.php';
+	// require '../../pdodbconnect.php';
 	$user = $_COOKIE['userID'];
     $token = $_COOKIE['token'];
 
