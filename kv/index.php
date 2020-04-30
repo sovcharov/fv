@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 if(isset($_COOKIE['token']))
 {
 	require __DIR__.'/../../dbconnect.php';
+	echo __DIR__.'/../../dbconnect.php';
 	$query ="select users.id
 	from users, userToken
 	where users.id = '".$_COOKIE['userID']."'
