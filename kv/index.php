@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 if(isset($_COOKIE['token']))
 {
-	require '../../dbconnect.php';
+	require __DIR__.'/../../dbconnect.php';
 	$query ="select users.id
 	from users, userToken
 	where users.id = '".$_COOKIE['userID']."'
@@ -25,7 +25,7 @@ if(isset($_COOKIE['token']))
 		if(isset($_COOKIE['userID'])) setcookie('userID',0, time()-1);
 		if(isset($_COOKIE['userType'])) setcookie('userType',0, time()-1);
 		if(isset($_COOKIE['token'])) setcookie('token',0, time()-1);
-		require '../../dbclose.php';
+		require __DIR__.'/../../dbclose.php';
 		header('Location: ../');
 		exit();
 	}
@@ -207,8 +207,8 @@ else
 
 		// echo $msqueryStores;
 // var_dump ($mass);
-		require '../../dbclose.php';
-		require '../../dbconnectmskv.php';
+		require __DIR__.'/../../dbclose.php';
+		require __DIR__.'/../../dbconnectmskv.php';
 		$msquery="
 		select sum(t1.nationalsum)as cash, count(t1.nationalsum) as checks,
 	  t1.IPRINTSTATION as cassa,
