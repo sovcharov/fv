@@ -62,7 +62,7 @@ else
 	<script src="controllers/MainController.js"></script>
 </head>
 <body ng-controller="MainController" ng-cloak style="background:#292d34;color:#e3e3e3;">
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-inverse">
 		<a class="navbar-brand" href="/"><img alt="Brand" height="30" width="34" src="../images/fvlogo.png"></a>
 		<a class="navbar-brand" href="/">Пекарня Ф. Вольчека</a>
 
