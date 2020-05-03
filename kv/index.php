@@ -61,23 +61,13 @@ else
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
 	<script src="controllers/MainController.js"></script>
 </head>
-<body ng-controller="MainController" ng-cloak>
+<body ng-controller="MainController" ng-cloak style="background:#292d34;color:#e3e3e3;">
 	<nav class="navbar navbar-default">
 		<a class="navbar-brand" href="/"><img alt="Brand" height="30" width="34" src="../images/fvlogo.png"></a>
 		<a class="navbar-brand" href="/">Пекарня Ф. Вольчека</a>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav pull-right">
-				<li>
-					<canvas id="myCanvas" width="48" height="48" style="margin:0px; padding:0px;">
-					</canvas>
-					<script type="text/javascript" src="js/mySpin.js"></script>
-				</li>
-				<?php
-				// if($_COOKIE['userID']==1 || $_COOKIE['userType']==1 || $_COOKIE['userID']==20) echo '<li><a href="/cakesorder/">orders</a></li>';
-				// if($_COOKIE['userID']==1) echo '<li><a href="../admin">admin</a></li>';
-				?>
-				<!-- <li><a href="../passwordchange/">Сменить Пароль</a></li> -->
 				<li class=""><a href="exitapp.php">Выход</a></li>
 			</ul>
 		</div>
@@ -219,11 +209,11 @@ else
 				$month = $storesData[$j]["bakeryData"]["eightDays"]["date"][$z]["month"];
 				if($day==(int) date('d'))
 				{
-					echo '<tr style="background-color:#E3FFE3;">';//E3FFE3 B8FFDB
+					echo '<tr style="background-color:#0d4f38;">';//E3FFE3 B8FFDB
 				}
 				else if ($dw == 1 || $dw == 7)
 				{
-					echo '<tr style="background-color:#ffeee5;">';
+					echo '<tr style="background-color:#692335;">';
 				}
 				else
 				{
@@ -243,7 +233,7 @@ else
 
 			echo '<div style="font-size:11px; clear:both;">';
 			echo '<table>';
-			echo '<tr><th style="background:#E6E6E6;" colspan="4">Выручка/Чеков/Средний</th></tr>';
+			echo '<tr><th style="background:#292d34;" colspan="4">Выручка/Чеков/Средний</th></tr>';
 			echo '<tr><td style="width:29%;">Этот месяц:</td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["thisMonth"]["revenue"]) . '  </td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["thisMonth"]["checks"])  . '  </td><td style="text-align:right;">  ' .number_format($storesData[$j]["bakeryData"]["thisMonth"]["average"]).'</td></tr>';
 			echo '<tr><td style="width:29%;">Прошлый:</td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["lastMonth"]["revenue"]) . '  </td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["lastMonth"]["checks"])  . '  </td><td style="text-align:right;">  ' .number_format($storesData[$j]["bakeryData"]["lastMonth"]["average"]). '</td></tr>';
 			echo '<tr><td style="width:29%;">Позапрошлый:</td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["revenue"]) . '  </td><td style="text-align:right;">'. number_format($storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["checks"])  . '  </td><td style="text-align:right;">  ' .number_format($storesData[$j]["bakeryData"]["monthBeforeLastMonth"]["average"]). '</td></tr>';
