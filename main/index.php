@@ -85,7 +85,7 @@ else
 	<div id="divContainer">
 		<?php
 
-		$string = file_get_contents("../../../soft/bakerydata.json");
+		$string = file_get_contents("../../../server/bakerydata.json");
 		// if ($string === false) {
 		//     // deal with error...
 		// }

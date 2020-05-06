@@ -75,7 +75,7 @@ else
 	<div id="divContainer">
 		<?php
 
-		$string = file_get_contents("../../../soft/kvdata.json");
+		$string = file_get_contents("../../../server/kvdata.json");
 		// if ($string === false) {
 		//     // deal with error...
 		// }
