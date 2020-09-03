@@ -94,7 +94,7 @@ else
 		// require '../../dbconnect.php';
 
 
-		if($_COOKIE['userType']==4 || $_COOKIE['userID']==1  || $_COOKIE['userType']==5){
+		if($_COOKIE['userType']==4 || $_COOKIE['userID']==1  || $_COOKIE['userType']==5 || $_COOKIE['userType']==6){
 			$storesData = $json;
 		}
 		else{
