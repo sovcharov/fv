@@ -13,9 +13,10 @@
         <div class="collapse navbar-collapse" id = "bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <!-- <li><a>{{commonDate}}</a></li> -->
-                <li ng-if="access.toToolsPage()"><a ui-sref="main.tools">Инструменты</a></li>
+                <!-- <li ng-if="access.toToolsPage()"><a ui-sref="main.tools">Инструменты</a></li> -->
                 <li ng-if="access.toFV()"><a href="/main/" target="_blank">Булочные</a></li>
                 <li ng-if="access.toKV()"><a href="/kv/" target="_blank">Kофейни</a></li>
+                <li ng-if="access.to4s()"><a href="/4s/" target="_blank">Kофейни</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
                     <ul class="dropdown-menu">

@@ -132,6 +132,13 @@
                         return true;
                     }
                     return false;
+                },
+
+                to4s: function () {
+                    if (user.id === 1 || user.id === 3 || user.type === 7) {
+                        return true;
+                    }
+                    return false;
                 }
             };
         });
