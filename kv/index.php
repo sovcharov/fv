@@ -50,7 +50,7 @@ else
 <!DOCTYPE html>
 <html ng-app="InvestorPanel">
 <head>
-	<title>ФВ.net</title>
+	<title>Кофеварим</title>
 	<link rel="stylesheet" type="text/css" href="css/catalog.css">
 	<link rel="icon" type="image/ico" href="../images/fvlogo.png">
 	<meta name="description" content="Investors page">
@@ -64,7 +64,7 @@ else
 <body ng-controller="MainController" ng-cloak style="background:#292d34;color:#e3e3e3;">
 	<nav class="navbar navbar-default navbar-inverse">
 		<a class="navbar-brand" href="/"><img alt="Brand" height="30" width="34" src="../images/fvlogo.png"></a>
-		<a class="navbar-brand" href="/">Пекарня Ф. Вольчека</a>
+		<a class="navbar-brand" href="/">Кофеварим</a>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav pull-right">
